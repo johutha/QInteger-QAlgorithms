@@ -1,0 +1,16 @@
+\newcommand\twodigits[1]{%
+   \ifnum#1<10 0#1\else #1\fi
+}
+
+\newcommand\loadchapter[1]{
+    \edef\PathName{chapters/\twodigits{#1}/}
+    \edef\FileName{\PathName\twodigits{#1}}
+    \edef\ImagePath{\PathName images/}
+    \graphicspath{\ImagePath}
+    \include{\FileName}
+}
+
+\newcommand\loadall[1]
+{
+    
+}
