@@ -1,46 +1,27 @@
 ﻿using System;
-using Utility;
+using System.Collections.Generic;
+using Factorize.Utility;
+using Factorize.Calculator;
 using Microsoft.Quantum.Simulation.Core;
 using Microsoft.Quantum.Simulation.Simulators;
+using Markdig.Extensions.AutoIdentifiers;
+using YamlDotNet.Core.Tokens;
 
-namespace Quantum.Factorize
+namespace Factorize
 {
     class Driver
     {
-        static (long, long) CN(long i1, long i2, long i3)
-        {
-            for (int i = 0; i < 8; i++)
-            {
-                if ((i1 & (1<<i)) != 0)
-                {
-                    i2 = i2 ^ (1 << i);
-                }
-            }
-            return (i1, i2);
-        }
-
         static void Main(string[] args)
         {
+            Factorizer factorizer = new Factorizer(new NaivePrimeChecker(), new NaiveOrderFinder());
             long ip = Convert.ToInt64(Console.ReadLine());
 
-            var res = Factorizer.Factorize(ip);
-            foreach (var p in res)
+            Dictionary<long, long> res = factorizer.Run(ip);
+
+            foreach (KeyValuePair<long, long> kvp in res)
             {
-                Console.WriteLine(p.Key.ToString() + "^" + p.Value.ToString());
+                Console.WriteLine(kvp.Key.ToString() + ": " + kvp.Value.ToString());
             }
-
-            var qs = new QuantumSimulator();
-            UnitTest ut = new UnitTest(CN, qs);
-            ut.RandomTests(100, fix3 : 0);
-
-            /*
-            using (var qsim = new QuantumSimulator())
-            {
-                var tsk = Factorize.Run(qsim, x: ip);
-                tsk.Wait();
-                long res = tsk.Result;
-                Console.WriteLine(res);
-            }*/
         }
     }
 }

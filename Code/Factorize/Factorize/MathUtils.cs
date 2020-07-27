@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Security.Cryptography;
 
-namespace Utility
+namespace Factorize.Utility
 {
     static class MathUtils
     {
@@ -26,36 +26,6 @@ namespace Utility
                 bs = (bs * bs) % mod;
             }
             return res;
-        }
-
-        public static bool MillerRabin(long n, long it = 100)
-        {
-            if (n == 1) return false;
-            if (n == 2 || n == 3) return true;
-
-            long r = 0;
-            long d = n - 1;
-
-            for (; (d & 1) == 0; d /= 2) r++;
-
-            for (long rn = 0; rn < it; rn++)
-            {
-                long a = (Random() % (n - 3)) + 2;
-                long x = FastPowMod(a, d, n);
-                if (x == 1 || x == n - 1) continue;
-                bool ok = false; ;
-                for (long i = 0; i < r - 1; i++)
-                {
-                    x = (x * x) % n;
-                    if (x == n - 1)
-                    {
-                        ok = true;
-                        break;
-                    }
-                }
-                if (!ok) return false;
-            }
-            return true;
         }
 
         public static long GCD(long a, long b)
