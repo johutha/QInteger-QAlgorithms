@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Security.Cryptography;
 
-namespace Factorize.Utility
+namespace Factorize.Classical.Utility
 {
     static class MathUtils
     {

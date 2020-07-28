@@ -1,7 +1,7 @@
-﻿using Factorize.Utility;
+﻿using Factorize.Classical.Utility;
 using Microsoft.VisualBasic.CompilerServices;
 
-namespace Factorize.Calculator
+namespace Factorize.Classical.Calculator.Modules
 {
     public class MillerRabin : IPrimeChecker
     {

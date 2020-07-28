@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29806.167
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Factorize", "Factorize\Factorize.csproj", "{6CBEC76F-804B-47E2-8DD9-04979D2FF21C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Factorize.Classical", "Factorize.Classical\Factorize.Classical.csproj", "{D405CDAF-B205-4728-9C70-A9F0627A91BA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Factorize.Executable", "Factorize.Executable\Factorize.Executable.csproj", "{777ECDC1-A034-4813-B85E-D7801D55214B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +13,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{6CBEC76F-804B-47E2-8DD9-04979D2FF21C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6CBEC76F-804B-47E2-8DD9-04979D2FF21C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6CBEC76F-804B-47E2-8DD9-04979D2FF21C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6CBEC76F-804B-47E2-8DD9-04979D2FF21C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D405CDAF-B205-4728-9C70-A9F0627A91BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D405CDAF-B205-4728-9C70-A9F0627A91BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D405CDAF-B205-4728-9C70-A9F0627A91BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D405CDAF-B205-4728-9C70-A9F0627A91BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{777ECDC1-A034-4813-B85E-D7801D55214B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{777ECDC1-A034-4813-B85E-D7801D55214B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{777ECDC1-A034-4813-B85E-D7801D55214B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{777ECDC1-A034-4813-B85E-D7801D55214B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

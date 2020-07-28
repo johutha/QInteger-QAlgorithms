@@ -1,6 +1,4 @@
-﻿using Factorize.Calculator;
-
-namespace Factorize.Calculator
+﻿namespace Factorize.Classical.Calculator.Modules
 {
     public class NaivePrimeChecker : IPrimeChecker
     {

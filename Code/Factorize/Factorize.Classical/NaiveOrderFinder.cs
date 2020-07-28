@@ -1,6 +1,6 @@
-﻿using Factorize.Utility;
+﻿using Factorize.Classical.Utility;
 
-namespace Factorize.Calculator
+namespace Factorize.Classical.Calculator.Modules
 {
     public class NaiveOrderFinder : IOrderFinder
     {

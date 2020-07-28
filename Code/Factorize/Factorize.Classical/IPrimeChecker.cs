@@ -1,4 +1,4 @@
-﻿namespace Factorize.Calculator
+﻿namespace Factorize.Classical.Calculator
 {
     public interface IPrimeChecker
     {

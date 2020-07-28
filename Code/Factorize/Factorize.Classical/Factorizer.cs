@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Factorize.Utility;
-using Microsoft.Quantum.Bitwise;
+using Factorize.Classical.Utility;
 
-namespace Factorize.Calculator
+namespace Factorize.Classical.Calculator
 {
     public class Factorizer
     {
