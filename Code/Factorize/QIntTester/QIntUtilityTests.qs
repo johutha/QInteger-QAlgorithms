@@ -136,7 +136,7 @@
                 let qn = QInt(10, qr[0..9]);
                 CopyToQInt(i, qn);
                 IsZeroQInt(qn, qr[10]);
-                AssertQubit(BoolAsResult(i == 0), qr[0]);
+                AssertQubit(BoolAsResult(i == 0), qr[10]);
                 ResetAll(qr);
 			}
 		}
