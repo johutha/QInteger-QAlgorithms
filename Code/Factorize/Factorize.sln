@@ -9,6 +9,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Factorize.Executable", "Fac
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QInteger", "QInteger\QInteger.csproj", "{C540E2B8-CAF1-487C-B1DA-8B4B7C1445F4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModulesTester", "ModulesTester\ModulesTester.csproj", "{3762FCF5-D829-4BD4-8A02-C47E68984E16}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QIntTester", "QIntTester\QIntTester.csproj", "{A57EA2FD-089C-4CAF-8E10-ADA7BEDC9C4F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{C540E2B8-CAF1-487C-B1DA-8B4B7C1445F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C540E2B8-CAF1-487C-B1DA-8B4B7C1445F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C540E2B8-CAF1-487C-B1DA-8B4B7C1445F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3762FCF5-D829-4BD4-8A02-C47E68984E16}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3762FCF5-D829-4BD4-8A02-C47E68984E16}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3762FCF5-D829-4BD4-8A02-C47E68984E16}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3762FCF5-D829-4BD4-8A02-C47E68984E16}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A57EA2FD-089C-4CAF-8E10-ADA7BEDC9C4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A57EA2FD-089C-4CAF-8E10-ADA7BEDC9C4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A57EA2FD-089C-4CAF-8E10-ADA7BEDC9C4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A57EA2FD-089C-4CAF-8E10-ADA7BEDC9C4F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

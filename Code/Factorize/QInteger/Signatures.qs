@@ -49,7 +49,7 @@
         
 	}
 
-    operation ConMulMpod(Control : Qubit, factor : QInt, Target : QInt, Mod : Int) : Unit is Adj
+    operation ConMulMod(Control : Qubit, factor : QInt, Target : QInt, Mod : Int) : Unit is Adj
     {
         
 	}
