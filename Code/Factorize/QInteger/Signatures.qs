@@ -49,19 +49,13 @@
         
 	}
 
-    operation MulModQQC(Factor : QInt, Target : QInt, Mod : Int) : Unit is Adj+Ctl
+    operation ConMulMpod(Control : Qubit, factor : QInt, Target : QInt, Mod : Int) : Unit is Adj
     {
         
 	}
 
-    operation MulModCQC(Factor : Int, Target : QInt, Mod : Int) : Unit is Adj+Ctl
+    operation ModExp(Base : Int, Expn : QInt, Mod : Int) : Unit is Adj+Ctl
     {
         
 	}
-
-    operation MulModCQQ(Factor : Int, Target : QInt, Mod : QInt) : Unit is Adj+Ctl
-    {
-        
-	}
-
 }
