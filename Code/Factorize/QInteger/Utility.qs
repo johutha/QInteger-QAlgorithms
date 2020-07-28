@@ -23,7 +23,7 @@
 		}
 	}
 
-    operation Measure(n : QInt) : Int
+    operation MeasureQInt(n : QInt) : Int
     {
         mutable r = 1;
         mutable res = 0;
@@ -44,7 +44,7 @@
         ResetAll(n::Number);
 	}
 
-    operation IsZero(n : QInt, res : Qubit) : Unit is Adj+Ctl
+    operation IsZeroQInt(n : QInt, res : Qubit) : Unit is Adj+Ctl
     {
         for (i in 0..n::Size - 1)
         {
@@ -57,7 +57,7 @@
 		}
 	}
 
-    operation Equals(a : QInt, b : QInt, c : Qubit) : Unit is Adj+Ctl
+    operation EqualsQQQ(a : QInt, b : QInt, c : Qubit) : Unit is Adj+Ctl
     {
         for (i in 0..b::Size - 1)
         {
@@ -97,7 +97,7 @@
         mutable res = Zero;
         using (anc = Qubit())
         {
-            Equals(a, b, anc);
+            EqualsQQQ(a, b, anc);
             set res = M(anc);
             Reset(anc);
 		}
