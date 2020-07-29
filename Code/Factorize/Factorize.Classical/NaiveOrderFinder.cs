@@ -6,7 +6,7 @@ namespace Factorize.Classical.Calculator.Modules
     {
         public long Find(long a, long n)
         {
-            int res = 1;
+            long res = 1;
             for (; MathUtils.FastPowMod(a, res, n) != 1; res++) { }
             return res;
         }

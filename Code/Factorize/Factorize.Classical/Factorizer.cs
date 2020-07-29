@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Factorize.Classical.Utility;
+using System.Diagnostics;
 
 namespace Factorize.Classical.Calculator
 {
@@ -35,6 +36,7 @@ namespace Factorize.Classical.Calculator
             while (q.Count > 0)
             {
                 long front = q.Dequeue();
+                Debug.Assert(front != 1);
                 if (PrimeChecker.Prime(front))
                 {
                     if (!PrimeDecomposition.ContainsKey(front)) PrimeDecomposition.Add(front, 0);

@@ -3,7 +3,7 @@ using System.Security.Cryptography;
 
 namespace Factorize.Classical.Utility
 {
-    static class MathUtils
+    public static class MathUtils
     {
         private static RandomNumberGenerator rng = RandomNumberGenerator.Create();
 
