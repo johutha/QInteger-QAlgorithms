@@ -8,7 +8,7 @@
 
     operation QIntVS(qs : Qubit[], len : Int, val : Int) : QInt
     {
-        let qn = QInt(len, qs[0..len]);
+        let qn = QInt(len, qs[0..len - 1]);
         CopyToQInt(val, qn);
         return qn;
 	}
@@ -16,7 +16,7 @@
     operation QIntV(qs : Qubit[], val : Int) : QInt
     {
         let len = Length(qs);
-        let qn = QInt(len, qs[0..len]);
+        let qn = QInt(len, qs[0..len - 1]);
         CopyToQInt(val, qn);
         return qn;
 	}

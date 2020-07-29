@@ -2,6 +2,14 @@
 {
     open Microsoft.Quantum.Convert;
     open Microsoft.Quantum.Intrinsic;
+    open Microsoft.Quantum.Math;
+
+    operation ResizeQInt(qn : QInt, rs : Qubit[]) : QInt
+    {
+        mutable ar = qn::Number;
+        set ar += rs;
+        return QIntR(ar);
+	}
 
     operation CopyToQInt(n : Int, qn : QInt) : Unit is Adj+Ctl
     {
@@ -46,50 +54,66 @@
 
     operation IsZeroQInt(n : QInt, res : Qubit) : Unit is Adj+Ctl
     {
-        for (i in 0..n::Size - 1)
+        within
         {
-            X(n::Number[i]);
-		}
-        (Controlled X)(n::Number, res);
-        for (i in 0..n::Size - 1)
+            for (i in 0..n::Size - 1)
+            {
+                X(n::Number[i]);
+		    }
+        }
+        apply
         {
-            X(n::Number[i]);
-		}
+            (Controlled X)(n::Number, res);
+	    }
 	}
 
     operation EqualsQQQ(a : QInt, b : QInt, c : Qubit) : Unit is Adj+Ctl
     {
-        for (i in 0..b::Size - 1)
+        if (a::Size <= b::Size)
         {
-            CNOT(a::Number[i], b::Number[i]);
-            X(b::Number[i]);
-		}
-        (Controlled X)(b::Number, c);
-        for (i in 0..b::Size - 1)
+            within
+            {
+                for (i in 0..b::Size - 1)
+                {
+                    if (i < a::Size)
+                    {
+                        CNOT(a::Number[i], b::Number[i]);
+			        }
+                    X(b::Number[i]);
+		        }
+		    }
+            apply
+            {
+                (Controlled X)(b::Number, c);
+		    }
+	    }
+        else
         {
-            X(b::Number[i]);
-            CNOT(a::Number[i], b::Number[i]);
+            EqualsQQQ(b, a, c);
 		}
 	}
 
     operation EqualsCQQ(a : Int, b : QInt, c : Qubit) : Unit is Adj+Ctl
     {
-        let ar = IntAsBoolArray(a, b::Size);
-        for (i in 0..b::Size - 1)
+        if (a < PowI(2, b::Size))
         {
-            if (not ar[i])
+            let ar = IntAsBoolArray(a, b::Size);
+            for (i in 0..b::Size - 1)
             {
-                X(b::Number[i]);
-            }
-		}
-        (Controlled X)(b::Number, c);
-        for (i in 0..b::Size - 1)
-        {
-            if (not ar[i])
+                if (not ar[i])
+                {
+                    X(b::Number[i]);
+                }
+		    }
+            (Controlled X)(b::Number, c);
+            for (i in 0..b::Size - 1)
             {
-                X(b::Number[i]);
-            }
-		}
+                if (not ar[i])
+                {
+                    X(b::Number[i]);
+                }
+		    }
+	    }
 	}
 
     operation EqualsQQM(a : QInt, b : QInt) : Bool
