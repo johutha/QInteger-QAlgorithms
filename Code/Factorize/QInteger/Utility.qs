@@ -4,11 +4,26 @@
     open Microsoft.Quantum.Intrinsic;
     open Microsoft.Quantum.Math;
 
-    operation ResizeQInt(qn : QInt, rs : Qubit[]) : QInt
+    operation GrowQInt(qn : QInt, nl : Int, reg : Qubit[]) : QInt
     {
-        mutable ar = qn::Number;
-        set ar += rs;
-        return QIntR(ar);
+        if (nl == qn::Size) { return qn; }
+        return QInt(nl, qn::Number + reg[0..nl - qn::Size - 1]);
+	}
+
+    operation GrowQIntBy(qn : QInt, add : Int, reg : Qubit[]) : QInt
+    {
+        if (add == 0) { return qn; }
+        return QInt(qn::Size + add, qn::Number + reg[0..add - 1]);
+	}
+
+    operation ShrinkQInt(qn : QInt, nl : Int) : QInt
+    {
+        return QInt(nl, qn::Number[0..nl - 1]);
+	}
+
+    operation ShrinkQIntBy(qn : QInt, sub : Int) : QInt
+    {
+        return QInt(qn::Size - sub, qn::Number[0..qn::Size - sub - 1]);
 	}
 
     operation CopyToQInt(n : Int, qn : QInt) : Unit is Adj+Ctl
@@ -23,7 +38,7 @@
 		}
 	}
 
-    operation PrepareUniformSuperposition(n : QInt) : Unit
+    operation PrepareUniformSuperposition(n : QInt) : Unit is Adj+Ctl
     {
         for (i in 0..n::Size - 1)
         {
@@ -98,21 +113,20 @@
         if (a < PowI(2, b::Size))
         {
             let ar = IntAsBoolArray(a, b::Size);
-            for (i in 0..b::Size - 1)
+            within
             {
-                if (not ar[i])
+                for (i in 0..b::Size - 1)
                 {
-                    X(b::Number[i]);
-                }
+                    if (not ar[i])
+                    {
+                        X(b::Number[i]);
+                    }
+		        }
 		    }
-            (Controlled X)(b::Number, c);
-            for (i in 0..b::Size - 1)
+            apply
             {
-                if (not ar[i])
-                {
-                    X(b::Number[i]);
-                }
-		    }
+                (Controlled X)(b::Number, c);
+			}
 	    }
 	}
 
