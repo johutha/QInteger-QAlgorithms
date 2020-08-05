@@ -26,6 +26,41 @@
         return QInt(qn::Size - sub, qn::Number[0..qn::Size - sub - 1]);
 	}
 
+    operation GreaterThan(A : QInt, B : QInt, res : Qubit) : Unit is Adj+Ctl
+    {
+        using (an = Qubit[2])
+        {
+            let a1 = QInt(A::Size + 1, A::Number + [an[0]]);
+            let b1 = QInt(B::Size + 1, B::Number + [an[1]]);
+
+            within
+            {
+                (Adjoint Add)(a1, b1);
+		    }
+            apply
+            {
+                CNOT(b1::Number[b1::Size - 1], res);
+			}
+		}
+	}
+
+    operation LessThan(A : QInt, B : QInt, res : Qubit) : Unit is Adj+Ctl
+    {
+        GreaterThan(B, A, res);
+	}
+
+    operation LessOrEq(A : QInt, B : QInt, res : Qubit) : Unit is Adj+Ctl
+    {
+        GreaterThan(A, B, res);
+        X(res);
+	}
+
+    operation GreaterOrEq(A : QInt, B : QInt, res : Qubit) : Unit is Adj+Ctl
+    {
+        LessThan(A, B, res);
+        X(res);
+	}
+
     operation CopyToQInt(n : Int, qn : QInt) : Unit is Adj+Ctl
     {
         let ar = IntAsBoolArray(n, qn::Size);

@@ -175,4 +175,37 @@
 		}
         Message("Test passed.");
 	}
+
+    @Test("QuantumSimulator")
+    operation CompTest() : Unit
+    {
+        for (i in 0..15)
+        {
+            for (j in 0..15)
+            {
+                using (qs = Qubit[9])
+                {
+                    let a = QInt(4, qs[0..3]);
+                    let b = QInt(4, qs[4..7]);
+                    let c = qs[8];
+                    CopyToQInt(i, a);
+                    CopyToQInt(j, b);
+                    GreaterThan(a, b, c);
+                    AssertQubit(BoolAsResult(i > j), c);
+                    Reset(c);
+                    LessThan(a, b, c);
+                    AssertQubit(BoolAsResult(i < j), c);
+                    Reset(c);
+                    GreaterOrEq(a, b, c);
+                    AssertQubit(BoolAsResult(i >= j), c);
+                    Reset(c);
+                    LessOrEq(a, b, c);
+                    AssertQubit(BoolAsResult(i <= j), c);
+                    Reset(c);
+                    ResetAll(qs);
+				}
+			}
+		}
+        Message("Test passed.");
+	}
 }

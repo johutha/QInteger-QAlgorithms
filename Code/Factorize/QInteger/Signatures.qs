@@ -19,12 +19,13 @@
 
     operation AddCQ(Summand : Int, Target : QInt) : Unit is Adj+Ctl
     {
-        
+        Add2nQFTCQ(Summand, Target);
 	}
 
     operation Add3CQQ(A : Int, B : QInt, Target : QInt) : Unit is Adj+Ctl
     {
-        
+        AddCQ(A, Target);
+        Add(B, Target);
 	}
 
     operation AddMod(Summand : QInt, Target : QInt, Mod : QInt) : Unit is Adj+Ctl
