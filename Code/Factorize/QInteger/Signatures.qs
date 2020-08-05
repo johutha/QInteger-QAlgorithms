@@ -1,6 +1,5 @@
 ﻿namespace QTypes.QInteger
 {
-
 	open Microsoft.Quantum.Canon;
 	open Microsoft.Quantum.Intrinsic;
 	open QTypes.QInteger.Addition;
@@ -11,47 +10,66 @@
 		Add2nQFT(Summand, Target);
 	}
 
-	operation Add3(A : QInt, B : QInt, Target : QInt) : Unit is Adj+Ctl
-	{
-		Add(A, Target);
-		Add(B, Target);
-	}
-
 	operation AddCQ(Summand : Int, Target : QInt) : Unit is Adj+Ctl
 	{
 		Add2nQFTCQ(Summand, Target);
 	}
 
-	operation Add3CQQ(A : Int, B : QInt, Target : QInt) : Unit is Adj+Ctl
+	operation AddMod(iSummand : QInt, iTarget : QInt, iMod : QInt) : Unit is Adj+Ctl
 	{
-		AddCQ(A, Target);
-		Add(B, Target);
-	}
-
-	operation AddMod(Summand : QInt, Target : QInt, Mod : QInt) : Unit is Adj+Ctl
-	{
-		using (anc = Qubit())
+		using (an = Qubit[4])
 		{
+			let c = an[3];
+			let Summand = QInt(iSummand::Size + 1, iSummand::Number + [an[0]]);
+			let Target = QInt(iTarget::Size + 1, iTarget::Number + [an[1]]);
+			let Mod = QInt(iMod::Size + 1, iMod::Number + [an[2]]);
 			Add(Summand, Target);
-			GreaterOrEq(Target, Mod, anc);
-			(Controlled (Adjoint Add))([anc], (Mod, Target));
-			GreaterThan(Summand, Target, anc);
+			GreaterOrEq(Target, Mod, c);
+			(Controlled (Adjoint Add))([c], (Mod, Target));
+			GreaterThan(Summand, Target, c);
 		}
 	}
 
-	operation AddModQQC(Summand : QInt, Target : QInt, Mod : Int) : Unit is Adj+Ctl
+	operation AddModQQC(iSummand : QInt, iTarget : QInt, Mod : Int) : Unit is Adj+Ctl
 	{
-		
+		using (an = Qubit[3])
+		{
+			let c = an[2];
+			let Summand = QInt(iSummand::Size + 1, iSummand::Number + [an[0]]);
+			let Target = QInt(iTarget::Size + 1, iTarget::Number + [an[1]]);
+			Add(Summand, Target);
+			LessOrEqCQ(Mod, Target, c);
+			(Controlled (Adjoint AddCQ))([c], (Mod, Target));
+			GreaterThan(Summand, Target, c);
+		}
 	}
 
-	operation AddModCQC(Summand : Int, Target : QInt, Mod : Int) : Unit is Adj+Ctl
+	operation AddModCQC(Summand : Int, iTarget : QInt, Mod : Int) : Unit
 	{
-		
+		using (an = Qubit[2])
+		{
+			let j = MeasureQInt(iTarget);
+			let c = an[1];
+			let Target = QInt(iTarget::Size + 1, iTarget::Number + [an[0]]);
+			AddCQ(Summand, Target);
+			LessOrEqCQ(Mod, Target, c);
+			(Controlled (Adjoint AddCQ))([c], (Mod, Target));
+			GreaterThanCQ(Summand, Target, c);
+		}
 	}
 
-	operation AddModCQQ(Summand : Int, Target : QInt, Mod : QInt) : Unit is Adj+Ctl
+	operation AddModCQQ(Summand : Int, iTarget : QInt, iMod : QInt) : Unit is Adj+Ctl
 	{
-		
+		using (an = Qubit[3])
+		{
+			let c = an[2];
+			let Target = QInt(iTarget::Size + 1, iTarget::Number + [an[0]]);
+			let Mod = QInt(iMod::Size + 1, iMod::Number + [an[1]]);
+			AddCQ(Summand, Target);
+			LessOrEq(Mod, Target, c);
+			(Controlled (Adjoint Add))([c], (Mod, Target));
+			GreaterThanCQ(Summand, Target, c);
+		}
 	}
 
 	operation MulMod(Factor : QInt, Target : QInt, Mod : QInt) : Unit is Adj+Ctl
