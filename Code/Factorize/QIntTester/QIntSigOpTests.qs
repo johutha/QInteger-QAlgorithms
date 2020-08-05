@@ -1,6 +1,7 @@
 ﻿namespace Quantum.QIntTester.SigOpTester
 {
 	open QTypes.QInteger;
+	open QTypes.QInteger.MultiplyExpMod;
 	open Microsoft.Quantum.Diagnostics;
 	open Microsoft.Quantum.Intrinsic;
 	open Microsoft.Quantum.Math;
@@ -147,6 +148,85 @@
 						let res = MeasureQInt(b);
 						EqualityFactI(res, (i + j) % k, "Addition returned wrong result: (" + IntAsString(i) + " + " + IntAsString(j) + ") % " + IntAsString(k) + " = " + IntAsString((i + j) % k) + " expected, returned " + IntAsString(res));
 						ResetAll(qs);
+					}
+				}
+			}
+		}
+		Message("Test passed.");
+	}
+	
+	@Test("QuantumSimulator")
+	operation MulModAddTester() : Unit
+	{
+		for (i in 0..7)
+		{
+			for (j in 0..7)
+			{
+				for (Mod in 1..7)
+				{
+					using (qr = Qubit[6])
+					{
+						let b = QIntVS(qr, 3, j % Mod);
+						let trg = QIntR(qr[3..5]);
+						MulModAdd(i, b, trg, Mod);
+						let res = MeasureQInt(trg);
+						EqualityFactI(res, (i * j) % Mod, "Returned wrong result (Expected (" + IntAsString(i) + " * " + IntAsString(j) + ") % " + IntAsString(Mod) + " = " + IntAsString((i * j) % Mod) + ", got " + IntAsString(res));
+						ResetAll(qr);
+					}
+				}
+			}
+		}
+		Message("Test passed.");
+	}
+
+	@Test("QuantumSimulator")
+	operation MulModTester() : Unit
+	{
+		for (i in 0..7)
+		{
+			for (j in 0..7)
+			{
+				for (Mod in 1..7)
+				{
+					if (GCD(i, Mod) == 1)
+					{
+						using (qr = Qubit[3])
+						{
+							let trg = QIntV(qr, j % Mod);
+							MulMod(i % Mod, trg, Mod);
+							let res = MeasureQInt(trg);
+							EqualityFactI(res, (i * j) % Mod, "Returned wrong result (Expected (" + IntAsString(i) + " * " + IntAsString(j) + ") % " + IntAsString(Mod) + " = " + IntAsString((i * j) % Mod) + ", got " + IntAsString(res));
+							ResetAll(qr);
+						}
+					}
+				}
+			}
+		}
+		Message("Test passed.");
+	}
+
+	@Test("QuantumSimulator")
+	operation ModExpTester() : Unit
+	{
+		for (i in 0..7)
+		{
+			for (j in 0..7)
+			{
+				for (Mod in 1..7)
+				{
+					if (GCD(i, Mod) == 1)
+					{
+						using (qr = Qubit[6])
+						{
+							let exp = QIntVS(qr, 3, j % Mod);
+							let trg = QIntR(qr[3..5]);
+							ModExp(i % Mod, exp, trg, Mod);
+							let res = MeasureQInt(trg);
+							let er = FastPowMod(i, j, Mod);
+							let eq = "(" + IntAsString(i) + "^" + IntAsString(j) + ") % " + IntAsString(Mod) + " = " + IntAsString(er);
+							EqualityFactI(res, er, "Wrong answer: Expected" + eq + ", got " + IntAsString(res));
+							ResetAll(qr);
+						}
 					}
 				}
 			}

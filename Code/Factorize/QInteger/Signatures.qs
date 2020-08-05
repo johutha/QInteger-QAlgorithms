@@ -3,6 +3,7 @@
 	open Microsoft.Quantum.Canon;
 	open Microsoft.Quantum.Intrinsic;
 	open QTypes.QInteger.Addition;
+	open QTypes.QInteger.MultiplyExpMod;
 	open QTypes.QInteger.QFT;
 
 	operation Add(Summand : QInt, Target : QInt) : Unit is Adj+Ctl
@@ -44,11 +45,10 @@
 		}
 	}
 
-	operation AddModCQC(Summand : Int, iTarget : QInt, Mod : Int) : Unit
+	operation AddModCQC(Summand : Int, iTarget : QInt, Mod : Int) : Unit is Adj+Ctl
 	{
 		using (an = Qubit[2])
 		{
-			let j = MeasureQInt(iTarget);
 			let c = an[1];
 			let Target = QInt(iTarget::Size + 1, iTarget::Number + [an[0]]);
 			AddCQ(Summand, Target);
@@ -72,19 +72,19 @@
 		}
 	}
 
-	operation MulMod(Factor : QInt, Target : QInt, Mod : QInt) : Unit is Adj+Ctl
+	operation MulModAdd(a : Int, b : QInt, Target : QInt, Mod : Int) : Unit is Adj+Ctl
 	{
-		
+		_MulModAdd(a, b, Target, Mod);
 	}
 
-	operation ConMulMod(Control : Qubit, factor : QInt, Target : QInt, Mod : Int) : Unit is Adj
+	operation MulMod(Factor : Int, Target : QInt, Mod : Int) : Unit is Adj+Ctl
 	{
-		
+		_MulMod(Factor, Target, Mod);
 	}
 
-	operation ModExp(Base : Int, Expn : QInt, Mod : Int) : Unit is Adj+Ctl
+	operation ModExp(Base : Int, Expn : QInt, Target : QInt, Mod : Int) : Unit is Adj+Ctl
 	{
-		
+		__ModExp(Base, Expn, Target, Mod);
 	}
 
 	operation QFTQInt(qn : QInt) : Unit is Adj+Ctl

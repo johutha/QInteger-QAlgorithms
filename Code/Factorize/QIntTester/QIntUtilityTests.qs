@@ -114,4 +114,22 @@
 		}
 		Message("Test passed.");
 	}
+
+	@Test("QuantumSimulator")
+	operation InitTest() : Unit
+	{
+		for (i in 0..511)
+		{
+			using (qr = Qubit[9])
+			{
+				mutable qn = QIntV(qr, i);
+				EqualityFactI(MeasureQInt(qn), i, "Initializer V returned QInt in wrong state");
+				ResetAll(qr);
+				set qn = QIntVS(qr, 9, i);
+				EqualityFactI(MeasureQInt(qn), i, "Initializer VS returned QInt in wrong state");
+				ResetAll(qr);
+			}
+		}
+		Message("Test passed.");
+	}
 }
