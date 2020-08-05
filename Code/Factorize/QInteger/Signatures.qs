@@ -3,20 +3,23 @@
 
     open Microsoft.Quantum.Canon;
     open Microsoft.Quantum.Intrinsic;
+    open QTypes.QInteger.Addition;
+    open QTypes.QInteger.QFT;
 
     operation Add(Summand : QInt, Target : QInt) : Unit is Adj+Ctl
     {
-    
+        Add2nQFT(Summand, Target);
 	}
 
     operation Add3(A : QInt, B : QInt, Target : QInt) : Unit is Adj+Ctl
     {
-        
+        Add(A, Target);
+        Add(B, Target);
 	}
 
     operation AddCQ(Summand : Int, Target : QInt) : Unit is Adj+Ctl
     {
-    
+        
 	}
 
     operation Add3CQQ(A : Int, B : QInt, Target : QInt) : Unit is Adj+Ctl
@@ -57,5 +60,10 @@
     operation ModExp(Base : Int, Expn : QInt, Mod : Int) : Unit is Adj+Ctl
     {
         
+	}
+
+    operation QFTQInt(qn : QInt) : Unit is Adj+Ctl
+    {
+        PerformQFT(qn);
 	}
 }

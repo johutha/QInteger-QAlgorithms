@@ -19,7 +19,7 @@
                     let b = QInt(4, qs[4..7]);
                     CopyToQInt(i, a);
                     CopyToQInt(j, b);
-                    Add3nWoOFCheck(a, b);
+                    __NotWorking_Add3nWoOFCheck(a, b);
                     let res = MeasureQInt(b);
                     EqualityFactI(res, i + j, "Addition returned wrong result: " + IntAsString(i + j) + " expected, returned " + IntAsString(res));
                     ResetAll(qs);
@@ -30,18 +30,76 @@
     }
 
     @Test("QuantumSimulator")
-    operation Add3n1Pl1Check() : Unit
+    operation Add2nQFTTest() : Unit
     {
-        using (qr = Qubit[6])
+        for (i in 0..31)
         {
-            let a = QInt(3, qr[0..2]);
-            let b = QInt(3, qr[3..5]);
-            CopyToQInt(1, a);
-            CopyToQInt(1, b);
-            Add3nWoOFCheck(a, b);
-            let res = MeasureQInt(b);
-            EqualityFactI(res, 2, "Wrong addition result");
-            ResetAll(qr);
+            for (j in 0..31)
+            {
+                using (qs = Qubit[10])
+                {
+                    let a = QInt(5, qs[0..4]);
+                    let b = QInt(5, qs[5..9]);
+                    CopyToQInt(i, a);
+                    CopyToQInt(j, b);
+                    Add2nQFT(a, b);
+                    let res = MeasureQInt(b);
+                    EqualityFactI(res, (i + j) % PowI(2, 5), "Addition returned wrong result: " + IntAsString(i + j) + " expected, returned " + IntAsString(res));
+                    ResetAll(qs);
+				}
+			}
+		}
+        Message("Test passed.");
+    }
+
+    @Test("QuantumSimulator")
+    operation Add2nQFTCQTest() : Unit
+    {
+        for (i in 0..31)
+        {
+            for (j in 0..31)
+            {
+                using (qs = Qubit[5])
+                {
+                    let b = QInt(5, qs[0..4]);
+                    CopyToQInt(j, b);
+                    Add2nQFTCQ(i, b);
+                    let res = MeasureQInt(b);
+                    EqualityFactI(res, (i + j) % PowI(2, 5), "Addition returned wrong result: " + IntAsString(i + j) + " expected, returned " + IntAsString(res));
+                    ResetAll(qs);
+				}
+			}
+		}
+        Message("Test passed.");
+    }
+
+    @Test("QuantumSimulator")
+    operation Add2nQFTOverFlowBitTest() : Unit
+    {
+        for (i in 0..15)
+        {
+            for (j in 0..15)
+            {
+                using (qs = Qubit[11])
+                {
+                    let a = QInt(5, qs[0..4]);
+                    let b = QInt(5, qs[5..9]);
+                    let c = qs[10];
+                    CopyToQInt(i, a);
+                    CopyToQInt(j, b);
+                    within
+                    {
+                        (Adjoint Add2nQFT)(a, b);
+					}
+                    apply
+                    {
+                        CNOT(b::Number[b::Size - 1], c);
+					}
+                    let res = ResultAsBool(M(c));
+                    EqualityFactB(res, (i > j), "Wrong answer for " + IntAsString(i) + " >? " + IntAsString(j));
+                    ResetAll(qs);
+				}
+			}
 		}
         Message("Test passed.");
     }
