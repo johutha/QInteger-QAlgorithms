@@ -5,19 +5,19 @@ using Factorize.Classical.Calculator.Modules;
 
 namespace Factorize.Executable
 {
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            long n = Convert.ToInt64(Console.ReadLine());
+	class Program
+	{
+		static void Main(string[] args)
+		{
+			long n = Convert.ToInt64(Console.ReadLine());
 
-            Factorizer factorizer = new Factorizer(new NaivePrimeChecker(), new BabyGiantOrderFinder());
-            Dictionary<long, long> res = factorizer.Run(n);
+			Factorizer factorizer = new Factorizer(new NaivePrimeChecker(), new BabyGiantOrderFinder());
+			Dictionary<long, long> res = factorizer.Run(n);
 
-            foreach (KeyValuePair<long,long> kvp in res)
-            {
-                Console.WriteLine(kvp.Key.ToString() + ": " + kvp.Value.ToString());
-            }
-        }
-    }
+			foreach (KeyValuePair<long,long> kvp in res)
+			{
+				Console.WriteLine(kvp.Key.ToString() + ": " + kvp.Value.ToString());
+			}
+		}
+	}
 }

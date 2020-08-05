@@ -53,6 +53,29 @@
     }
 
     @Test("QuantumSimulator")
+    operation Subtract2nQFTTest() : Unit
+    {
+        for (i in 0..15)
+        {
+            for (j in 0..15)
+            {
+                using (qs = Qubit[8])
+                {
+                    let a = QInt(4, qs[0..3]);
+                    let b = QInt(4, qs[4..7]);
+                    CopyToQInt(i, a);
+                    CopyToQInt(j, b);
+                    (Adjoint Add2nQFT)(a, b);
+                    let res = MeasureQInt(b);
+                    EqualityFactI(res, (j - i + PowI(2, 4)) % PowI(2, 4), "Addition returned wrong result: " + IntAsString((j - i + PowI(2, 4)) % PowI(2, 4)) + " expected, returned " + IntAsString(res));
+                    ResetAll(qs);
+				}
+			}
+		}
+        Message("Test passed.");
+    }
+
+    @Test("QuantumSimulator")
     operation Add2nQFTCQTest() : Unit
     {
         for (i in 0..31)
@@ -65,7 +88,28 @@
                     CopyToQInt(j, b);
                     Add2nQFTCQ(i, b);
                     let res = MeasureQInt(b);
-                    EqualityFactI(res, (i + j) % PowI(2, 5), "Addition returned wrong result: " + IntAsString(i + j) + " expected, returned " + IntAsString(res));
+                    EqualityFactI(res, (i + j) % PowI(2, 5), "Addition returned wrong result: " + IntAsString((i + j) % PowI(2, 5)) + " expected, returned " + IntAsString(res));
+                    ResetAll(qs);
+				}
+			}
+		}
+        Message("Test passed.");
+    }
+
+    @Test("QuantumSimulator")
+    operation Subtract2nQFTCQTest() : Unit
+    {
+        for (i in 0..31)
+        {
+            for (j in 0..31)
+            {
+                using (qs = Qubit[5])
+                {
+                    let b = QInt(5, qs[0..4]);
+                    CopyToQInt(j, b);
+                    (Adjoint Add2nQFTCQ)(i, b);
+                    let res = MeasureQInt(b);
+                    EqualityFactI(res, (j - i + PowI(2, 5)) % PowI(2, 5), "Addition returned wrong result: " + IntAsString((j - i + PowI(2, 5)) % PowI(2, 5)) + " expected, returned " + IntAsString(res));
                     ResetAll(qs);
 				}
 			}
