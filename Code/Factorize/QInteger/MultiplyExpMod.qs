@@ -3,7 +3,7 @@
 	open QTypes.QInteger;
 	open Microsoft.Quantum.Intrinsic;
 	open Microsoft.Quantum.Math;
-
+	open Microsoft.Quantum.Convert;
 
 	operation _MulModAdd(a : Int, b : QInt, Target : QInt, Mod : Int) : Unit is Adj+Ctl
 	{
@@ -27,6 +27,25 @@
 				set res = (res * bas) % mod;
 			}
 			set bas = (bas * bas) % mod;
+			set exp = exp / 2;
+		}
+		return res;
+	}
+
+	function FastPow(ibas : Int, iexp : Int) : Int
+	{
+		mutable bas = ibas;
+		mutable exp = iexp;
+		mutable res = 1;
+
+		while (exp > 0)
+		{
+			if (exp % 2 == 1)
+			{
+				set res = res * bas;
+			}
+			set bas = (bas * bas);
+			set exp = exp / 2;
 		}
 		return res;
 	}
@@ -98,7 +117,7 @@
 		CopyToQInt(1, Target);
 		for (i in 0..n - 1)
 		{
-			let cr = FastPowMod(Bas, i, Mod);
+			let cr = FastPowMod(Bas, FastPow(2, i), Mod);
 			(Controlled MulMod)([Ex::Number[i]], (cr, Target, Mod));
 		}
 	}
