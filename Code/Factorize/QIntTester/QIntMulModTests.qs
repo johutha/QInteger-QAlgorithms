@@ -1,7 +1,6 @@
-﻿namespace Quantum.QIntTester.MulModTester
+﻿namespace QIntTester.MulModTester
 {
 	open QTypes.QInteger;
-	open QTypes.QInteger.MultiplyExpMod;
 	open Microsoft.Quantum.Diagnostics;
 	open Microsoft.Quantum.Intrinsic;
 	open Microsoft.Quantum.Math;

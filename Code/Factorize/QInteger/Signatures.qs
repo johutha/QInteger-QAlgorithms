@@ -2,9 +2,6 @@
 {
 	open Microsoft.Quantum.Canon;
 	open Microsoft.Quantum.Intrinsic;
-	open QTypes.QInteger.Addition;
-	open QTypes.QInteger.MultiplyExpMod;
-	open QTypes.QInteger.QFT;
 
 	operation Add(Summand : QInt, Target : QInt) : Unit is Adj+Ctl
 	{

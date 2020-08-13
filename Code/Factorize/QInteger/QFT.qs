@@ -1,19 +1,18 @@
-﻿namespace QTypes.QInteger.QFT
+﻿namespace QTypes.QInteger
 {
-	open QTypes.QInteger;
 	open Microsoft.Quantum.Canon;
 	open Microsoft.Quantum.Intrinsic;
 	open Microsoft.Quantum.Math;
 	open Microsoft.Quantum.Convert;
 
 
-	operation RotQ(k : Int, q : Qubit) : Unit is Adj+Ctl
+	internal operation RotQ(k : Int, q : Qubit) : Unit is Adj+Ctl
 	{
 		R1(2.0 * PI() / IntAsDouble(PowI(2, k)), q);
 	}
 
 
-	operation PerformQFT(qn : QInt) : Unit is Adj+Ctl
+	internal operation PerformQFT(qn : QInt) : Unit is Adj+Ctl
 	{
 		let n = qn::Size;
 		for (i in n-1..-1..0)

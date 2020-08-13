@@ -1,7 +1,6 @@
-﻿namespace Quantum.QIntTester.SigOpTester
+﻿namespace QIntTester.SigOpTester
 {
 	open QTypes.QInteger;
-	open QTypes.QInteger.MultiplyExpMod;
 	open Microsoft.Quantum.Diagnostics;
 	open Microsoft.Quantum.Intrinsic;
 	open Microsoft.Quantum.Math;

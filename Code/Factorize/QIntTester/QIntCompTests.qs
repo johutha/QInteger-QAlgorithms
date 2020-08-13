@@ -1,4 +1,4 @@
-﻿namespace Quantum.QIntTester.CompTester
+﻿namespace QIntTester.CompTester
 {
 	open QTypes.QInteger;
 	open Microsoft.Quantum.Diagnostics;

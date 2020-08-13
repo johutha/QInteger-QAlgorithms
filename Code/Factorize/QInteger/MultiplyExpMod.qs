@@ -1,11 +1,10 @@
-﻿namespace QTypes.QInteger.MultiplyExpMod
+﻿namespace QTypes.QInteger
 {
-	open QTypes.QInteger;
 	open Microsoft.Quantum.Intrinsic;
 	open Microsoft.Quantum.Math;
 	open Microsoft.Quantum.Convert;
 
-	operation _MulModAdd(a : Int, b : QInt, Target : QInt, Mod : Int) : Unit is Adj+Ctl
+	internal operation _MulModAdd(a : Int, b : QInt, Target : QInt, Mod : Int) : Unit is Adj+Ctl
 	{
 		for (i in 0..Target::Size - 1)
 		{
@@ -88,7 +87,7 @@
 		return t;
 	}
 
-	operation _MulMod(a : Int, Target : QInt, Mod : Int) : Unit is Adj+Ctl
+	internal operation _MulMod(a : Int, Target : QInt, Mod : Int) : Unit is Adj+Ctl
 	{
 		if (GCD(a, Mod) == 1)
 		{
@@ -111,7 +110,7 @@
 		}
 	}
 
-	operation __ModExp(Bas : Int, Ex : QInt, Target : QInt, Mod : Int) : Unit is Adj+Ctl
+	internal operation __ModExp(Bas : Int, Ex : QInt, Target : QInt, Mod : Int) : Unit is Adj+Ctl
 	{
 		let n = Ex::Size;
 		CopyToQInt(1, Target);

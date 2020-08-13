@@ -1,4 +1,4 @@
-﻿namespace Quantum.QIntTester.UtilityTester
+﻿namespace QIntTester.UtilityTester
 {
 	open QTypes.QInteger;
 	open Microsoft.Quantum.Diagnostics;

@@ -1,25 +1,23 @@
-﻿namespace QTypes.QInteger.Addition
+﻿namespace QTypes.QInteger
 {
-	open QTypes.QInteger;
-	open QTypes.QInteger.QFT;
 	open Microsoft.Quantum.Intrinsic;
 	open Microsoft.Quantum.Convert;
 
-	operation __carry(Ccurr : Qubit, Summand : Qubit, Target : Qubit, Cnext : Qubit) : Unit is Adj+Ctl
+	internal operation __carry(Ccurr : Qubit, Summand : Qubit, Target : Qubit, Cnext : Qubit) : Unit is Adj+Ctl
 	{
 		CCNOT(Summand, Target, Cnext);
 		CNOT(Summand, Target);
 		CCNOT(Ccurr, Target, Cnext);
 	}
 
-	operation __sum(Ccurr : Qubit, Summand : Qubit, Target : Qubit) : Unit is Adj+Ctl
+	internal operation __sum(Ccurr : Qubit, Summand : Qubit, Target : Qubit) : Unit is Adj+Ctl
 	{
 		CNOT(Summand, Target);
 		CNOT(Ccurr, Target);
 	}
 
-	// Does not work as Subtract/Overflow! Needs to be looked at.
-	operation __NotWorking_Add3nWoOFCheck(Summand : QInt, Target : QInt) : Unit is Adj+Ctl
+	// Does not work! Needs to be looked at.
+	internal operation __NotWorking_Add3nWoOFCheck(Summand : QInt, Target : QInt) : Unit is Adj+Ctl
 	{
 		let n = Target::Size;
 		using (Carry = Qubit[n + 1])
@@ -38,7 +36,7 @@
 		}
 	}
 
-	operation Add2nQFT(Summand : QInt, Target : QInt) : Unit is Adj+Ctl
+	internal operation Add2nQFT(Summand : QInt, Target : QInt) : Unit is Adj+Ctl
 	{
 		let n = Target::Size;
 		within
@@ -57,7 +55,7 @@
 		}
 	}
 
-	operation Add2nQFTCQ(Summand : Int, Target : QInt) : Unit is Adj+Ctl
+	internal operation Add2nQFTCQ(Summand : Int, Target : QInt) : Unit is Adj+Ctl
 	{
 		let n = Target::Size;
 		let bs = IntAsBoolArray(Summand, n);
