@@ -13,59 +13,59 @@
 		Add2nQFTCQ(Summand, Target);
 	}
 
-	operation AddMod(iSummand : QInt, iTarget : QInt, iMod : QInt) : Unit is Adj+Ctl
+	operation AddMod(Summand : QInt, Target : QInt, Mod : QInt) : Unit is Adj+Ctl
 	{
 		using (an = Qubit[4])
 		{
 			let c = an[3];
-			let Summand = QInt(iSummand::Size + 1, iSummand::Number + [an[0]]);
-			let Target = QInt(iTarget::Size + 1, iTarget::Number + [an[1]]);
-			let Mod = QInt(iMod::Size + 1, iMod::Number + [an[2]]);
-			Add(Summand, Target);
-			GreaterOrEq(Target, Mod, c);
-			(Controlled (Adjoint Add))([c], (Mod, Target));
-			GreaterThan(Summand, Target, c);
+			let _Summand = QInt(Summand::Size + 1, Summand::Number + [an[0]]);
+			let _Target = QInt(Target::Size + 1, Target::Number + [an[1]]);
+			let _Mod = QInt(Mod::Size + 1, Mod::Number + [an[2]]);
+			Add(_Summand, _Target);
+			GreaterOrEq(_Target, _Mod, c);
+			(Controlled (Adjoint Add))([c], (_Mod, _Target));
+			GreaterThan(_Summand, _Target, c);
 		}
 	}
 
-	operation AddModQQC(iSummand : QInt, iTarget : QInt, Mod : Int) : Unit is Adj+Ctl
+	operation AddModQQC(Summand : QInt, Target : QInt, Mod : Int) : Unit is Adj+Ctl
 	{
 		using (an = Qubit[3])
 		{
 			let c = an[2];
-			let Summand = QInt(iSummand::Size + 1, iSummand::Number + [an[0]]);
-			let Target = QInt(iTarget::Size + 1, iTarget::Number + [an[1]]);
-			Add(Summand, Target);
-			LessOrEqCQ(Mod, Target, c);
-			(Controlled (Adjoint AddCQ))([c], (Mod, Target));
-			GreaterThan(Summand, Target, c);
+			let _Summand = QInt(Summand::Size + 1, Summand::Number + [an[0]]);
+			let _Target = QInt(Target::Size + 1, Target::Number + [an[1]]);
+			Add(_Summand, _Target);
+			LessOrEqCQ(Mod, _Target, c);
+			(Controlled (Adjoint AddCQ))([c], (Mod, _Target));
+			GreaterThan(_Summand, _Target, c);
 		}
 	}
 
-	operation AddModCQC(Summand : Int, iTarget : QInt, Mod : Int) : Unit is Adj+Ctl
+	operation AddModCQC(Summand : Int, Target : QInt, Mod : Int) : Unit is Adj+Ctl
 	{
 		using (an = Qubit[2])
 		{
 			let c = an[1];
-			let Target = QInt(iTarget::Size + 1, iTarget::Number + [an[0]]);
-			AddCQ(Summand, Target);
-			LessOrEqCQ(Mod, Target, c);
-			(Controlled (Adjoint AddCQ))([c], (Mod, Target));
-			GreaterThanCQ(Summand, Target, c);
+			let _Target = QInt(Target::Size + 1, Target::Number + [an[0]]);
+			AddCQ(Summand, _Target);
+			LessOrEqCQ(Mod, _Target, c);
+			(Controlled (Adjoint AddCQ))([c], (Mod, _Target));
+			GreaterThanCQ(Summand, _Target, c);
 		}
 	}
 
-	operation AddModCQQ(Summand : Int, iTarget : QInt, iMod : QInt) : Unit is Adj+Ctl
+	operation AddModCQQ(Summand : Int, Target : QInt, Mod : QInt) : Unit is Adj+Ctl
 	{
 		using (an = Qubit[3])
 		{
 			let c = an[2];
-			let Target = QInt(iTarget::Size + 1, iTarget::Number + [an[0]]);
-			let Mod = QInt(iMod::Size + 1, iMod::Number + [an[1]]);
-			AddCQ(Summand, Target);
-			LessOrEq(Mod, Target, c);
-			(Controlled (Adjoint Add))([c], (Mod, Target));
-			GreaterThanCQ(Summand, Target, c);
+			let _Target = QInt(Target::Size + 1, Target::Number + [an[0]]);
+			let _Mod = QInt(Mod::Size + 1, Mod::Number + [an[1]]);
+			AddCQ(Summand, _Target);
+			LessOrEq(_Mod, _Target, c);
+			(Controlled (Adjoint Add))([c], (_Mod, _Target));
+			GreaterThanCQ(Summand, _Target, c);
 		}
 	}
 
