@@ -14,13 +14,14 @@
 
 	internal operation PerformQFT(qn : QInt) : Unit is Adj+Ctl
 	{
+		ReverseBits(qn);
 		let n = qn::Size;
-		for (i in n-1..-1..0)
+		for (i in 0..n - 1)
 		{
 			H(qn::Number[i]);
-			for (j in i-1..-1..0)
+			for (j in i + 1..n - 1)
 			{
-				(Controlled RotQ)([qn::Number[j]], (i - j + 1, qn::Number[i]));
+				(Controlled RotQ)([qn::Number[j]], (j - i + 1, qn::Number[i]));
 			}
 		}
 	}

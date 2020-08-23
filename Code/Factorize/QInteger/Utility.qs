@@ -4,24 +4,24 @@
 	open Microsoft.Quantum.Intrinsic;
 	open Microsoft.Quantum.Math;
 
-	operation GrowQInt(qn : QInt, nl : Int, reg : Qubit[]) : QInt
+	function GrowQInt(qn : QInt, nl : Int, reg : Qubit[]) : QInt
 	{
 		if (nl == qn::Size) { return qn; }
 		return QInt(nl, qn::Number + reg[0..nl - qn::Size - 1]);
 	}
 
-	operation GrowQIntBy(qn : QInt, add : Int, reg : Qubit[]) : QInt
+	function GrowQIntBy(qn : QInt, add : Int, reg : Qubit[]) : QInt
 	{
 		if (add == 0) { return qn; }
 		return QInt(qn::Size + add, qn::Number + reg[0..add - 1]);
 	}
 
-	operation ShrinkQInt(qn : QInt, nl : Int) : QInt
+	function ShrinkQInt(qn : QInt, nl : Int) : QInt
 	{
 		return QInt(nl, qn::Number[0..nl - 1]);
 	}
 
-	operation ShrinkQIntBy(qn : QInt, sub : Int) : QInt
+	function ShrinkQIntBy(qn : QInt, sub : Int) : QInt
 	{
 		return QInt(qn::Size - sub, qn::Number[0..qn::Size - sub - 1]);
 	}
@@ -60,6 +60,20 @@
 			set r*= 2;
 		}
 		return res;
+	}
+
+	function ReversedBits(qn : QInt) : QInt
+	{
+		return QInt(qn::Size, qn::Number[qn::Size - 1..-1..0]);
+	}
+
+	operation ReverseBits(qn : QInt) : Unit is Adj+Ctl
+	{
+		let n = qn::Size;
+		for (i in 0..n/2 - 1)
+		{
+			SWAP(qn::Number[i], qn::Number[n - 1 - i]);
+		}
 	}
 
 	operation ResetQInt(n : QInt) : Unit

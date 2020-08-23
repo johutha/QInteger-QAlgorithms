@@ -42,6 +42,7 @@
 		within
 		{
 			QFTQInt(Target);
+			ReverseBits(Target);
 		}
 		apply
 		{
@@ -62,6 +63,7 @@
 		within
 		{
 			QFTQInt(Target);
+			ReverseBits(Target);
 		}
 		apply
 		{

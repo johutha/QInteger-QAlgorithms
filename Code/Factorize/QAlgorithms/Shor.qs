@@ -31,7 +31,7 @@
                 let outreg = QIntR(qr[q..q + n - 1]);
                 PrepareUniformSuperposition(inreg);
                 ModExp(A, inreg, outreg, Mod);
-                (Adjoint QFTQInt)(outreg);
+                (Adjoint QFTQInt)(inreg);
                 let tr = MeasureQInt(inreg);
                 let dsc = MeasureQInt(outreg);
                 mutable tp = 0;
@@ -40,7 +40,7 @@
                 set rep = rep + 1;
                 if (rep >= 50)
                 {
-                    fail "Too many repetitions.";
+                    fail "Too many repetitions for " + IntAsString(A) + "^? == 1 mod " + IntAsString(Mod) + ", last guess " + IntAsString(tr) + " / " + IntAsString(FastPow(2, q)) + " -> " + IntAsString(tp) + " / " + IntAsString(res) + ".";
 				}
 		    }
 	    }

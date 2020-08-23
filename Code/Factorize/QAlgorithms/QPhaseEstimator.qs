@@ -14,7 +14,7 @@
 				H(anc[i]);
 			}
             mutable rep = 1;
-            for (i in Precision - 1..-1..0)
+            for (i in 0..Precision-1)
             {
                 for (r in 0..rep - 1)
                 {
