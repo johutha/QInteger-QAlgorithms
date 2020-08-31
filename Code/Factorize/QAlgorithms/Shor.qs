@@ -17,7 +17,7 @@
         return e;
 	}
 
-    operation Shor(A : Int, Mod : Int) : Int
+    operation ShorOrderFinder(A : Int, Mod : Int) : Int
     {
         mutable res = 0;
         mutable rep = 0;

@@ -11,7 +11,7 @@ namespace Factorize.Executable
 		{
 			long n = Convert.ToInt64(Console.ReadLine());
 
-			Factorizer factorizer = new Factorizer(new NaivePrimeChecker(), new BabyGiantOrderFinder());
+			Factorizer factorizer = new Factorizer(new MillerRabin(40), new QuantumOrderFinder());
 			Dictionary<long, long> res = factorizer.Run(n);
 
 			foreach (KeyValuePair<long,long> kvp in res)

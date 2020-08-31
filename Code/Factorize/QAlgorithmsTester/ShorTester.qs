@@ -10,13 +10,13 @@
 	@Test("QuantumSimulator")
     operation ShorTest() : Unit
     {
-        for (Mod in 1..2..11)
+        for (Mod in 5..9)
         {
             for (Base in 2..Mod - 1)
             {
                 if (GCD(Base, Mod) == 1)
                 {
-                    let per = Shor(Base, Mod);
+                    let per = ShorOrderFinder(Base, Mod);
                     Fact(FastPowMod(Base, per, Mod) == 1, "Wrong result: base^result != 1, base = " + IntAsString(Base) + ", result = " + IntAsString(per) + ", mod=" + IntAsString(Mod));
                     for (j in 1..per - 1)
                     {

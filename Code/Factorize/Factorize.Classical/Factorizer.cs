@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Factorize.Classical.Utility;
 using System.Diagnostics;
+using Microsoft.Quantum.Intrinsic;
 
 namespace Factorize.Classical.Calculator
 {
@@ -10,14 +11,55 @@ namespace Factorize.Classical.Calculator
 		IPrimeChecker PrimeChecker;
 		IOrderFinder OrderFinder;
 
+		long FindRthRoot(long n, long rt)
+        {
+			long l = 0;
+			long r = n;
+
+			while (l + 1 < r)
+            {
+				long m = (l + r) / 2;
+                try
+                {
+					long rs = MathUtils.FastPowMod(m, rt, long.MaxValue);
+					if (rs > n)
+                    {
+						r = m;
+                    }
+					else
+                    {
+						l = m;
+                    }
+                }
+				catch (OverflowException)
+                {
+					r = m;
+                }
+            }
+			return l;
+        }
+
+		long FindRoot(long n)
+        {
+			long lg2 = (long)Math.Ceiling(Math.Log2(n));
+			for (int i = 2; i < lg2; i++)
+            {
+				long rt = FindRthRoot(n, i);
+				if (MathUtils.FastPowMod(rt, i, long.MaxValue) == n) return rt;
+            }
+			return -1;
+        }
+
 		long FindDivisor(long n)
 		{
 			if (PrimeChecker.Prime(n)) throw new Exception("Number is already prime, can't find any nontrivial divisor.");
 			if ((n & 1) == 0) return 2;
+			var rt = FindRoot(n);
+			if (rt != -1) return rt;
 
 			while (true)
 			{
-				long a = (MathUtils.Random() % (n - 2)) + 1;
+				long a = (MathUtils.Random() % (n - 1)) + 1;
 				long g = MathUtils.GCD(n, a);
 				if (g != 1) return g;
 				long r = OrderFinder.Find(a, n);
