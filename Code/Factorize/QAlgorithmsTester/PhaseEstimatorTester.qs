@@ -21,9 +21,9 @@
         using (q = Qubit())
         {
             X(q);
-            EqualityFactI(EstimatePhase(ToFirst(_, T, 1), [q], 3), 1, "Wrong Phase for Gate T");
-            EqualityFactI(EstimatePhase(ToFirst(_, T, 2), [q], 3), 2, "Wrong Phase for Gate T");
-            EqualityFactI(EstimatePhase(ToFirst(_, T, 3), [q], 4), 6, "Wrong Phase for Gate T");
+            EqualityFactI(EstimatePhase(ApplyMultipleTimes(ToFirst(_, T, 1), _, _), [q], 3), 1, "Wrong Phase for Gate T");
+            EqualityFactI(EstimatePhase(ApplyMultipleTimes(ToFirst(_, T, 2), _, _), [q], 3), 2, "Wrong Phase for Gate T");
+            EqualityFactI(EstimatePhase(ApplyMultipleTimes(ToFirst(_, T, 3), _, _), [q], 4), 6, "Wrong Phase for Gate T");
             X(q);
 	    }
     }

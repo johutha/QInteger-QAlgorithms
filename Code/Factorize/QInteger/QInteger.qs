@@ -21,7 +21,7 @@
 		return qn;
 	}
 
-	operation QIntR(qs : Qubit[]) : QInt
+	function QIntR(qs : Qubit[]) : QInt
 	{
 		let len = Length(qs);
 		let qn = QInt(len, qs);

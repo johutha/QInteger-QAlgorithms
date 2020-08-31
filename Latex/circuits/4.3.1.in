@@ -1,0 +1,9 @@
+a W c_0 breadth=15
+... W breadth=10
+c W c_{n - 1} breadth=10
+d W \ket{\psi} style=very_thick breadth=40
+
+d G {$U_{2^0}$} a length=20 height=20 
+= {...}
+d G {$U_{2^{(n - 1)}}$} c length=35 height=20
+a c G {$QFT^{-1}$} length=40

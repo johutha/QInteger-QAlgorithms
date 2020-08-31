@@ -113,7 +113,6 @@
 	internal operation __ModExp(Bas : Int, Ex : QInt, Target : QInt, Mod : Int) : Unit is Adj+Ctl
 	{
 		let n = Ex::Size;
-		CopyToQInt(1, Target);
 		for (i in 0..n - 1)
 		{
 			let cr = FastPowMod(Bas, FastPow(2, i), Mod);

@@ -1,4 +1,4 @@
-﻿namespace QAlgorithms.Shor
+﻿namespace QAlgorithms.PeriodFinder
 {
     open Microsoft.Quantum.Convert;
     open Microsoft.Quantum.Math;

@@ -1,0 +1,46 @@
+\begin{tikzpicture}[scale=1.000000,x=1pt,y=1pt]
+\filldraw[color=white] (0.000000, -20.000000) rectangle (158.000000, 55.000000);
+% Drawing wires
+% Line 1: a W c_0 breadth=15
+\draw[color=black] (0.000000,47.500000) -- (158.000000,47.500000);
+\draw[color=black] (0.000000,47.500000) node[left] {$c_0$};
+% Line 2: ... W breadth=10
+\draw[color=black] (0.000000,35.000000) node[anchor=mid east] {$\vdots$};
+% Line 3: c W c_{n - 1} breadth=10
+\draw[color=black] (0.000000,25.000000) -- (158.000000,25.000000);
+\draw[color=black] (0.000000,25.000000) node[left] {$c_{n - 1}$};
+% Line 4: d W \ket{\psi} style=very_thick breadth=40
+\draw[color=black,very thick] (0.000000,0.000000) -- (158.000000,0.000000);
+\draw[color=black] (0.000000,0.000000) node[left] {$\ket{\psi}$};
+% Done with wires; drawing gates
+% Line 6: d G {$U_{2^0}$} a length=20 height=20
+\draw (16.000000,47.500000) -- (16.000000,0.000000);
+\begin{scope}
+\draw[fill=white] (16.000000, -0.000000) +(-45.000000:14.142136pt and 14.142136pt) -- +(45.000000:14.142136pt and 14.142136pt) -- +(135.000000:14.142136pt and 14.142136pt) -- +(225.000000:14.142136pt and 14.142136pt) -- cycle;
+\clip (16.000000, -0.000000) +(-45.000000:14.142136pt and 14.142136pt) -- +(45.000000:14.142136pt and 14.142136pt) -- +(135.000000:14.142136pt and 14.142136pt) -- +(225.000000:14.142136pt and 14.142136pt) -- cycle;
+\draw (16.000000, -0.000000) node {{$U_{2^0}$}};
+\end{scope}
+\filldraw (16.000000, 47.500000) circle(1.500000pt);
+% Line 7: = {...}
+\draw[fill=white,color=white] (38.000000, -6.000000) rectangle (53.000000, 53.500000);
+\draw (45.500000, 23.750000) node {{...}};
+% Line 8: d G {$U_{2^{(n - 1)}}$} c length=35 height=20
+\draw (82.500000,25.000000) -- (82.500000,0.000000);
+\begin{scope}
+\draw[fill=white] (82.500000, -0.000000) +(-45.000000:24.748737pt and 14.142136pt) -- +(45.000000:24.748737pt and 14.142136pt) -- +(135.000000:24.748737pt and 14.142136pt) -- +(225.000000:24.748737pt and 14.142136pt) -- cycle;
+\clip (82.500000, -0.000000) +(-45.000000:24.748737pt and 14.142136pt) -- +(45.000000:24.748737pt and 14.142136pt) -- +(135.000000:24.748737pt and 14.142136pt) -- +(225.000000:24.748737pt and 14.142136pt) -- cycle;
+\draw (82.500000, -0.000000) node {{$U_{2^{(n - 1)}}$}};
+\end{scope}
+\filldraw (82.500000, 25.000000) circle(1.500000pt);
+% Line 9: a c G {$QFT^{-1}$} length=40
+\draw (132.000000,47.500000) -- (132.000000,25.000000);
+\begin{scope}
+\draw[fill=white] (132.000000, 36.250000) +(-45.000000:28.284271pt and 24.395184pt) -- +(45.000000:28.284271pt and 24.395184pt) -- +(135.000000:28.284271pt and 24.395184pt) -- +(225.000000:28.284271pt and 24.395184pt) -- cycle;
+\clip (132.000000, 36.250000) +(-45.000000:28.284271pt and 24.395184pt) -- +(45.000000:28.284271pt and 24.395184pt) -- +(135.000000:28.284271pt and 24.395184pt) -- +(225.000000:28.284271pt and 24.395184pt) -- cycle;
+\draw (132.000000, 36.250000) node {{$QFT^{-1}$}};
+\end{scope}
+% Done with gates; drawing ending labels
+\draw[color=black] (158.000000,35.000000) node[anchor=mid west] {$\vdots$};
+% Done with ending labels; drawing cut lines and comments
+% Done with comments
+\end{tikzpicture}
