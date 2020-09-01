@@ -37,7 +37,7 @@ namespace Factorize.Classical.Calculator.Modules
 			return true;
 		}
 
-		public MillerRabin(long NrIterations)
+		public MillerRabin(long NrIterations = 100)
 		{
 			it = NrIterations;
 		}

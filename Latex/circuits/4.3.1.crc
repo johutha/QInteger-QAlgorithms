@@ -1,46 +1,90 @@
+%! \usetikzlibrary{decorations.pathreplacing,decorations.pathmorphing}
 \begin{tikzpicture}[scale=1.000000,x=1pt,y=1pt]
-\filldraw[color=white] (0.000000, -20.000000) rectangle (158.000000, 55.000000);
+\filldraw[color=white] (0.000000, -20.000000) rectangle (256.000000, 70.000000);
 % Drawing wires
-% Line 1: a W c_0 breadth=15
-\draw[color=black] (0.000000,47.500000) -- (158.000000,47.500000);
-\draw[color=black] (0.000000,47.500000) node[left] {$c_0$};
-% Line 2: ... W breadth=10
+% Line 1: a W {c_0 = \ket{0}} breadth=15
+\draw[color=black] (0.000000,62.500000) -- (244.000000,62.500000);
+\draw[color=black] (244.000000,62.000000) -- (256.000000,62.000000);
+\draw[color=black] (244.000000,63.000000) -- (256.000000,63.000000);
+\draw[color=black] (0.000000,62.500000) node[left] {${c_0 = \ket{0}}$};
+% Line 2: b W {c_1 = \ket{0}} breadth=15
+\draw[color=black] (0.000000,47.500000) -- (244.000000,47.500000);
+\draw[color=black] (244.000000,47.000000) -- (256.000000,47.000000);
+\draw[color=black] (244.000000,48.000000) -- (256.000000,48.000000);
+\draw[color=black] (0.000000,47.500000) node[left] {${c_1 = \ket{0}}$};
+% Line 3: ... W breadth=10
 \draw[color=black] (0.000000,35.000000) node[anchor=mid east] {$\vdots$};
-% Line 3: c W c_{n - 1} breadth=10
-\draw[color=black] (0.000000,25.000000) -- (158.000000,25.000000);
-\draw[color=black] (0.000000,25.000000) node[left] {$c_{n - 1}$};
-% Line 4: d W \ket{\psi} style=very_thick breadth=40
-\draw[color=black,very thick] (0.000000,0.000000) -- (158.000000,0.000000);
+% Line 4: c W {c_{n - 1} = \ket{0}} breadth=10
+\draw[color=black] (0.000000,25.000000) -- (244.000000,25.000000);
+\draw[color=black] (244.000000,24.500000) -- (256.000000,24.500000);
+\draw[color=black] (244.000000,25.500000) -- (256.000000,25.500000);
+\draw[color=black] (0.000000,25.000000) node[left] {${c_{n - 1} = \ket{0}}$};
+% Line 6: d W \ket{\psi} \ket{\psi} style=very_thick breadth=40
+\draw[color=black,very thick] (0.000000,0.000000) -- (256.000000,0.000000);
 \draw[color=black] (0.000000,0.000000) node[left] {$\ket{\psi}$};
 % Done with wires; drawing gates
-% Line 6: d G {$U_{2^0}$} a length=20 height=20
-\draw (16.000000,47.500000) -- (16.000000,0.000000);
+% Line 8: a b c G {$H^{\otimes n}$} length=30
+\draw (21.000000,62.500000) -- (21.000000,25.000000);
 \begin{scope}
-\draw[fill=white] (16.000000, -0.000000) +(-45.000000:14.142136pt and 14.142136pt) -- +(45.000000:14.142136pt and 14.142136pt) -- +(135.000000:14.142136pt and 14.142136pt) -- +(225.000000:14.142136pt and 14.142136pt) -- cycle;
-\clip (16.000000, -0.000000) +(-45.000000:14.142136pt and 14.142136pt) -- +(45.000000:14.142136pt and 14.142136pt) -- +(135.000000:14.142136pt and 14.142136pt) -- +(225.000000:14.142136pt and 14.142136pt) -- cycle;
-\draw (16.000000, -0.000000) node {{$U_{2^0}$}};
+\draw[fill=white] (21.000000, 43.750000) +(-45.000000:21.213203pt and 35.001786pt) -- +(45.000000:21.213203pt and 35.001786pt) -- +(135.000000:21.213203pt and 35.001786pt) -- +(225.000000:21.213203pt and 35.001786pt) -- cycle;
+\clip (21.000000, 43.750000) +(-45.000000:21.213203pt and 35.001786pt) -- +(45.000000:21.213203pt and 35.001786pt) -- +(135.000000:21.213203pt and 35.001786pt) -- +(225.000000:21.213203pt and 35.001786pt) -- cycle;
+\draw (21.000000, 43.750000) node {{$H^{\otimes n}$}};
 \end{scope}
-\filldraw (16.000000, 47.500000) circle(1.500000pt);
-% Line 7: = {...}
-\draw[fill=white,color=white] (38.000000, -6.000000) rectangle (53.000000, 53.500000);
-\draw (45.500000, 23.750000) node {{...}};
-% Line 8: d G {$U_{2^{(n - 1)}}$} c length=35 height=20
-\draw (82.500000,25.000000) -- (82.500000,0.000000);
+% Line 9: d G {$U_{2^0}$} a length=20 height=20
+\draw (58.000000,62.500000) -- (58.000000,0.000000);
 \begin{scope}
-\draw[fill=white] (82.500000, -0.000000) +(-45.000000:24.748737pt and 14.142136pt) -- +(45.000000:24.748737pt and 14.142136pt) -- +(135.000000:24.748737pt and 14.142136pt) -- +(225.000000:24.748737pt and 14.142136pt) -- cycle;
-\clip (82.500000, -0.000000) +(-45.000000:24.748737pt and 14.142136pt) -- +(45.000000:24.748737pt and 14.142136pt) -- +(135.000000:24.748737pt and 14.142136pt) -- +(225.000000:24.748737pt and 14.142136pt) -- cycle;
-\draw (82.500000, -0.000000) node {{$U_{2^{(n - 1)}}$}};
+\draw[fill=white] (58.000000, -0.000000) +(-45.000000:14.142136pt and 14.142136pt) -- +(45.000000:14.142136pt and 14.142136pt) -- +(135.000000:14.142136pt and 14.142136pt) -- +(225.000000:14.142136pt and 14.142136pt) -- cycle;
+\clip (58.000000, -0.000000) +(-45.000000:14.142136pt and 14.142136pt) -- +(45.000000:14.142136pt and 14.142136pt) -- +(135.000000:14.142136pt and 14.142136pt) -- +(225.000000:14.142136pt and 14.142136pt) -- cycle;
+\draw (58.000000, -0.000000) node {{$U_{2^0}$}};
 \end{scope}
-\filldraw (82.500000, 25.000000) circle(1.500000pt);
-% Line 9: a c G {$QFT^{-1}$} length=40
-\draw (132.000000,47.500000) -- (132.000000,25.000000);
+\filldraw (58.000000, 62.500000) circle(1.500000pt);
+% Line 10: d G {$U_{2^1}$} b length=20 height=20
+\draw (90.000000,47.500000) -- (90.000000,0.000000);
 \begin{scope}
-\draw[fill=white] (132.000000, 36.250000) +(-45.000000:28.284271pt and 24.395184pt) -- +(45.000000:28.284271pt and 24.395184pt) -- +(135.000000:28.284271pt and 24.395184pt) -- +(225.000000:28.284271pt and 24.395184pt) -- cycle;
-\clip (132.000000, 36.250000) +(-45.000000:28.284271pt and 24.395184pt) -- +(45.000000:28.284271pt and 24.395184pt) -- +(135.000000:28.284271pt and 24.395184pt) -- +(225.000000:28.284271pt and 24.395184pt) -- cycle;
-\draw (132.000000, 36.250000) node {{$QFT^{-1}$}};
+\draw[fill=white] (90.000000, -0.000000) +(-45.000000:14.142136pt and 14.142136pt) -- +(45.000000:14.142136pt and 14.142136pt) -- +(135.000000:14.142136pt and 14.142136pt) -- +(225.000000:14.142136pt and 14.142136pt) -- cycle;
+\clip (90.000000, -0.000000) +(-45.000000:14.142136pt and 14.142136pt) -- +(45.000000:14.142136pt and 14.142136pt) -- +(135.000000:14.142136pt and 14.142136pt) -- +(225.000000:14.142136pt and 14.142136pt) -- cycle;
+\draw (90.000000, -0.000000) node {{$U_{2^1}$}};
 \end{scope}
+\filldraw (90.000000, 47.500000) circle(1.500000pt);
+% Line 11: = {...}
+\draw[fill=white,color=white] (112.000000, -6.000000) rectangle (127.000000, 68.500000);
+\draw (119.500000, 31.250000) node {{...}};
+% Line 12: d G {$U_{2^{(n - 1)}}$} c length=35 height=20
+\draw (156.500000,25.000000) -- (156.500000,0.000000);
+\begin{scope}
+\draw[fill=white] (156.500000, -0.000000) +(-45.000000:24.748737pt and 14.142136pt) -- +(45.000000:24.748737pt and 14.142136pt) -- +(135.000000:24.748737pt and 14.142136pt) -- +(225.000000:24.748737pt and 14.142136pt) -- cycle;
+\clip (156.500000, -0.000000) +(-45.000000:24.748737pt and 14.142136pt) -- +(45.000000:24.748737pt and 14.142136pt) -- +(135.000000:24.748737pt and 14.142136pt) -- +(225.000000:24.748737pt and 14.142136pt) -- cycle;
+\draw (156.500000, -0.000000) node {{$U_{2^{(n - 1)}}$}};
+\end{scope}
+\filldraw (156.500000, 25.000000) circle(1.500000pt);
+% Line 13: a b c G {$QFT^{-1}_{n}$} length=40
+\draw (206.000000,62.500000) -- (206.000000,25.000000);
+\begin{scope}
+\draw[fill=white] (206.000000, 43.750000) +(-45.000000:28.284271pt and 35.001786pt) -- +(45.000000:28.284271pt and 35.001786pt) -- +(135.000000:28.284271pt and 35.001786pt) -- +(225.000000:28.284271pt and 35.001786pt) -- cycle;
+\clip (206.000000, 43.750000) +(-45.000000:28.284271pt and 35.001786pt) -- +(45.000000:28.284271pt and 35.001786pt) -- +(135.000000:28.284271pt and 35.001786pt) -- +(225.000000:28.284271pt and 35.001786pt) -- cycle;
+\draw (206.000000, 43.750000) node {{$QFT^{-1}_{n}$}};
+\end{scope}
+% Line 14: a b c M
+\draw[fill=white] (238.000000, 56.500000) rectangle (250.000000, 68.500000);
+\draw[very thin] (244.000000, 63.100000) arc (90:150:6.000000pt);
+\draw[very thin] (244.000000, 63.100000) arc (90:30:6.000000pt);
+\draw[->,>=stealth] (244.000000, 57.100000) -- +(80:10.392305pt);
+\draw[fill=white] (238.000000, 41.500000) rectangle (250.000000, 53.500000);
+\draw[very thin] (244.000000, 48.100000) arc (90:150:6.000000pt);
+\draw[very thin] (244.000000, 48.100000) arc (90:30:6.000000pt);
+\draw[->,>=stealth] (244.000000, 42.100000) -- +(80:10.392305pt);
+\draw[fill=white] (238.000000, 19.000000) rectangle (250.000000, 31.000000);
+\draw[very thin] (244.000000, 25.600000) arc (90:150:6.000000pt);
+\draw[very thin] (244.000000, 25.600000) arc (90:30:6.000000pt);
+\draw[->,>=stealth] (244.000000, 19.600000) -- +(80:10.392305pt);
 % Done with gates; drawing ending labels
-\draw[color=black] (158.000000,35.000000) node[anchor=mid west] {$\vdots$};
+%   Deferring wire label at (256.000000,62.500000)
+%   Deferring wire label at (256.000000,47.500000)
+\draw[color=black] (256.000000,35.000000) node[anchor=mid west] {$\vdots$};
+\filldraw[color=white,fill=white] (256.000000,22.500000) rectangle (260.000000,66.250000);
+\draw[decorate,decoration={brace,mirror,amplitude = 4.000000pt},very thick] (256.000000,22.500000) -- (256.000000,66.250000);
+\draw[color=black] (260.000000,45.000000) node[right] {${2^n\theta}$};
+\draw[color=black] (256.000000,0.000000) node[right] {$\ket{\psi}$};
 % Done with ending labels; drawing cut lines and comments
 % Done with comments
 \end{tikzpicture}

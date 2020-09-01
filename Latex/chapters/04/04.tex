@@ -11,4 +11,11 @@ Das Ziel-Qubit verändert sich nicht, es ist ja ein Eigenvektor, dafür sehen wi
 \section{Phase Estimation}
 Verschiedene Quanten-Algorithmen basieren darauf, den Eigenwert eines Operators zu einem Eigenvektor abzuschätzen. Dazu benutzen wir Phase-Kickbacks, um den Eigenwert in ein Quantum-Register in der Fourier-Basis zu schreiben, welches wir dann mit der inversen Quanten-Fouriertransformation in die binäre Basis zurückrechnen. Dazu können wir die Anzahl Qubits variieren, um die Präzision der Approximation festlegen. Besser gesagt gibt der Algorithmus zum Eigenwert $\lambda = e^{2i\pi\theta}$ die Zahl $\lfloor{2^n\theta}\rfloor$ zurück, wobei $n$ die Anzahl Qubits des Zählerregisters ist, die für bessere Präzision erhöht werden kann. 
 \paragraph{Algorithmus}\mbox{} \newline
+\begin{enumerate}
+    \item Initialisiere zwei Quantenregister, das Zählerregister und das Eigenstate-Register, und setze das Eigenstate-Register auf den gewünschten Eigenstate $\psi$.
+    \item Wende $H^{\otimes n}$ auf das Zähler-Register an, um es auf $\ket{+}^{\otimes{n}}$ zu setzen.
+    \item Für das $i$-te Bit im Zählerregister, wende das kontrollierte $U$ mit $c_i$ als Kontroll-Qubit $2^i$ Mal auf den Eigenstate an.
+    \item Wende die inverse Quantenfouriertransformation auf das Zählerregister an, um die Approximation in die binäre Basis umzurechnen.
+    \item Miss das Zählerregister, um die Abschützung abzulesen.
+\end{enumerate}
 \input{./circuits/4.3.1.crc}

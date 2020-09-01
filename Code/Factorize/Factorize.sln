@@ -17,7 +17,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QAlgorithms", "QAlgorithms\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QAlgorithmsTester", "QAlgorithmsTester\QAlgorithmsTester.csproj", "{03B7ABEE-FA10-4C3C-943E-E83D1949D4E8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuantumLauncher", "QuantumLauncher\QuantumLauncher.csproj", "{63FFC59F-2DAE-4185-9CC1-3695637C99BD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuantumLauncher", "QuantumLauncher\QuantumLauncher.csproj", "{63FFC59F-2DAE-4185-9CC1-3695637C99BD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FactorizationPerformanceTester", "PerformanceTester\FactorizationPerformanceTester.csproj", "{AEAAC4B6-5AF9-4FD4-B166-822A6705C825}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +59,10 @@ Global
 		{63FFC59F-2DAE-4185-9CC1-3695637C99BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{63FFC59F-2DAE-4185-9CC1-3695637C99BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{63FFC59F-2DAE-4185-9CC1-3695637C99BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AEAAC4B6-5AF9-4FD4-B166-822A6705C825}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AEAAC4B6-5AF9-4FD4-B166-822A6705C825}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AEAAC4B6-5AF9-4FD4-B166-822A6705C825}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AEAAC4B6-5AF9-4FD4-B166-822A6705C825}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

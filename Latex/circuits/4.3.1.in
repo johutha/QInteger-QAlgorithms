@@ -1,9 +1,14 @@
-a W c_0 breadth=15
+a W {c_0 = \ket{0}} breadth=15
+b W {c_1 = \ket{0}} breadth=15
 ... W breadth=10
-c W c_{n - 1} breadth=10
-d W \ket{\psi} style=very_thick breadth=40
+c W {c_{n - 1} = \ket{0}} breadth=10
+a b c W >{2^n\theta} width=100
+d W \ket{\psi} \ket{\psi} style=very_thick breadth=40
 
+a b c G {$H^{\otimes n}$} length=30
 d G {$U_{2^0}$} a length=20 height=20 
+d G {$U_{2^1}$} b length=20 height=20 
 = {...}
 d G {$U_{2^{(n - 1)}}$} c length=35 height=20
-a c G {$QFT^{-1}$} length=40
+a b c G {$QFT^{-1}_{n}$} length=40
+a b c M
