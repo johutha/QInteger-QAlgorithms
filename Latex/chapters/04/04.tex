@@ -27,6 +27,11 @@ Dies entspricht genau dem $k$-ten Qubit der Repräsentation von $2^n\theta$ in d
     \item Wende die inverse Quantenfouriertransformation auf das Zählerregister an, um die Approximation in die binäre Basis umzurechnen.
     \item Miss das Zählerregister, um die Abschätzung abzulesen.
 \end{enumerate}
-\input{./circuits/4.3.1.crc} \newline
+\input{./assets/circuits/4.3.1.crct} \newline
 
 \section{Period Finding}
+Gegeben sei eine Funktion $f : S \rightarrow S$ mit $S \subset \mathbb{Z}$, welche sich auf einem Quantencomputer implementieren lässt, und ein Wert $x \in S$. Wir versuchen nun, die kleinste Zahl $r \in \mathbb{N}$ zu berechnen, so dass $f^r(x) = x$ gilt. In anderen Worten: Sei $f_x(i) = f^i(x)$. Wir wollen nun die Periode von $f_x$ zu berechnen.
+
+Wir haben gesagt, unsere Funktion soll auf einem Quantencomputer implementierbar sein. Daraus folgt bereits, dass $f$ bijektiv ist: Falls es ein $a$ und ein $b$ mit $f(a) = f(b) = c$ gibt, dann lässt sich $f^{-1}(c)$ nicht berechnen, was im Wiederspruch zur Reversibilität steht. Daraus folgt, dass $f$ injektiv ist. Gleichzeitig müssen deshalb $|S|$ verschiedene Bilder von $f$ existieren, damit jeder Wert ein eigenes Bild hat. Unsere Funktion permutiert die Elemente in $S$. Schaut man sich diese Permutation als Graph an, so hat jeder Knoten einen Eingangs- und einen Ausgangsgrad von 1. Dies ist jedoch nur möglich, wenn der Graph eine Vereinigung disjunkter Zyklen ist.
+TODO Beispiel $f : \mathbb{Z} / 11 \mathbb{Z} \rightarrow \mathbb{Z} / 11 \mathbb{Z} $, $f(x) = x^3 - 1$
+\input{./assets/graphs/4.4.1.grph}
