@@ -1,16 +1,74 @@
 digraph
 {
-    layout="circo";
-    node [ shape = circle, width = 0.7 ];
-    0 -> 10
-    1 -> 0
-    2 -> 7
-    3 -> 4
-    4 -> 8
-    5 -> 3
-    6 -> 6
-    7 -> 1
-    8 -> 5
-    9 -> 2
-    10 -> 9
+    layout="neato"
+    node [shape = circle, width = 0.2, shape=plaintext];
+    edge [splines = curved];
+
+0 [
+    label = "0"
+    pos = "0.0,1.5!"
+]
+
+1 [
+    label = "1"
+    pos = "0.8109612261833963,1.261880299246772!"
+]
+
+2 [
+    label = "2"
+    pos = "1.3644479930317774,0.6231225195028296!"
+]
+
+3 [
+    label = "3"
+    pos = "1.4847321628213992,-0.2134722574099275!"
+]
+
+4 [
+    label = "4"
+    pos = "1.1336243615313875,-0.9822911009179275!"
+]
+
+
+5 [
+    label = "5"
+    pos = "0.4225988352621445,-1.439239460421746!"
+]
+
+6 [
+    label = "6"
+    pos = "-0.4225988352621441,-1.4392394604217462!"
+]
+
+7 [
+    label = "7"
+    pos = "-1.1336243615313872,-0.9822911009179278!"
+]
+
+8 [
+    label = "8"
+    pos = "-1.484732162821399,-0.21347225740992784!"
+]
+
+9 [
+    label = "9"
+    pos = "-1.3644479930317779,0.623122519502829!"
+]
+
+10 [
+    label = "10"
+    pos = "-0.8109612261833962,1.261880299246772!"
+]
+
+    0 -> 1 [constraint=false];
+    1 -> 0 [constraint=false];
+    2 -> 4 [constraint=false];
+    3 -> 7 [constraint=false];
+    4 -> 3 [constraint=false];
+    5 -> 8 [constraint=false];
+    6 -> 5 [constraint=false];
+    7 -> 10 [constraint=false];
+    8 -> 6 [constraint=false];
+    9 -> 9 [constraint=false];
+    10 -> 2 [constraint=false];
 }
