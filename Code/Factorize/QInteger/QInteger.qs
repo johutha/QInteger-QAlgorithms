@@ -4,6 +4,8 @@
 	open Microsoft.Quantum.Math;
 	open Microsoft.Quantum.Convert;
 
+	// Definition of the QInt type of variable size. QInts
+	// are represented in little-endian.
 	newtype QInt = (Size : Int, Number : Qubit[]);
 
 	operation QIntVS(qs : Qubit[], len : Int, val : Int) : QInt

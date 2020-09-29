@@ -81,13 +81,13 @@
 
 	operation MulByModExp(Base : Int, Expn : QInt, Target : QInt, Mod : Int) : Unit is Adj+Ctl
 	{
-		__ModExp(Base, Expn, Target, Mod);
+		_ModExp(Base, Expn, Target, Mod);
 	}
 
 	operation ModExp(Base : Int, Expn : QInt, Target : QInt, Mod : Int) : Unit is Adj+Ctl
 	{
 		CopyToQInt(1, Target);
-		__ModExp(Base, Expn, Target, Mod);
+		_ModExp(Base, Expn, Target, Mod);
 	}
 
 	operation QFTQInt(qn : QInt) : Unit is Adj+Ctl

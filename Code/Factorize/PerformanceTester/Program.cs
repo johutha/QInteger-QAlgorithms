@@ -32,6 +32,7 @@ namespace PerformanceTester
 
         static void Main(string[] args)
         {
+            // Initialize Standard configuration
             IOrderFinder of = new QuantumOrderFinder();
             IPrimeChecker pc = new MillerRabin();
 
@@ -39,6 +40,7 @@ namespace PerformanceTester
             bool saveFile = false;
             string logfile = "";
 
+            // Read Arguments from the command line
             for (int i = 0; i < n; i++)
             {
                 if (args[i] == "-of")
@@ -112,14 +114,19 @@ namespace PerformanceTester
                     logfile = Path.GetFullPath(fn);
                 }
             }
-
+            
+            // Initialize the Timer
             PerformanceTimer.Init(pc, of);
 
+            // Factorize each number in the input:
+            // For each line, while not at end of line
             string st;
             while ((st = Console.ReadLine()) != null)
             {
                 List<string> vals = st.Split(' ').ToList();
                 List<long> inp = new List<long>();
+
+                // Try to convert each word on this line to a number
                 foreach (string s in vals)
                 {
                     long r = 0;
@@ -130,6 +137,8 @@ namespace PerformanceTester
                     }
                     inp.Add(r);
                 }
+
+                // Measure the time for each of these numbers
                 foreach (long v in inp)
                 {
                     TimeSpan ts = PerformanceTimer.Measure(v);

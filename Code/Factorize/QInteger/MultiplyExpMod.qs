@@ -110,7 +110,7 @@
 		}
 	}
 
-	internal operation __ModExp(Bas : Int, Ex : QInt, Target : QInt, Mod : Int) : Unit is Adj+Ctl
+	internal operation _ModExp(Bas : Int, Ex : QInt, Target : QInt, Mod : Int) : Unit is Adj+Ctl
 	{
 		let n = Ex::Size;
 		for (i in 0..n - 1)

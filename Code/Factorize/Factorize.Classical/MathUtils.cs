@@ -5,6 +5,7 @@ namespace Factorize.Classical.Utility
 {
 	public static class MathUtils
 	{
+
 		private static RandomNumberGenerator rng = RandomNumberGenerator.Create();
 
 		public static long Random()
@@ -15,6 +16,10 @@ namespace Factorize.Classical.Utility
 			return Math.Abs(BitConverter.ToInt64(res));
 		}
 
+		/// <summary>
+		/// Static helper class which provides implementations of useful functions
+		/// needed in different parts of the implemented algorithms.
+		/// </summary>
 		public static long FastPowMod(long bs, long exp, long mod)
 		{
 			long res = 1;
