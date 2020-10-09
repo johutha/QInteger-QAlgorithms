@@ -56,20 +56,28 @@
 		}
 	}
 
+	// Checks if an Integer is less than a QInt
+
 	operation LessThanCQ(A : Int, B : QInt, res : Qubit) : Unit is Adj+Ctl
 	{
 		using (an = Qubit())
 		{
-			let b1 = QInt(B::Size + 1, B::Number + [an]);
+			// Extend the length of B by one to make sure that
+			// the first Qubit is 0 if there is no overflow
+			let b1 = GrowQIntBy(B, 1, [an]);
 
 			within
 			{
+				// Subtract A from B
 				(Adjoint AddCQ)(A, b1);
 			}
 			apply
 			{
+				// Initialize the res to 1
 				X(res);
+				// Result smaller than 0 -> A !< B
 				CNOT(b1::Number[b1::Size - 1], res);
+				// Result equals to zero -> A !< B
 				IsZeroQInt(b1, res);
 			}
 		}

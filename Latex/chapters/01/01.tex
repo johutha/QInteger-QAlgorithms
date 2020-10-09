@@ -1,3 +1,15 @@
-\chapter{Introduction}
-\section{First Section}
-\subsection{First Subsection}
+\chapter{Einführung}
+\section{Einführung ?}
+\section{Mein Produkt - Die QInteger- und die QAlgorithm-Libraries und ein Faktorisierungs-Algorithmus}
+Das Produkt dieser Maturaarbeit sind zwei Libraries, die Algorithmen für Quanten-COmputer implementieren: 
+\begin{itemize}
+    \item Die QInteger-Library, welche Zahlen auf Quantencomputer implementiert, grundlegende arithmetische Operationen bereitstellt, und viele nützliche Operationen für jene Quantenzahlen implementiert.
+    \item Die QAlgorithms-Library, welche Algorithmen für diese Quantenzahlen implementiert, aber vor allem auf die Implementierung von Shors Algorithmus zur Faktorisierung hinarbeitet, welcher ohne Frage einer der nennenswertesten Erfolge der Quantencomputer ist.
+\end{itemize}
+Diese beiden Libraries sind mit dem Ziel, generelle und nützliche Funktionen für Quantencomputer bereitzustellen, welche man auch für andere Projekte gebrauchen kann, implementiert. Diese Libraries sind in der Programmiersprache Q\# von Microsoft geschrieben. Den Code zu diesen Libraries habe ich im Appendix angefügt und man kann ihn auch auf GitHub finden, wo er auch einige Qktualisierungen erhalten wird. Auf GitHub ist er unter folgendem Link verfügbar: https://github.com/johutha/QInteger-QAlgorithms
+
+Ich habe Q\# gewählt, da es momentan eine der populärsten Quantenprogrammiersprachen ist, eine gute Dokumentation hat, gut unterstützt wird und regelmässig aktualisiert wird. Gleichzeitig kann der Compiler automatische zu Quantenoperation deren Inverses oder deren kontrollierte Version generieren, was den Code gleich kürzer und übersichtlicher macht. 
+
+Neben diesen beiden Libraries finden sich im GitHub noch weitere Projekte. Eines davon implementiert den "Factorizer", welcher mit Hilfe einer Blackbox-Operation, die die Ordnung einer Zahl findet und einer Blackbox-Operation, die überprüft, ob eine Zahl eine Primzahl ist, den kompletten Faktorisierungs-Algorithmus. Dazu stehen verschiedene Primzahltester- und Ordnungs-Finder-Module zur Verfügung, so dass man die verschiedenen Algorithmen vergleichen kann. Natürlich ruft eines jener Module den Algorithmus die Quantenoperation auf, so dass der Faktorisierer zusammen mit jenem Modul eine komplette Implementierung von Shors Algorithmus ist. Weiterhin findet sich darunter auch ein Projekt, welches eine einfache Konsolen-Applikation implementiert, welche diese Libraries benützt, als Proof-Of-Concept, und ein Projekt, welches die Zeit misst, die der Faktorisierer braucht.
+
+Natürlich muss ich überprüfen, ob diese Implementierungen funktionieren, deshalb habe ich drei Unit-Test-Projekte, die die verschiedenen Komponenten einzeln testen. Das Konzept der Unit-Tests erlaubt ein einfaches Lokalisieren von Implementationsfehlern und Bugs und fangen fast alle Fehler ein.
