@@ -2,18 +2,18 @@
 \section{Überblick}
 
 \section{Zahlen in Qubits speichern - Der QInt-Typ}
-Da ich davon ausgehe, dass in nächster Zeit die Anzahl Qubits zwar wachsen wird, aber nicht so schnell ansteigen, dass man schon bald mehrere grössere Qubit-Einheiten speichern kann, habe ich mich entschieden, in meiner Implementation auf eine einheiltiche Grösse zu verzichten. Deshalb der QInt-Typ aus einer klassischen Zahl, die Anzahl Qubits, und einem Array von Qubits, welcher die eigentliche Zahl speichert. Ich habe mich auch dazu entschieden, die Quantenzahl im Little-Endian Format zu speichern, da so neue Qubits einfach angehängt werden können ohne den Wert der Zahl zu verändern. 
+Da ich davon ausgehe, dass in nächster Zeit die Anzahl Qubits zwar wachsen, aber nicht so schnell ansteigen wird, dass man schon bald mehrere grössere Qubit-Einheiten speichern kann, habe ich mich entschieden, in meiner Implementation auf eine einheiltiche Grösse zu verzichten und dafür auf eine variable Grösse zu setzen. Deshalb besteht der QInt-Typ aus einer klassischen Zahl, der Anzahl Qubits, und einem Array von Qubits, welcher die eigentliche Zahl speichert. Ich habe mich auch dazu entschieden, die Quantenzahl im Little-Endian Format zu speichern, da so neue Qubits einfach angehängt werden können, ohne den Wert der Zahl zu verändern. 
 
 \lstinputlisting[language=C++]{assets/code/3/3.2.1}
 
 \section{Die Quanten-Fouriertransformation und die Fourier-Basis}
-Die Quanten-Fouriertransformation ist eine Transformation, die eine Quantenzahl von der uns bekannten binären Basis in die Fourierbasis transformiert. Die Fouriertransformation, die dabei auf den Qubits implementiert ist, ist mathematisch definiert als eine Transformation, die zu einem Vektor $(x_0, x_1, ..., x_{n - 1})$ zum Vektor $(y_0, y_1, ..., y_{n - 1})$ transformiert, mit $y_k = \frac{1}{\sqrt{n}}\sum_{j = 0}^{n - 1}x_je^{2i\pi\frac{kj}{n}}$. Da dies ein linearer Operator ist, genügt es, wenn wir uns die Wirkung des Operators auf den Basiszuständen anschauen. Schauen wir also die Wirkung des Operators auf den Basiszustand $\ket{x}$ an. Wir erhalten:
+Die Quanten-Fouriertransformation ist eine Transformation, die eine Quantenzahl von der uns bekannten binären Basis in die Fourierbasis transformiert. Die Fouriertransformation, die dabei auf den Qubits implementiert ist, ist mathematisch definiert als eine Transformation, die aus einem Vektor $(x_0, x_1, ..., x_{n - 1})$ den Vektor $(y_0, y_1, ..., y_{n - 1})$ zurückgibt, mit $y_k = \frac{1}{\sqrt{n}}\sum_{j = 0}^{n - 1}x_je^{2i\pi\frac{kj}{n}}$. Da dies ein linearer Operator ist, genügt es, wenn wir uns die Wirkung des Operators auf die Basiszustände anschauen. Schauen wir also die Wirkung des Operators auf den Basiszustand $\ket{x}$ an. Wir erhalten:
 $$QFT\ket{x} = \frac{1}{\sqrt{2^n}}\sum^{2^n - 1}_{j = 0}e^{2i\pi\frac{xj}{2^n}}\ket{j}$$
-Gleichzeitig lässt dieser Zustand sich faktorisieren, nämlich zu:
+Gleichzeitig lässt sich dieser Zustand faktorisieren, nämlich zu:
 \begin{align*}
 \left(\ket{0} + e^{2i\pi\frac{x}{2^{n}}}\ket{1}\right)\otimes\left(\ket{0} + e^{2i\pi\frac{x}{2^{n - 1}}}\ket{1}\right)\otimes\cdots\otimes\left(\ket{0} + e^{2i\pi\frac{x}{2^{1}}}\ket{1}\right) = \\ \bigotimes_{j = 0}^{n - 1}\left(\ket{0} + e^{2i\pi\frac{x}{2^{n - j}}}\ket{1}\right)
 \end{align*}
-Dies kann man durch ausmultiplizieren beweisen. Um die folgende Gleichung zu vereinfachen, sei hier $b_k(j) = 1$ falls das $k$-te Bit von $j$ gesetzt ist, und $b_k(j) = 0$ falls nicht. Dazu sie $B_j$ als das Set aller $k \in \mathbb{N}_0$ mit $b_k(j) = 1$. Dann bekommen wir:
+Dies kann man durch ausmultiplizieren beweisen. Um die folgende Gleichung zu vereinfachen, sei hier $b_k(j) = 1$, falls das $k$-te Bit von $j$ gesetzt ist, und $b_k(j) = 0$, falls nicht. Dazu sei $B_j$ als das Set aller $k \in \mathbb{N}_0$ mit $b_k(j) = 1$. Dann bekommen wir:
 \begin{align*}
 \frac{1}{\sqrt{2^n}}\bigotimes_{j = 0}^{n - 1}\left(\ket{0} + e^{2i\pi\frac{x}{2^{n - j}}}\ket{1}\right) = \frac{1}{\sqrt{2^n}}\sum_{j = 0}^{2^n - 1}\left(\prod_{k \in B_j}e^{2i\pi\frac{x}{2^{n - k}}}\right)\ket{j} \\ \\
 = \frac{1}{\sqrt{2^n}}\sum_{j = 0}^{2^n - 1}e^{2i\pi\sum_{k = 0}^{n - 1}\left(\frac{x \cdot b_k(j)}{2^{n - k}}\right)}\ket{j} = \frac{1}{\sqrt{2^n}}\sum_{j = 0}^{2^n - 1}e^{2i\pi\frac{x\sum_{k = 0}^{n - 1}\left(2^k\cdot b_k(j)\right)}{2^n}}\ket{j} \\ \\
