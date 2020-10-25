@@ -2,6 +2,7 @@
 
 \usepackage{amsfonts}
 \usepackage[german]{babel}
+\usepackage[style=ieee]{biblatex}
 \usepackage[a4paper]{geometry}
 \usepackage{graphicx}
 \usepackage{inputenc}
@@ -11,12 +12,17 @@
 \usepackage{tikz}
 
 \usetikzlibrary{angles,babel,quotes,decorations.pathreplacing,decorations.pathmorphing}
+\addbibresource{./bibliography.bib}
 
+\nocite{*}
+
+\author{Joël Benjamin Huber}
+\title{Faktorisieren auf Quantencomputer - eine Implemenetation}
 
 \include{macros}
 
 \begin{document}
 \include{titlepage/titlepage}
 
-\loadallchapters{4}
+\loadallchapters{7}
 \end{document}
