@@ -1,58 +1,116 @@
 \chapter{Grundlagen}
 \section{Lineare Algebra}
-Um mit Qubits arbeiten zu können, braucht es Kenntnisse der linearen Algebra. Operationen, die man auf Quantencomputern implementiert, sind lineare Operationen auf Qubits. Ich werde an dieser Stelle eine kurze Zusammenfassung der nötigen Grundlagen geben, welche erforderlich sind, um die Quanten-Grundlagen und Shors Algorithmus zu verstehen. Dies wird jedoch nur eine kurze Zusammenfassung und keine Einführung in dieses Gebiet sein. Für eine Einführung verweise ich auf \cite{LA}.
+Um mit Quantencomputern arbeiten zu können, braucht es Kenntnisse der linearen Algebra. Operationen, die man auf Quantencomputern implementiert, sind lineare Operationen auf Qubits. Ich werde an dieser Stelle eine kurze Zusammenfassung der nötigen Grundlagen geben, welche erforderlich sind, um die Quanten-Grundlagen und Shors Algorithmus zu verstehen. Dies wird jedoch nur eine kurze Zusammenfassung und keine Einführung in dieses Gebiet sein. Für eine Einführung verweise ich auf \cite{LA}.
 
 Vor der Zusammenfassung möchte ich kurz die in der Quantenmechanik gebräuchliche Notation für lineare Algebra einführen. Diese nennt sich Dirac- oder Bra-Ket-Notation. 
 
 \subsection{Schreibweise}
-Einen Vektor schreibt man in der Quantenmechanik als $\ket{\varphi}$. Diese besondere Art von Klammern wird als \textit{ket} bezeichnet. Für einen Vektor $\ket{\varphi}$ wird das dazugehörige Dual als $\bra{\phi}$ bezeichnet. Diese zweite Klammer heisst \textit{bra}, sodass die beiden Klammern zusammen ein Bra-Ket bildet, was vom englischen Wort bracket abstammt. Das später definierte innere Produkt von $\ket{\psi}$ und $\ket{\varphi}$ kann man als $\bra{\psi}\ket{\varphi}$ darstellen.
+Einen Vektor schreibt man in der Quantenmechanik als $\ket{\varphi}$. Diese besondere Art von Klammern wird als \textit{ket} bezeichnet. Für einen Vektor $\ket{\varphi}$ wird der dazugehörige duale Vektor als $\bra{\phi}$ bezeichnet. Diese zweite Klammer heisst \textit{bra}, sodass die beiden Klammern zusammen ein Bra-Ket bildet, was vom englischen Wort bracket abstammt. Somit lässt sich das Skalarprodukt von $\ket{\psi}$ und $\ket{\varphi}$ als $\bra{\psi}\ket{\varphi}$ darstellen.
 
 \subsection{Vektorräume}
-Um Quantensysteme mathematisch beschreiben zu können, brauchen wir Vektorräume. Genauer benötigen wir finite Vektorräume über $\mathbb{C}$, zusammen mit einem inneren Produkt. Sei $V$ ein solcher Vektorraum. 
+Um Quantensysteme mathematisch beschreiben zu können, brauchen wir Vektorräume. Genauer benötigen wir endlichdimensionale Vektorräume über $\mathbb{C}$, zusammen mit einem Skalarprodukt. Diese Vektorräume werden auch unitäre Vektorräume\footnote{Im Allgemeinen braucht es sogenannte Hilberträume. Da man es im Zusammenhang mit Quantencomputern aber nur mit endlichdimensionalen Räumen zu tun hat, reichen unitäre Vektorräume} genannt. Diese sind isomorph zu $\mathbb{C}^n$.
 
-Wir nennen eine Familie von Vektoren ein \textit{Erzeugendensystem}, falls jeder Vektor in $V$ als eine Linearkombination der Vektoren in jener Familie geschrieben werden kann. Zum Beispiel sind die drei Vektoren $\begin{bmatrix}2 \\ 0\end{bmatrix}, \begin{bmatrix} 0 \\ 37\end{bmatrix}, \begin{bmatrix}3 \\ 2\end{bmatrix}$ ein Erzeugendensystem, denn zum Beispiel der Vektor $\begin{bmatrix}7 \\ 3\end{bmatrix}$ kann als Linearkombination $2\begin{bmatrix}2 \\ 0\end{bmatrix} + \frac{1}{37}\begin{bmatrix} 0 \\ 37\end{bmatrix} + \begin{bmatrix}3 \\ 2\end{bmatrix} = \begin{bmatrix}7 \\ 3\end{bmatrix}$ dargestellt werden.
+Sei $V$ ein solcher Vektorraum. 
 \paragraph{}
-Eine Familie von Vektoren $\ket{v_0}, \ket{v_1}, ... \ket{v_{k - 1}}$ ist \textit{linear unabhängig}, falls wenn für Koeffizienten $a_0, a_1, ... a_{k - 1}$ die Gleichung $a_0\ket{v_0} + a_1\ket{v_1} + ... + a_{k - 1}\ket{v_{k - 1}} = 0$ gilt, dann $a_0 = a_1 = ... = a_{k - 1} = 0$ gilt. Diese Aussage ist äquivalent zur Aussage, dass sich keiner der Vektoren $\ket{v_{i}}$ als Linearkombination der anderen Vektoren in der Familie darstellen lässt.
 
-Die drei Vektoren $\begin{bmatrix}2 \\ 0\end{bmatrix}, \begin{bmatrix} 0 \\ 37\end{bmatrix}, \begin{bmatrix}3 \\ 2\end{bmatrix}$ sind nicht linear unabhängig, da $\frac{111}{2}\begin{bmatrix}2 \\ 0\end{bmatrix} + 2\begin{bmatrix} 0 \\ 37\end{bmatrix} + (-37)\begin{bmatrix}3 \\ 2\end{bmatrix} = 0$ gilt.
+Wir nennen eine Menge von Vektoren in $V$ ein \textit{Erzeugendensystem}, falls jeder Vektor in $V$ als eine Linearkombination der Vektoren in jener Menge geschrieben werden kann. 
+\paragraph{}
+Eine Menge von Vektoren $\ket{v_0}, \ket{v_1}, ... \ket{v_{k - 1}}$ ist \textit{linear unabhängig}, falls wenn aus der Gleichung $a_0\ket{v_0} + a_1\ket{v_1} + ... + a_{k - 1}\ket{v_{k - 1}} = 0$ folgt, dass $a_0 = a_1 = ... = a_{k - 1} = 0$ gilt. Dabei sind die Koeffizienten $a_0, a_1, ..., a_{n - 1}$ komplexe Zahlen. Diese Aussage ist äquivalent zur Aussage, dass sich keiner der Vektoren $\ket{v_{i}}$ als Linearkombination der anderen Vektoren in der Menge darstellen lässt.
+
 \paragraph{}
 Eine \textit{Basis} ist ein linear unabhängiges Erzeugendensystem.
-Zum Beispiel bilden die Vektoren $\begin{bmatrix}2 \\ 0\end{bmatrix}$ und $\begin{bmatrix}-1 \\ i\end{bmatrix}$ eine Basis über den Vektorraum $\mathbb{C}^2$.
 
 \subsection{Inneres Produkt}
-Am Anfang habe ich angetönt, dass wir dem Vektorraum ein inneres Produkt $(\cdot,\cdot)$ mitgeben werden. Dieses innere Produkt muss folgende drei Bedingungen erfüllen: 
+Die für die Beschreibung der Qubits benötigten unitären Vektorräumen sind mit einem Skalarprodukt ausgerüstet: Das heisst, es gibt eine Funktion $(\cdot, \cdot) : V \times V \rightarrow C$ mit folgenden Eigenschaften:
 \begin{enumerate}
     \item Linear im zweiten Argument: $$\sum_j\lambda_j\left(\ket{\psi}, \; \ket{\varphi_j}\right) = \left(\ket{\psi}, \; \sum_j\lambda_j\ket{\varphi_j}\right)$$
     \item Hermitesch: $$\left(\ket{\psi}, \; \ket{\varphi} \right) = \overline{\left(\ket{\varphi} , \; \ket{\psi}\right)}$$
-    \item Positiv-definit: $$\varphi \neq 0 \rightarrow \left( \ket{\varphi}, \; \ket{\varphi} \right) > 0$$
+    \item Positiv definit: $$\varphi \neq 0 \Rightarrow \left( \ket{\varphi}, \; \ket{\varphi} \right) > 0$$
 \end{enumerate}
 Wie oben schon angetönt, schreibt man dieses Produkt in der quantenmechanischen Notation als $\bra{\psi}\ket{\varphi}$. Ich habe für diese drei Bedingungen jedoch die $(\cdot, \cdot)$-Schreibweise verwendet, da man mit ihr die Bedingungen übersichtlicher darstellen kann.
+\paragraph{}
+Die \textit{Norm} eines Vektors $\ket{\varphi}$, wird als $\left\| \ket{\varphi} \right\|$ geschrieben und ist definiert als $\left\| \ket{\varphi} \right\| = \sqrt{\bra{\varphi}\ket{\varphi}}$. Ein Vektor $\ket{\varphi}$ ist normiert, falls $\left\| \ket{\varphi} \right\| = 1$ gilt. Wir benutzen hier das Standardskalarprodukt in $\mathbb{C}^n$ definiert als: $$\begin{pmatrix} c_1 \\ \vdots \\ c_n \end{pmatrix}\cdot\begin{pmatrix} w_1 \\ \vdots \\ w_n \end{pmatrix} := \sum_{i = 1}^{n}\overline{c_i}w_i$$
 
-Die \textit{Norm} eines Vektors $\ket{\varphi}$, wird als $\left\| \ket{\varphi} \right\|$ geschrieben und ist definiert als $\left\| \ket{\varphi} \right\| = \sqrt{\bra{\varphi}\ket{\varphi}}$. Ein Vektor $\ket{\varphi}$ ist normiert, falls $\left| \ket{\varphi} \right| = 1$ gilt.
+Es ist nicht schwierig zu sehen, dass das auf diese Weise definierte Skalarprodukt die oben genannten Bedingungen erfüllt.
 
 \subsection{Lineare Operatoren}
-Die Operationen, die wir auf Quantencomputer durchführen, sind lineare Operationen über die Basiszustände. Lineare Operatoren über Vektoren kann man als Matrizen darstellen und jene Operationen anwenden, in dem wir die Matrix-Multiplikation des Vektors mit der Matrix des linearen Operators durchführt.
+Sei $v$ ein endlichdimensionaler, unitärer Vektorraum\footnote{Die Definitionen dieses Abschnittes würden auch für allgemeinere Vektorräume funktionieren. Das ist aber für diese Arbeit nicht nötig.}, seien $\ket{v}$ und $\ket{w} \in V$ und $\lambda \in \mathbb{C}$.
 
-Eine unitärer Operator $U$ ist ein linearer Operator, der $UU^{\dagger} = I$ erfüllt. Ein unitärer Operator hat die Eigenschaft, dass das innere Produkt bewahrt wird, oder dass $(U\ket{\psi}, U\ket{\varphi}) = \bra{\psi}U^{\dagger}U\ket{\varphi} = \bra{\psi}\ket{\varphi}$ für alle $\ket{\psi}, \ket{\varphi} \in V$. Auch hier habe ich auf der linken Seite die mathematische Schreibweise verwendet, um es verständlicher darzustellen. Die beiden Bedingungen, dass $UU^{\dagger} = 1$ gilt und dass das innere Produkt bewahrt wird, sind äquivalent. Wir stellen auch fest, dass da das innere Produkt bewahrt wird, wird auch das innere Produkt eines Vektors mit sich selbst bewahrt, und somit auch die Norm eines Vektors.
+\textbf{Definition:} Ein \textit{linerarer Operator}\footnote{In dieser Arbeit wird der Begriff \textit{linearer Operator} synonym zum Begriff \textit{lineare Abbildung} benutzt} $L$ ist eine Funktion
+
+\vspace{0.2cm}
+\hspace{5cm}$\begin{array}{ l c c c}
+
+L:  &  V & \longrightarrow & V \\
+& v & \mapsto & Lv \\
+\end{array}$
+\vspace{0.2cm}
+
+welcher die Bedingung der Linearität $L(\sum_i{\lambda_i\ket{v_i}}) = \sum_i{\lambda_iL(\ket{v_i})}$ erfüllt. Für eine Matrix
+
+\vspace{0.5cm}
+$A=\begin{pmatrix}
+a_{11} & a_{12} & \cdots & a_{1n} \\
+a_{21} & a_{22} & \cdots  &  a_{2n} \\
+\vdots & \vdots & \ddots  & \vdots \\
+a_{n1} & a_{n2} & \cdots  & a_{nn} \\
+\end{pmatrix}$  
+\quad\begin{minipage}{7cm}
+mit Einträgen $a_{ij}\in \mathbb{C}$ schreiben wir kurz 
+
+\hspace{2cm}$A=(a_{ij})$  und definieren $\ldots$
+\end{minipage}
+
+
+\vspace{0.3cm}
+die \textit{konjugierte} Matrix von $A$: \quad$\overline{A}:=(\overline{a}_{ij})$
+
+\vspace{0.1cm}
+die \textit{transponierte} Matrix von $A$: \quad $A^{T}:=(a_{ji})$
+
+\vspace{0.1cm}
+die \textit{adjungierte} Matrix von $A$: \quad $A^{\dag}:=\overline{A}^{T}$
+
+\paragraph{}
+
+\textbf{Definition:} Ein \textit{unitärer Operator} $U$ ist ein linearer Operator, welcher die Bedingung $U^\dagger U = I$. Aufgrund dieser Bedingungen erhalten unitäre Operationen das Skalarprodukt der Vektoren:
+
+\vspace{0.3cm}
+\centerline{ $(U\ket{u}, U\ket{v}) = \bra{u}U^\dagger U\ket{v} = \bra{u}\ket{v}$ }
+
+\vspace{0.3cm}
+Somit verändert sich auch das Skalarprodukt eines Vektors mit sich selbst nicht, weshalb auch die Norm eines Vektors unter unitären Operatoren erhalten bleibt.
+\paragraph{}
+
+
+Zustände eines Quantensystems können als Vektoren eines unitären Vektorraumes $V$ beschrieben werden. Zustandsänderungen werden durch unitäre Operationen beschrieben.
 
 \subsection{Eigenwerte und Eigenvektoren}
-Ein Eigenvektor $\ket{\varphi}$ zu einem linearen Operator $U$ ist ein Vektor, sodass $U\ket{\varphi} = \lambda\ket{\varphi}$ gilt, wobei $\lambda$ als der dazugehörige Eigenwert bezeichnet wird und eine Zahl ist. Bei einer unitären Matrix muss der Eigenwert einen Betrag von 1 haben, denn sonst würde sich die Norm verändern. Der grosse Vorteil von Eigenvektoren ist, dass sie sich nicht verändern, wenn der dazugehörige Operator auf ihnen angewandt wird.
+Ein Eigenvektor $\ket{\varphi}$ zu einem linearen Operator $U$ ist ein Vektor, sodass $U\ket{\varphi} = \lambda\ket{\varphi}$ gilt, wobei $\lambda$ als der dazugehörige Eigenwert bezeichnet wird und eine komplexe Zahl ist. Bei einem unitären Operator müssen alle Eigenwerte einen Betrag von 1 haben, denn sonst würde sich die Norm des Vektors verändern. Der grosse Vorteil von Eigenvektoren ist, dass sie sich bis auf einen skalaren Faktor nicht verändern, wenn der dazugehörige Operator auf sie angewendet wird.
 
 \section{Quantensysteme}
-Die Quantensysteme, die wir im Bereich der Quantencomputer betrachten, sind rein mathematische Systeme, die nicht an eine fixe physikalische Realisierung gebunden sind. In der Tat gibt es verschiedene Möglichkeiten, solche Systeme umzusetzen, wobei jedes System eigene Vor- und Nachteile hat.
+Die Quantensysteme, die wir im Rahmen dieser Arbeit betrachten, sind rein mathematische Systeme, die nicht an eine fixe physikalische Realisierung gebunden sind. In der Tat gibt es verschiedene Möglichkeiten, solche Systeme physikalisch umzusetzen, wobei jede Variante eigene Vor- und Nachteile hat.
 
 \subsection{Qubits}
-Starten wir beim klassischen Bit. Ein klassisches Bit hat genau zwei Zustände - 0 und 1 - und ist immer in genau einem dieser beide Zustände. Ein Qubit hat auch die beiden Basiszustände $\ket{0}$ und $\ket{1}$, im Gegensatz zu einem klassischen Bit kann es aber auch beides gleichzeitig sein. Dies nennt man eine Superposition. 
+Ein klassisches Bit hat genau zwei Zustände - 0 und 1 - und ist immer in genau einem dieser beiden Zustände. Kann man  zwei solche Zustände in einem quantenmechanischen System gezielt herbeizuführen, treten auch die Gesetze der Quantenphysik in Kraft. Ein Beispiel einer physikalischen Realisierung, das bei der Vorstellung helfen kann, wäre ein Atom in einem Grundzustand und einem angeregten Zustand, wobei der Grundzustand einem klassischen 0 und der angeregte Zustand einem klassischen 1 entsprechen könnte. Gemäss den Gesetzen der Quantenphysik kann sich das Atom aber auch in einer Überlagerung der beiden Zustände befinden. Dies nennt man eine Superposition. Von diesem Beispiel aus können wir uns nun die genaue Definition eines Qubits betrachten:
+\paragraph{}
+\textbf{Definition:} Ein \textit{Qubit} ist ein Quantensystem mit den beiden Basiszuständen $\ket{0}$ und $\ket{1}$. Es kann alle Zustände $\alpha\ket{0} + \beta\ket{1}$ annehmen, sodass $\abs{\alpha}^2 + \abs{\beta}^2 = 1$ gilt.
 
-\textbf{Definition:} Ein \textit{Qubit} ist ein Quantensystem mit den beiden Basiszuständen $\ket{0}$ und $\ket{1}$. Es kann alle Zustände $\alpha\ket{0} + \beta\ket{1}$ annehmen, sodass $\abs{a}^2 + \abs{b}^2 = 1$ gilt.
+Ein Zustand des Qubits, welcher durch die Parameter $\alpha$ und $\beta$ definiert ist, entspricht einem normierten Vektor im Vektorraum $\mathbb{C}^2$\footnote{Dass sich der Zustand eines quantenmechanisches System als Vektor beschreiben lässt, garantiert uns das erste Postulat der Quantenmechanik. Da diese Postulate den Rahmen dieser Arbeit übersteigt, verweise ich für eine genauere Betrachtung dieser Postulate auf \cite{QC}, Kapitel 2.2}. 
 
-Ein Zustand des Qubits, welcher durch die Parameter $\alpha$ und $\beta$ definiert ist, entspricht einem normierten Vektor im Vektorraum $\mathbb{C}^2$.
+\paragraph{}
+Wenbn wir zu unserem Beispiel von vorhin zurückgehen, dann würde der Zustand $\ket{0}$ dem Grundzustand und der Zustand $\ket{1}$ dem angeregten Zustand entsprechen.
+\paragraph{}
 
-Dieses Qubit können wir messen. Die Wahrscheinlichkeit, dass wir $\ket{0}$ messen beträgt $\abs{\alpha}^2$, und die Wahrscheinlichkeit, $\ket{1}$ zu messen, beträgt $\abs{\beta}^2$. Die Bedingung, dass $\abs{a}^2 + \abs{b}^2 = 1$ gelten muss, führt in diesem Fall dazu, dass sich die Wahrscheinlichkeiten auf $1$ summiern. Nach der Messung kollabiert das Quantensystem in den gemessenen Zustand. Messen wir also $\ket{1}$, befindet sich das Qubit nachher immer im Zustand $\ket{1}$, unabhängig davon, was $\alpha$ und $\beta$ vorher waren.
+Qubits können wir messen\footnote{Auch die Messungen basieren auf einem Postulat der Quantenmechanik, nämlich auf dem dritten Postulat.}. Betrachten wir ein Qubit im Zustand $\alpha\ket{0} + \beta\ket{1}$, so beträgt die Wahrscheinlichkeit, dass wir $\ket{0}$ messen, $\abs{\alpha}^2$, und die Wahrscheinlichkeit, $\ket{1}$ zu messen, beträgt $\abs{\beta}^2$. Die Bedingung, dass $\abs{a}^2 + \abs{b}^2 = 1$ gelten muss (dass der Vektor normiert sein muss), führt dazu, dass sich die Wahrscheinlichkeiten auf $1$ summieren. Nach der Messung kollabiert das Quantensystem in den gemessenen Zustand. Messen wir also $\ket{1}$, befindet sich das Qubit nachher immer im Zustand $\ket{1}$, unabhängig davon, was $\alpha$ und $\beta$ vorher waren.
+
+\paragraph{}
 
 Ähnlich entspricht der Zustand eines Multiqubitsystems mit $n$ Qubits einen normierten Vektor im Vektorraum $\mathbb{C}^{2^n}$. Die Basiszustände des Vektorraums entsprechen dabei den einzelnen Kombinationen der $\ket{0}$s und $\ket{1}$s der einzelnen Qubits. Zum Beispiel hat der Vektorraum zu einem Quantensystem mit 2 Qubits die vier Basiszustände $\ket{00}, \ket{01}, \ket{10}$ und $\ket{11}$. Der Bitstring von Länge $n$ innerhalb dem Ket, entspricht dabei der Konfiguration der Qubits. Der Zustand $\ket{101}$ in einem System mit 3 Qubits entspricht dem Zustand, in welchem das erste Qubit im Zustand $\ket{1}$, das zweite im Zustand $\ket{0}$ und das dritte im Zustand $\ket{1}$ ist. Anstelle des Bitstrings wird innerhalb des Kets auch oft eine Zahl verwendet, welche in der Binärdarstellung diesen Bitstring ergibt. Zum Beispiel entspricht $\ket{5}$ dem Zustand $\ket{101}$.
 
-Ein Zustand ist nun ein normierter Vektor im Vektorraum $\mathbb{C}^{2^n}$. Der Eintrag des Basiszustands $\ket{j}$ entspricht dabei der Wahrscheinlichkeit, den Zustand $j$ zu messen. Auch hier summmieren sich die Wahrscheinlichkeiten wieder auf 1, da der Vektor normiert ist. Auch hier schreibt man die Zustände auch oft wieder als eine Linearkombiantion der Basiszustände: $\alpha_{00}\ket{00} + \alpha_{01}\ket{01} + \alpha_{10}\ket{10} + \alpha_{11}\ket{11} = \alpha_{0}\ket{0} + \alpha_{1}\ket{1} + \alpha_{2}\ket{2} + \alpha_{3}\ket{3}$.
+Ein Zustand ist nun ein normierter Vektor im Vektorraum $\mathbb{C}^{2^n}$. Der Koeffizient des Basiszustands $\ket{j}$ eines Vektors in diesem Vektorraum entspricht dabei der Wahrscheinlichkeit, den Zustand $j$ zu messen. Auch hier summmieren sich die Wahrscheinlichkeiten wieder auf 1, da der Vektor normiert ist. Auch hier schreibt man die Zustände auch oft wieder als eine Linearkombiantion der Basiszustände: $\alpha_{00}\ket{00} + \alpha_{01}\ket{01} + \alpha_{10}\ket{10} + \alpha_{11}\ket{11} = \alpha_{0}\ket{0} + \alpha_{1}\ket{1} + \alpha_{2}\ket{2} + \alpha_{3}\ket{3}$.
+
+\paragraph{}
 
 Falls wir nur einzelne Qubits messen, kollabiert das System in die restlichen, noch möglichen Zustände. Nehmen wir als Beispiel ein 2-Qubit-System im Zustand $\frac{1}{\sqrt{6}}\ket{00} + \frac{1}{\sqrt{2}}\ket{01} + \frac{1}{\sqrt{3}}\ket{11}$ und messen das erste Qubit. Die Wahrscheinlichkeit, dass wir dieses Qubit im Zustand $\ket{1}$ messen, liegt bei $\abs*{\alpha_{10}}^2 + \abs*{\alpha_{11}}^2 = \frac{1}{3}$. Falls wir diesen Zustand messen, kollabiert unser Quantensystem sofort in den Zustand $\frac{\alpha_{10}\ket{10} + \alpha_{11}\ket{11}}{\sqrt{\abs*{\alpha_{10}}^2 + \abs*{\alpha_{11}}^2}} = \ket{11}$, wobei der Nenner dafür sorgt, dass der neue Quantenzustand wieder normiert ist. Die Wahrscheinlichkeit eines $\ket{0}$ in der Messung des ersten Qubit hingegen liegt bei $\abs*{\alpha_{00}}^2 + \abs*{\alpha_{01}}^2 = \frac{2}{3}$. Der Zustand des Systems nach der Messung ist dann $\frac{\alpha_{00}\ket{00} + \alpha_{01}\ket{01}}{\sqrt{\abs*{\alpha_{00}}^2 + \abs*{\alpha_{01}}^2}} = \sqrt{\frac{1}{4}}\ket{00} + \sqrt{\frac{3}{4}}\ket{01}$.
 
