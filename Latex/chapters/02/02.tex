@@ -88,6 +88,59 @@ Zustände eines Quantensystems können als Vektoren eines unitären Vektorraumes
 \subsection{Eigenwerte und Eigenvektoren}
 Ein Eigenvektor $\ket{\varphi}$ zu einem linearen Operator $U$ ist ein Vektor, sodass $U\ket{\varphi} = \lambda\ket{\varphi}$ gilt, wobei $\lambda$ als der dazugehörige Eigenwert bezeichnet wird und eine komplexe Zahl ist. Bei einem unitären Operator müssen alle Eigenwerte einen Betrag von 1 haben, denn sonst würde sich die Norm des Vektors verändern. Der grosse Vorteil von Eigenvektoren ist, dass sie sich bis auf einen skalaren Faktor nicht verändern, wenn der dazugehörige Operator auf sie angewendet wird.
 
+\subsection{Das Tensorprodukt}
+Das Tensorprodukt, geschrieben mit dem Zeichen $\otimes$, gibt uns die Möglichkeit alle Möglichkeiten Kombinationen der Einträge ihrer Operanden zu generieren. Sei $A := (a_{ij})$ eine $n_a \times m_a$ Matrix und $B := (b_{ij})$ eine $n_b \times m_b$ Matrix. Die daraus resultierende Matrix $A \otimes B = C := (c_{ij})$ ist eine $n_an_b \times m_am_b$ Matrix, die wie folgt generiert wird:
+
+\begin{align*}
+    C = A \otimes B =
+    \begin{bmatrix}
+        a_{11} & \cdots & a_{1m_a} \\
+        \vdots & \ddots  & \vdots \\
+        a_{n_a1} & \cdots  & a_{n_am_a} \\
+    \end{bmatrix}
+    \otimes
+    \begin{bmatrix}
+        b_{11} & \cdots & b_{1m_b} \\
+        \vdots & \ddots  & \vdots \\
+        b_{n_b1} & \cdots  & b_{n_bm_b} \\
+    \end{bmatrix} \\
+    =
+    \begin{bmatrix}
+        a_{11}\begin{bmatrix}
+            b_{11} & \cdots & b_{1m_b} \\
+            \vdots & \ddots  & \vdots \\
+            b_{n_b1} & \cdots  & b_{n_bm_b} \\
+        \end{bmatrix} 
+        & \cdots & a_{1m_a}\begin{bmatrix}
+            b_{11} & \cdots & b_{1m_b} \\
+            \vdots & \ddots  & \vdots \\
+            b_{n_b1} & \cdots  & b_{n_bm_b} \\
+        \end{bmatrix}
+         \\
+        \vdots & \ddots  & \vdots \\
+        a_{n_a1}\begin{bmatrix}
+            b_{11} & \cdots & b_{1m_b} \\
+            \vdots & \ddots  & \vdots \\
+            b_{n_b1} & \cdots  & b_{n_bm_b} \\
+        \end{bmatrix} 
+        & \cdots  & a_{n_am_a}\begin{bmatrix}
+            b_{11} & \cdots & b_{1m_b} \\
+            \vdots & \ddots  & \vdots \\
+            b_{n_b1} & \cdots  & b_{n_bm_b} \\
+        \end{bmatrix} \\
+    \end{bmatrix} \\
+    =
+    \begin{bmatrix}
+        a_{11}b_{11} & a_{11}b_{12} & \cdots & a_{11}b_{1m_b} & a_{12}b_{11} & \cdots & a_{1m_a}b_{1m_b} \\
+        a_{11}b_{21} & a_{11}b_{22} & \cdots & a_{11}b_{2m_b} & a_{12}b_{21} & \cdots & a_{1m_a}b_{2m_b} \\
+        \vdots & \vdots & \ddots & \vdots & \vdots & \ddots & \vdots \\
+        a_{11}b_{n_b1} & a_{11}b_{n_b2} & \cdots & a_{11}b_{n_bm_b} & a_{12}b_{n_b1} & \cdots & a_{1m_a}b_{n_bm_b} \\ 
+        a_{21}b_{11} & a_{21}b_{12} & \cdots & a_{21}b_{1m_b} & a_{22}b_{11} & \cdots & a_{2m_a}b_{1m_b} \\
+        \vdots & \vdots & \ddots & \vdots & \vdots & \ddots & \vdots \\
+        a_{n_a1}b_{n_b1} & a_{n_a1}b_{n_b2} & \cdots & a_{n_a1}b_{n_bm_b} & a_{n_a2}b_{n_b1} & \cdots & a_{n_am_a}b_{n_bm_b}
+    \end{bmatrix}
+\end{align*}
+
 \section{Quantensysteme}
 Die Quantensysteme, die wir im Rahmen dieser Arbeit betrachten, sind rein mathematische Systeme, die nicht an eine fixe physikalische Realisierung gebunden sind. In der Tat gibt es verschiedene Möglichkeiten, solche Systeme physikalisch umzusetzen, wobei jede Variante eigene Vor- und Nachteile hat.
 
@@ -96,7 +149,7 @@ Ein klassisches Bit hat genau zwei Zustände - 0 und 1 - und ist immer in genau 
 \paragraph{}
 \textbf{Definition:} Ein \textit{Qubit} ist ein Quantensystem mit den beiden Basiszuständen $\ket{0}$ und $\ket{1}$. Es kann alle Zustände $\alpha\ket{0} + \beta\ket{1}$ annehmen, sodass $\abs{\alpha}^2 + \abs{\beta}^2 = 1$ gilt.
 
-Ein Zustand des Qubits, welcher durch die Parameter $\alpha$ und $\beta$ definiert ist, entspricht einem normierten Vektor im Vektorraum $\mathbb{C}^2$\footnote{Dass sich der Zustand eines quantenmechanisches System als Vektor beschreiben lässt, garantiert uns das erste Postulat der Quantenmechanik. Da diese Postulate den Rahmen dieser Arbeit übersteigt, verweise ich für eine genauere Betrachtung dieser Postulate auf \cite{QC}, Kapitel 2.2}. 
+Ein Zustand des Qubits, welcher durch die Parameter $\alpha$ und $\beta$ definiert ist, entspricht einem normierten Vektor im Vektorraum $\mathbb{C}^2$.\footnote{Dass sich der Zustand eines quantenmechanisches System als Vektor beschreiben lässt, garantiert uns das erste Postulat der Quantenmechanik. Da diese Postulate den Rahmen dieser Arbeit übersteigt, verweise ich für eine genauere Betrachtung dieser Postulate auf \cite{QC}, Kapitel 2.2}
 
 \paragraph{}
 Wenbn wir zu unserem Beispiel von vorhin zurückgehen, dann würde der Zustand $\ket{0}$ dem Grundzustand und der Zustand $\ket{1}$ dem angeregten Zustand entsprechen.
@@ -111,11 +164,13 @@ Qubits können wir messen\footnote{Auch die Messungen basieren auf einem Postula
 Ein Zustand ist nun ein normierter Vektor im Vektorraum $\mathbb{C}^{2^n}$. Der Koeffizient des Basiszustands $\ket{j}$ eines Vektors in diesem Vektorraum entspricht dabei der Wahrscheinlichkeit, den Zustand $j$ zu messen. Auch hier summmieren sich die Wahrscheinlichkeiten wieder auf 1, da der Vektor normiert ist. Auch hier schreibt man die Zustände auch oft wieder als eine Linearkombiantion der Basiszustände: $\alpha_{00}\ket{00} + \alpha_{01}\ket{01} + \alpha_{10}\ket{10} + \alpha_{11}\ket{11} = \alpha_{0}\ket{0} + \alpha_{1}\ket{1} + \alpha_{2}\ket{2} + \alpha_{3}\ket{3}$.
 
 \paragraph{}
+Um den Zustand des Multiqubitsystems beschreiben zu können, wenn wir im Besitz der Zustände der einzelnen Qubits sind, können wir die Vektoren dieser Zustände mit Hilfe des Tensorprodukts zusammenmultiplizieren, und bekommen dann den Zustandsvektor für das Multiqubitsystem. Zudem kann man mit dem Tensorprodukt auch Operationen zusammenmultiplizieren: Wenn wir $n$ Qubits haben und auf jedes Qubit eine Operation anwenden (dies kann auch die Identität sein, falls wir das Qubit unverändert lassen wollen). Wenn wir dann die Matrizen dieser Operationen multiplizieren, bekommen wir die Matrix, die der Operation entspricht, die alle unsere ausgewählten Operationen ausführt. Wichtig ist aber noch anzumerken, dass das Tensorprodukt nicht kommutativ ist, und die Reihenfolge der Faktoren somit wichtig ist.
+\paragraph{}
 
 Falls wir nur einzelne Qubits messen, kollabiert das System in die restlichen, noch möglichen Zustände. Nehmen wir als Beispiel ein 2-Qubit-System im Zustand $\frac{1}{\sqrt{6}}\ket{00} + \frac{1}{\sqrt{2}}\ket{01} + \frac{1}{\sqrt{3}}\ket{11}$ und messen das erste Qubit. Die Wahrscheinlichkeit, dass wir dieses Qubit im Zustand $\ket{1}$ messen, liegt bei $\abs*{\alpha_{10}}^2 + \abs*{\alpha_{11}}^2 = \frac{1}{3}$. Falls wir diesen Zustand messen, kollabiert unser Quantensystem sofort in den Zustand $\frac{\alpha_{10}\ket{10} + \alpha_{11}\ket{11}}{\sqrt{\abs*{\alpha_{10}}^2 + \abs*{\alpha_{11}}^2}} = \ket{11}$, wobei der Nenner dafür sorgt, dass der neue Quantenzustand wieder normiert ist. Die Wahrscheinlichkeit eines $\ket{0}$ in der Messung des ersten Qubit hingegen liegt bei $\abs*{\alpha_{00}}^2 + \abs*{\alpha_{01}}^2 = \frac{2}{3}$. Der Zustand des Systems nach der Messung ist dann $\frac{\alpha_{00}\ket{00} + \alpha_{01}\ket{01}}{\sqrt{\abs*{\alpha_{00}}^2 + \abs*{\alpha_{01}}^2}} = \sqrt{\frac{1}{4}}\ket{00} + \sqrt{\frac{3}{4}}\ket{01}$.
 
 \subsection{Die Blochkugel}
-Die Blochkugel dient der graphischen Darstellung des Zustands eines einzelnen Qubits. Zu diesem Zweck nehmen wir noch einmal ein einzelnes Qubit $\alpha\ket{0} + \beta\ket{1}$ mit $\abs*{\alpha}^2 + \abs*{\beta}^2 = 1$. Diese Bedingung führt dazu, dass wir den Zustand als $e^{i\gamma}\left(cos\frac{\theta}{2}\ket{0} + e^{i\varphi}sin\frac{\theta}{2}\ket{1}\right)$ umschreiben können. Den Faktor $e^{i\gamma}$ können wir nicht beobachten, da er auf beide Koeffizienten wirkt. Deshalb ist der Zustand durch die beiden Winkel $\theta$ und $\varphi$ definiert. Diese beiden Winkel kann man graphisch als einen Punkt auf einer Einheitskugel darstellen. Diese Darstellung wird die Bloch-Kugel genannt.
+Die Blochkugel dient der graphischen Darstellung des Zustands eines einzelnen Qubits. Zu diesem Zweck betrachten wir noch einmal ein einzelnes Qubit $\alpha\ket{0} + \beta\ket{1}$ mit $\abs*{\alpha}^2 + \abs*{\beta}^2 = 1$. Diese Bedingung führt dazu, dass wir den Zustand als $e^{i\gamma}\left(\cos\frac{\theta}{2}\ket{0} + e^{i\varphi}\sin\frac{\theta}{2}\ket{1}\right)$ umschreiben können. Den Faktor $e^{i\gamma}$ können wir nicht beobachten, da er auf beide Koeffizienten wirkt\footnote{Dies nennt man eine globale Phase: Dieser Faktor hat Betrag 1 und verändert deshalb die Wahrscheinlichkeiten nicht. Da er sich zudem auf alle Zustände auswirkt, kann man ihn bei den Quantenoperatoren wegen der Linearität ausklammern. Somit bleibt er immer über alle Qubits bestehen.}. Deshalb ist der Zustand durch die beiden Winkel $\theta$ und $\varphi$ definiert. Diese beiden Winkel kann man graphisch als einen Punkt auf einer Einheitskugel darstellen. Diese Darstellung wird die Bloch-Kugel genannt.
 
 \begin{tikzpicture}
     \def\radius{3}
@@ -131,18 +186,34 @@ Die Blochkugel dient der graphischen Darstellung des Zustands eines einzelnen Qu
 \end{tikzpicture}
 
 \subsection{Operationen auf Qubits}
-Operationen, die man auf Qubits implementiert, sind lineare Operationen und lassen sich somit als Matrizen darstellen. Man kann den Zustandsvektor mit der Matrix des Operators multiplizieren, um den Zustand nach der Operation zu erhalten. Dazu müssen die Operatoren die Norm des Quantenzustands bewahren, da die Zustände immer normiert sein müssen, und somit unitär sein. Dies hat die direkte Konsequenz (für eine unitäre Matrix $U$ gilt $UU^{\dagger} = I$), dass ein inverser Operator existieren muss und deshalb alle Berechnungen reversibel sein müssen. Beispielsweise kann der Modulo Operator nicht auf Quantencomputern implementiert werden, da man aus dem Ergebnis $x \equiv 2 \pmod{3}$ die Eingabe $x \in \{2, 5, 8\cdots\}$ nicht eindeutig wiederherstellen kann. Dies hat grosse Konsequenzen für die Berechnungen auf Quantencomputern. Gleichzeitig stellt sich heraus, dass sich alle unitären Matrizen beliebig annähern lassen. Die Konstruktion dazu kann man in \cite{QC}, Seiten 188ff., nachlesen.
+Operationen, die man auf Qubits implementiert, sind lineare Operationen und lassen sich somit als Matrizen darstellen. Man kann den Vektor, welcher den Zustand beschreibt, mit der Matrix des Operators multiplizieren, um den Zustand nach der Operation zu erhalten. Dazu müssen die Operatoren die Norm des Quantenzustands bewahren, da die Zustände immer normiert sein müssen, und somit unitär sein. Dies hat die direkte Konsequenz (für eine unitäre Matrix $U$ gilt $UU^{\dagger} = I$), dass ein inverser Operator existieren muss und deshalb alle Berechnungen reversibel sein müssen. Beispielsweise kann der Modulo Operator nicht auf Quantencomputern implementiert werden, da man aus dem Ergebnis $x \equiv 2 \pmod{3}$ die Eingabe $x \in \{2, 5, 8\cdots\}$ nicht eindeutig wiederherstellen kann. Dies hat grosse Konsequenzen für die Berechnungen auf Quantencomputern.
+\paragraph{}
+Gleichzeitig stellt sich heraus, dass es verschiedene universelle Kombinationen von Operationen gibt, wobei universell in diesem Zusammenhang bedeutet, dass man jeden unitären Operator nur mit den ausgewählten Operatoren beliebig annähern kann. Die Konstruktion dazu kann man in \cite{QC}, Seiten 188ff. nachlesen.
 
 \subsection{Wichtige Quantengatter}
-An dieser Stelle werden kurz die wichtigsten Quantengatter eingeführt, die wir benötigen werden. Zuerst betrachten wir 5 grundlegende Gatter auf Qubits: die 3 Pauli-Matrizen, das $H$-Gatter und das $CNOT$-Gatter.
+An dieser Stelle werden die wichtigsten Quantengatter eingeführt, die wir benötigen werden. Zuerst betrachten wir fünf grundlegende Gatter auf Qubits: die drei Pauli-Matrizen $X, Y$ und $Z$, das $H$-Gatter und das $CNOT$-Gatter.
 \begin{itemize}
-    \item Das $X$-Gatter ist das Qubit-Equivalent zum $NOT$-Gatter. In Matrixform sieht der Operator so aus: $ X = \begin{bmatrix}0 & 1 \\ 1 & 0\end{bmatrix}$. Dieses Gatter dreht den Zustand des Qubits um $\pi$ um die $x$-Achse in der Blochkugel.
-    \item Das $Y$-Gatter implementiert die Operation der Matrix $Y = \begin{bmatrix}0 & -i \\ i & 0\end{bmatrix}$. Dieses Gatter entspricht einer Rotation von $\pi$ um die $y$-Achse in der Blochkugel.
+    \item Das $X$-Gatter ist das Qubit-Equivalent zum $NOT$-Gatter eines elektronischen Schaltkreises. In Matrixform sieht der Operator so aus: $ X = \begin{bmatrix}0 & 1 \\ 1 & 0\end{bmatrix}$. Dieses Gatter dreht den Zustand des Qubits um $\pi$ um die $x$-Achse in der Blochkugel.
+    \item Das $Y$-Gatter wird durch die Matrix $Y = \begin{bmatrix}0 & -i \\ i & 0\end{bmatrix}$ dargestellt. Dieses Gatter entspricht einer Rotation von $\pi$ um die $y$-Achse in der Blochkugel.
     \item Das $Z$-Gatter, als Matrix $Z = \begin{bmatrix}1 & 0 \\ 0 & -1\end{bmatrix}$, dreht den Zustand um $\pi$ um die $z$-Achse.
-    \item Das $H$-Gatter ist der einfachste Weg, eine Superposition zu erzeugen. Mit der Matrix $H = \frac{1}{\sqrt{2}}\begin{bmatrix}1 & 1 \\ 1 & -1\end{bmatrix}$ kann man die beiden Zustände $H\ket{0} = \frac{1}{\sqrt{2}}(\ket{0} + \ket{1})$ und $H\ket{1} = \frac{1}{\sqrt{2}}(\ket{0} - \ket{1})$ erzeugen. Diese beiden Zustände kommen so häufig vor, dass man ihnen die Namen $\ket{+} = \frac{1}{\sqrt{2}}(\ket{0} + \ket{1})$ und $\ket{-} = \frac{1}{\sqrt{2}}(\ket{0} - \ket{1})$ gegeben hat.
-    \item $CNOT$ steht als Abkürzung für "Controlled NOT". Dieses Gatter wirkt auf zwei Qubits und wendet ein $NOT$ auf das zweite Qubit an, wenn das erste Qubit auf $1$ ist. Als Matrix sieht die Operation so aus: $CNOT = \begin{bmatrix}1 & 0 & 0 & 0 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 0 & 1 \\ 0 & 0 & 1 & 0\end{bmatrix}$.
+    \item Das Hadamard-Gatter, meistens einfach durch den Buchstaben $H$ abgekürzt, ist der einfachste Weg, eine Superposition zu erzeugen. Mit der Matrix $H = \frac{1}{\sqrt{2}}\begin{bmatrix}1 & 1 \\ 1 & -1\end{bmatrix}$ kann man die beiden Zustände $H\ket{0} = \frac{1}{\sqrt{2}}(\ket{0} + \ket{1})$ und $H\ket{1} = \frac{1}{\sqrt{2}}(\ket{0} - \ket{1})$ erzeugen. Diese beiden Zustände kommen so häufig vor, dass man ihnen die Namen $\ket{+} = \frac{1}{\sqrt{2}}(\ket{0} + \ket{1})$ und $\ket{-} = \frac{1}{\sqrt{2}}(\ket{0} - \ket{1})$ gegeben hat.
+    \item $CNOT$ steht als Abkürzung für \grqq Controlled NOT\grqq. Dieses Gatter wirkt auf zwei Qubits und wendet ein $NOT$ auf das zweite Qubit an, wenn das erste Qubit auf $1$ ist. Als Matrix sieht die Operation so aus: $$CNOT = \begin{bmatrix}1 & 0 & 0 & 0 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 0 & 1 \\ 0 & 0 & 1 & 0\end{bmatrix}$$.
 \end{itemize}
-Diese Gatter gehören zu den wichtigsten Gattern im Bereich der Quantencomputer. Wir werden auf unserem Weg jedoch weitere Gatter antreffen. Eines, von welchem wir noch mehr Gebrauch machen werden, möchte ich hier kurz definieren. Ich nenne es $Rot(k)$ und in Matrix-Form sieht es so aus: $Rot(k) = \begin{bmatrix}1 & 0 \\ 0 & e^{\frac{2i\pi}{2^k}}\end{bmatrix}$. Dieses Gatter multipliziert den Koeffiztienten von $\ket{1}$ mit $e^{\frac{2i\pi}{2^k}}$ und wir werden es bei der Quanten-Fouriertransformation und dessen Anwendungen antreffen.
+Diese Gatter gehören zu den wichtigsten Gattern im Bereich der Quantencomputer. Wir werden auf unserem Weg jedoch weitere Gatter antreffen. Eines, von welchem wir noch mehr Gebrauch machen werden, möchte ich hier kurz definieren. Ich nenne es $\text{Rot}(k)$ und in Matrix-Form sieht es so aus: $\text{Rot}(k) = \begin{bmatrix}1 & 0 \\ 0 & e^{\frac{2i\pi}{2^k}}\end{bmatrix}$. Dieses Gatter multipliziert den Koeffiztienten von $\ket{1}$ mit $e^{\frac{2i\pi}{2^k}}$ und wir werden es bei der Quanten-Fouriertransformation\footnote{Siehe Kapitel 3} und dessen Anwendungen antreffen.
 
-Abschliessend möchte ich noch ein Gatter auf zwei Qubits erwähnen, bekannt als das SWAP-Gatter. Dieses Gatter wechselt die Zustände der beiden Qubits. Es implementiert die Matrix: $$ SWAP = \begin{bmatrix} 1 & 0 & 0 & 0 \\ 0 & 0 & 1 & 0 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 0 & 1 \end{bmatrix} = \begin{bmatrix}1 & 0 & 0 & 0 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 0 & 1 \\ 0 & 0 & 1 & 0\end{bmatrix} \begin{bmatrix}0 & 1 & 0 & 0 \\ 1 & 0 & 0 & 0 \\ 0 & 0 & 1 & 0 \\ 0 & 0 & 0 & 1 \end{bmatrix} \begin{bmatrix}1 & 0 & 0 & 0 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 0 & 1 \\ 0 & 0 & 1 & 0\end{bmatrix}$$
-Die rechte Seite zeigt uns, dass wir $SWAP(A, B)$ als $CNOT(A, B)$, $CNOT(B, A)$ und $CNOT(A, B)$ implementieren können.
+Abschliessend möchte ich noch ein Gatter auf zwei Qubits erwähnen, bekannt als das SWAP-Gatter. Dieses Gatter vertauscht die Zustände der beiden Qubits, indem es die Amplituden in derjenigen Zustände vertauscht, in welchen die beiden Qubits nicht gleich sind. Es wird durch die folgende Matrix beschrieben: $$ SWAP = \begin{bmatrix} 1 & 0 & 0 & 0 \\ 0 & 0 & 1 & 0 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 0 & 1 \end{bmatrix} = \begin{bmatrix}1 & 0 & 0 & 0 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 0 & 1 \\ 0 & 0 & 1 & 0\end{bmatrix} \begin{bmatrix}1 & 0 & 0 & 0 \\ 0 & 0 & 0 & 1 \\ 0 & 0 & 1 & 0 \\ 0 & 1 & 0 & 0 \end{bmatrix} \begin{bmatrix}1 & 0 & 0 & 0 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 0 & 1 \\ 0 & 0 & 1 & 0\end{bmatrix}$$
+Wenn wir das erste Qubit als $a$ und das zweite als $b$ bezeichnen, sehen wir auf der rechten Seite, dass wir das $SWAP(a, b)$ als Abfolge dreier $CNOT$-Gates ($CNOT(a, b)$, dann $CNOT(b, a)$ und dann $CNOT(a, b)$) programmieren können.
+
+\subsection{Kontrollierte und adjungierte Operatoren}
+Wie wir bereits erfahren haben, müssen die Operatoren, welche man auf Quantencomputern umsetzen kann, unitär und somit reversibel sein. Dies setzt sofort die Existenz eines adjungierten Operatoren (auch inversen Operator genannt) zu einem Operator $U$ voraus, welcher aus einem Zustand $\ket{\varphi}$ den Zustand $\ket{\psi}$ mit $U\ket{\psi} = \ket{\varphi}$ macht. Ein Schaltkreis zu diesem adjungiertem Operator lässt generieren, indem man die Gatter des Schaltkreises für $U$ rückwerts durchgeht, und immer den adjungierten Operator des jeweiligen Gatters nimmt. Viele Quantenprogrammiersprachen können deshalb auch die die adjungierte Version eines Quantenoperators aus dem Programmcode des ursprünglichen Operators generieren.
+
+\paragraph{}
+Auch lassen sich kontrollierte Versionen eines Operators bilden. Die kontrollierte Version eines Operators nimmt zusätzlich zu den Qubits, auf welche die Operation ausgeführt werden soll, noch eine Menge an sogenannten Kontrollqubits. Diese Version der Operation wird nur dann ausgeführt, wenn die Kontrollqubits im Zustand $\ket{1}$ sind. Als Beispiel nehmen wir eine Operation, welche die Bitrepräsentation zyklisch um ein Bit nach rechts verschiebt (also aus dem Zustand $\ket{01101}$ den Zustand $\ket{10110}$ macht). Haben wir nun den Zustand $\ket{0}\ket{11101} + \ket{1}\ket{10110} + \ket{0}\ket{01000}$ haben (das erste Bit habe ich hier getrennt dargestellt, da es für diese Operation als Kontrollqubit verwenden will). Wenn wir nun die Operation mit dem ersten Bit als Kontrollqubit anwenden, so bekommen wir den Zustand $\ket{0}\ket{11101} + \ket{1}\ket{01011} + \ket{0}\ket{01000}$. 
+
+Ein Qubit darf aber nie gleichzeitig ein Kontrollqubit und eines jener Qubits, auf dem der Operator angewendet wird, sein. Um dies zu sehen betrachten wir das $CNOT$, welches die kontrolleirte Variante des $X$-Operators ist. Wenn wir de Operator auf ein QUbit mit demselben QUbit als Kontrollqubit anwenden, so wird dieses Qubit nach der Anwendung immer im Zustand $\ket{0}$ sein. Somit ist dieser Operator nicht mehr reversibel. Wenn diese Bedingung aber eingehalten wird, so ist dieser Operator reversibel, da man aus den Kontrollqubits, welche während der Operation nicht verändert werden, ablesen kann, ob die Operation durchgeführt wurde.
+
+Auchg diese Version wird von den meisten Quantenprogrammiersprachen automatisch generiert, da man den Schaltkreis der kontrollierten Version einfach herstellen kann, indem man vom Schaltkreis des ursprünglichen Operators bei jedem Gatter die kontrollierte Version nimmt.
+
+\paragraph{}
+
+Zudem lassen sich die beiden oben genannten Varianten auch kombinieren, um eine kontrollierte, adjungierte Version eines Operators zu generieren. 
