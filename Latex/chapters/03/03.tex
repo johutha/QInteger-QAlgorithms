@@ -64,7 +64,7 @@ Unter der Darstellung $x$ in der \textit{Fourierbasis} verstehen wir die Produkt
 
 $$\frac{1}{\sqrt{2^n}}\left(\ket{0} + e^{2i\pi(0.x_0)}\right)\otimes\left(\ket{0} + e^{2i\pi(0.x_1x_0)}\right)\otimes \dots \otimes \left(\ket{0} + e^{2i\pi(0.x_{n - 1}\dots x_0)}\right)$$
 
-Die im obigen Produkt vorkommenden Zustände nennen wir in diesem Zusammenhang die \textit{Fourierbasis}\footnote{Man beachte, dass die Fourierbasis keine Vektorraumbasis im Sinno von Kapitel 2.1.2 ist.}.
+Die im obigen Produkt vorkommenden Zustände nennen wir in diesem Zusammenhang die \textit{Fourierbasis}\footnote{Man beachte, dass die Fourierbasis keine Vektorraumbasis im Sinno von Kapitel 2.1.2 ist.}. Hier soll noch darauf hingewiesen werden, dass die Qubits aber von rechts nach links im Array gespeichert sind (da in der binären Basis das rechteste Qubit das mit dem Wert $2^0 \cdot x_0$ ist).
 
 \paragraph{}
 
@@ -138,7 +138,7 @@ Schauen wir uns nun den in der QInteger-Library verwendeten Additionsalgorithmus
 \end{bmatrix}$. Mit dem Gatter können wir den Wert $2i\pi\frac{1}{2^k}$ zum Exponenten des Koeffizienten von $\ket{1}$ addieren. Das heisst, wenn wir das Gatter auf ein Qubit im Zustand $\frac{1}{\sqrt{2}}(\ket{0} + e^{2i\pi\frac{y}{2^{1 + j}}}\ket{1})$ anwenden, wird es in den Zustand $\frac{1}{\sqrt{2}}(\ket{0} + e^{2i\pi\frac{y + 2^{n - j - k}}{2^{n - j}}}\ket{1})$ versetzt. Wir können also mit Hilfe dieses Gatters Zweierpotenzen zum Qubit in der Fourierbasis addieren. Wenn wir das Qubit im Zustand $\ket{x}$ in der binären Basis belassen, können wir die Addition wie folgt mit $\mathcal O(n^2)$ Gatteroperationen implementieren:
 \begin{enumerate}
     \item Wende $QFT$ auf den zweiten Summanden im Zustand $\ket{y}$ an. Das Register befindet sich nun im Zustand $\frac{1}{\sqrt{2^n}}\bigotimes_{j = 0}^{n - 1}\left(\ket{0} + e^{2i\pi\frac{y}{2^{1 + j}}}\right)$.
-    \item Für jedes $j \in \{0, ..., n - 1\}$, wende für jedes Bit $x_k$ mit $k \leq j$ ein kontrolliertes $Rot(j + 1 - k)$ auf das Qubit im $y$-Register im Zustand $\frac{1}{\sqrt{2}}\left(\ket{0} + e^{2i\pi\frac{y}{1 + j}}\right)$ an. Dieses befindet sich danach im Zustand:
+    \item Für jedes $j = 0, ..., n - 1$, wende für jedes Bit $x_k$ mit $k \leq j$ ein kontrolliertes $Rot(j + 1 - k)$ auf das Qubit im $y$-Register im Zustand $\frac{1}{\sqrt{2}}\left(\ket{0} + e^{2i\pi\frac{y}{1 + j}}\right)$ an. Dieses befindet sich danach im Zustand:
     \begin{align*}
         &\frac{1}{\sqrt{2}}(\ket{0} + e^{2i\pi\frac{y}{2^{1 + j}}}\cdot e^{2i\pi\sum_{s = 0}^{j}\frac{x_{j - s}\cdot 2^{j - s}}{2^{1 + s}\cdot2^{j - s}}}\ket{1}) 
         = \frac{1}{\sqrt{2}}(\ket{0} + e^{2i\pi\frac{y + \sum_{s = 0}^{j}{x_{j - s}\cdot2^{j - s}}}{2^{1 + j}}}\ket{1}) \\ = &\frac{1}{\sqrt{2}}(\ket{0} + e^{2i\pi\frac{y + x}{2^{1 + j}}}\ket{1})

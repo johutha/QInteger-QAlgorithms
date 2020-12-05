@@ -93,7 +93,7 @@ Das Tensorprodukt, geschrieben mit dem Zeichen $\otimes$, gibt uns die Möglichk
 
 \begin{align*}
     C = A \otimes B =
-    \begin{bmatrix}
+    &\begin{bmatrix}
         a_{11} & \cdots & a_{1m_a} \\
         \vdots & \ddots  & \vdots \\
         a_{n_a1} & \cdots  & a_{n_am_a} \\
@@ -103,9 +103,9 @@ Das Tensorprodukt, geschrieben mit dem Zeichen $\otimes$, gibt uns die Möglichk
         b_{11} & \cdots & b_{1m_b} \\
         \vdots & \ddots  & \vdots \\
         b_{n_b1} & \cdots  & b_{n_bm_b} \\
-    \end{bmatrix} \\
+    \end{bmatrix} \\[0.5cm]
     =
-    \begin{bmatrix}
+    &\begin{bmatrix}
         a_{11}\begin{bmatrix}
             b_{11} & \cdots & b_{1m_b} \\
             \vdots & \ddots  & \vdots \\
@@ -128,9 +128,9 @@ Das Tensorprodukt, geschrieben mit dem Zeichen $\otimes$, gibt uns die Möglichk
             \vdots & \ddots  & \vdots \\
             b_{n_b1} & \cdots  & b_{n_bm_b} \\
         \end{bmatrix} \\
-    \end{bmatrix} \\
+    \end{bmatrix} \\[0.5cm]
     =
-    \begin{bmatrix}
+    &\begin{bmatrix}
         a_{11}b_{11} & a_{11}b_{12} & \cdots & a_{11}b_{1m_b} & a_{12}b_{11} & \cdots & a_{1m_a}b_{1m_b} \\
         a_{11}b_{21} & a_{11}b_{22} & \cdots & a_{11}b_{2m_b} & a_{12}b_{21} & \cdots & a_{1m_a}b_{2m_b} \\
         \vdots & \vdots & \ddots & \vdots & \vdots & \ddots & \vdots \\
@@ -141,6 +141,8 @@ Das Tensorprodukt, geschrieben mit dem Zeichen $\otimes$, gibt uns die Möglichk
     \end{bmatrix}
 \end{align*}
 
+\paragraph{}
+Zusättzlich ist die Schreibweise $X^{\otimes n}$ eine verkürzte Schreibweise für die $n$-malige Anwendung des Tensorprodukts. In anderen Worten, $X^{\otimes n} = \bigotimes_{k = 0}^{n - 1}X$.
 \section{Quantensysteme}
 Die Quantensysteme, die wir im Rahmen dieser Arbeit betrachten, sind rein mathematische Systeme, die nicht an eine fixe physikalische Realisierung gebunden sind. In der Tat gibt es verschiedene Möglichkeiten, solche Systeme physikalisch umzusetzen, wobei jede Variante eigene Vor- und Nachteile hat.
 
@@ -208,7 +210,7 @@ Wenn wir das erste Qubit als $a$ und das zweite als $b$ bezeichnen, sehen wir au
 Wie wir bereits erfahren haben, müssen die Operatoren, welche man auf Quantencomputern umsetzen kann, unitär und somit reversibel sein. Dies setzt sofort die Existenz eines adjungierten Operatoren (auch inversen Operator genannt) zu einem Operator $U$ voraus, welcher aus einem Zustand $\ket{\varphi}$ den Zustand $\ket{\psi}$ mit $U\ket{\psi} = \ket{\varphi}$ macht. Ein Schaltkreis zu diesem adjungiertem Operator lässt generieren, indem man die Gatter des Schaltkreises für $U$ rückwerts durchgeht, und immer den adjungierten Operator des jeweiligen Gatters nimmt. Viele Quantenprogrammiersprachen können deshalb auch die die adjungierte Version eines Quantenoperators aus dem Programmcode des ursprünglichen Operators generieren.
 
 \paragraph{}
-Auch lassen sich kontrollierte Versionen eines Operators bilden. Die kontrollierte Version eines Operators nimmt zusätzlich zu den Qubits, auf welche die Operation ausgeführt werden soll, noch eine Menge an sogenannten Kontrollqubits. Diese Version der Operation wird nur dann ausgeführt, wenn die Kontrollqubits im Zustand $\ket{1}$ sind. Als Beispiel nehmen wir eine Operation, welche die Bitrepräsentation zyklisch um ein Bit nach rechts verschiebt (also aus dem Zustand $\ket{01101}$ den Zustand $\ket{10110}$ macht). Haben wir nun den Zustand $\ket{0}\ket{11101} + \ket{1}\ket{10110} + \ket{0}\ket{01000}$ haben (das erste Bit habe ich hier getrennt dargestellt, da es für diese Operation als Kontrollqubit verwenden will). Wenn wir nun die Operation mit dem ersten Bit als Kontrollqubit anwenden, so bekommen wir den Zustand $\ket{0}\ket{11101} + \ket{1}\ket{01011} + \ket{0}\ket{01000}$. Sei $U$ ein Operator, welcher auf Quantencomputern programmierbar ist. Dann schreiben wir die durch das Qubit $c$ kontrollierte Version von $U$ als $U^c$. In den Fällen, in denen wir mit $U^k$ die $k$ mal wiederholte Anwendung des Operators $U$ meinen, werde ich darauf hinweisen.
+Auch lassen sich kontrollierte Versionen eines Operators bilden. Die kontrollierte Version eines Operators nimmt zusätzlich zu den Qubits, auf welche die Operation ausgeführt werden soll, noch eine Menge an sogenannten Kontrollqubits. Diese Version der Operation wird nur auf denjenigen Zuständen ausgeführt, in welchen alle Kontrollqubits im Zustand $\ket{1}$ sind. Als Beispiel nehmen wir eine Operation, welche die Bitrepräsentation zyklisch um ein Bit nach rechts verschiebt (also aus dem Zustand $\ket{01101}$ den Zustand $\ket{10110}$ macht). Haben wir nun den Zustand $\ket{0}\ket{11101} + \ket{1}\ket{10110} + \ket{0}\ket{01000}$ haben (das erste Bit habe ich hier getrennt dargestellt, da es für diese Operation als Kontrollqubit verwenden will). Wenn wir nun die Operation mit dem ersten Bit als Kontrollqubit anwenden, so bekommen wir den Zustand $\ket{0}\ket{11101} + \ket{1}\ket{01011} + \ket{0}\ket{01000}$. Sei $U$ ein Operator, welcher auf Quantencomputern programmierbar ist. Dann schreiben wir die durch das Qubit $c$ kontrollierte Version von $U$ als $U^c$. In den Fällen, in denen wir mit $U^k$ die $k$ mal wiederholte Anwendung des Operators $U$ meinen, werde ich darauf hinweisen.
 
 \paragraph{}
 
