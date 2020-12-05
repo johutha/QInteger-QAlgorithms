@@ -1,0 +1,115 @@
+\begin{tikzpicture}[scale=0.650000,x=1pt,y=1pt]
+\filldraw[color=white] (0.000000, -7.500000) rectangle (520.000000, 67.500000);
+% Drawing wires
+% Line 3: a W {x_{n - 1}} {\ket{0} + e^{2i\pi(0.x_{n-1}\dots x_0)}}
+\draw[color=black] (0.000000,60.000000) -- (520.000000,60.000000);
+\draw[color=black] (0.000000,60.000000) node[left] {${x_{n - 1}}$};
+% Line 4: b W {x_{n - 2}} {\ket{0} + e^{2i\pi(0.x_{n-2}\dots x_0)}}
+\draw[color=black] (0.000000,45.000000) -- (520.000000,45.000000);
+\draw[color=black] (0.000000,45.000000) node[left] {${x_{n - 2}}$};
+% Line 5: ...e W
+\draw[color=black] (0.000000,30.000000) node[anchor=mid east] {$\vdots$};
+% Line 6: c W {x_{1}} {\ket{0} + e^{2i\pi(0.x_1x_0)}}
+\draw[color=black] (0.000000,15.000000) -- (520.000000,15.000000);
+\draw[color=black] (0.000000,15.000000) node[left] {${x_{1}}$};
+% Line 7: d W {x_0} {\ket{0} + e^{2i\pi(0.x_0)}}
+\draw[color=black] (0.000000,0.000000) -- (520.000000,0.000000);
+\draw[color=black] (0.000000,0.000000) node[left] {${x_0}$};
+% Done with wires; drawing gates
+% Line 9: a G {$H$}
+\begin{scope}
+\draw[fill=white] (12.000000, 60.000000) +(-45.000000:8.485281pt and 8.485281pt) -- +(45.000000:8.485281pt and 8.485281pt) -- +(135.000000:8.485281pt and 8.485281pt) -- +(225.000000:8.485281pt and 8.485281pt) -- cycle;
+\clip (12.000000, 60.000000) +(-45.000000:8.485281pt and 8.485281pt) -- +(45.000000:8.485281pt and 8.485281pt) -- +(135.000000:8.485281pt and 8.485281pt) -- +(225.000000:8.485281pt and 8.485281pt) -- cycle;
+\draw (12.000000, 60.000000) node {{$H$}};
+\end{scope}
+% Line 10: a G {$R(2)$} length=32 height=13 b
+\draw (46.000000,60.000000) -- (46.000000,45.000000);
+\begin{scope}
+\draw[fill=white] (46.000000, 60.000000) +(-45.000000:22.627417pt and 9.192388pt) -- +(45.000000:22.627417pt and 9.192388pt) -- +(135.000000:22.627417pt and 9.192388pt) -- +(225.000000:22.627417pt and 9.192388pt) -- cycle;
+\clip (46.000000, 60.000000) +(-45.000000:22.627417pt and 9.192388pt) -- +(45.000000:22.627417pt and 9.192388pt) -- +(135.000000:22.627417pt and 9.192388pt) -- +(225.000000:22.627417pt and 9.192388pt) -- cycle;
+\draw (46.000000, 60.000000) node {{$R(2)$}};
+\end{scope}
+\filldraw (46.000000, 45.000000) circle(1.500000pt);
+% Line 11: LABEL ...
+\draw[color=black] (81.500000, 60.000000) node [fill=white] {$\cdots$};
+\draw[color=black] (81.500000, 45.000000) node [fill=white] {$\cdots$};
+\draw[color=black] (81.500000, 15.000000) node [fill=white] {$\cdots$};
+\draw[color=black] (81.500000, 0.000000) node [fill=white] {$\cdots$};
+% Line 12: a G {$R(n - 1)$} length=53 height=13 c
+\draw (127.500000,60.000000) -- (127.500000,15.000000);
+\begin{scope}
+\draw[fill=white] (127.500000, 60.000000) +(-45.000000:37.476659pt and 9.192388pt) -- +(45.000000:37.476659pt and 9.192388pt) -- +(135.000000:37.476659pt and 9.192388pt) -- +(225.000000:37.476659pt and 9.192388pt) -- cycle;
+\clip (127.500000, 60.000000) +(-45.000000:37.476659pt and 9.192388pt) -- +(45.000000:37.476659pt and 9.192388pt) -- +(135.000000:37.476659pt and 9.192388pt) -- +(225.000000:37.476659pt and 9.192388pt) -- cycle;
+\draw (127.500000, 60.000000) node {{$R(n - 1)$}};
+\end{scope}
+\filldraw (127.500000, 15.000000) circle(1.500000pt);
+% Line 13: a G {$R(n)$} length=48 height=13 d
+\draw (190.000000,60.000000) -- (190.000000,0.000000);
+\begin{scope}
+\draw[fill=white] (190.000000, 60.000000) +(-45.000000:33.941125pt and 9.192388pt) -- +(45.000000:33.941125pt and 9.192388pt) -- +(135.000000:33.941125pt and 9.192388pt) -- +(225.000000:33.941125pt and 9.192388pt) -- cycle;
+\clip (190.000000, 60.000000) +(-45.000000:33.941125pt and 9.192388pt) -- +(45.000000:33.941125pt and 9.192388pt) -- +(135.000000:33.941125pt and 9.192388pt) -- +(225.000000:33.941125pt and 9.192388pt) -- cycle;
+\draw (190.000000, 60.000000) node {{$R(n)$}};
+\end{scope}
+\filldraw (190.000000, 0.000000) circle(1.500000pt);
+% Line 14: TOUCH
+% Line 15: b G {$H$}
+\begin{scope}
+\draw[fill=white] (232.000000, 45.000000) +(-45.000000:8.485281pt and 8.485281pt) -- +(45.000000:8.485281pt and 8.485281pt) -- +(135.000000:8.485281pt and 8.485281pt) -- +(225.000000:8.485281pt and 8.485281pt) -- cycle;
+\clip (232.000000, 45.000000) +(-45.000000:8.485281pt and 8.485281pt) -- +(45.000000:8.485281pt and 8.485281pt) -- +(135.000000:8.485281pt and 8.485281pt) -- +(225.000000:8.485281pt and 8.485281pt) -- cycle;
+\draw (232.000000, 45.000000) node {{$H$}};
+\end{scope}
+% Line 16: LABEL ...
+\draw[color=black] (257.500000, 60.000000) node [fill=white] {$\cdots$};
+\draw[color=black] (257.500000, 45.000000) node [fill=white] {$\cdots$};
+\draw[color=black] (257.500000, 15.000000) node [fill=white] {$\cdots$};
+\draw[color=black] (257.500000, 0.000000) node [fill=white] {$\cdots$};
+% Line 17: b G {$R(n - 2)$} length=53 height=13 c
+\draw (303.500000,45.000000) -- (303.500000,15.000000);
+\begin{scope}
+\draw[fill=white] (303.500000, 45.000000) +(-45.000000:37.476659pt and 9.192388pt) -- +(45.000000:37.476659pt and 9.192388pt) -- +(135.000000:37.476659pt and 9.192388pt) -- +(225.000000:37.476659pt and 9.192388pt) -- cycle;
+\clip (303.500000, 45.000000) +(-45.000000:37.476659pt and 9.192388pt) -- +(45.000000:37.476659pt and 9.192388pt) -- +(135.000000:37.476659pt and 9.192388pt) -- +(225.000000:37.476659pt and 9.192388pt) -- cycle;
+\draw (303.500000, 45.000000) node {{$R(n - 2)$}};
+\end{scope}
+\filldraw (303.500000, 15.000000) circle(1.500000pt);
+% Line 18: b G {$R(n - 1)$} length=53 height=13 d
+\draw (368.500000,45.000000) -- (368.500000,0.000000);
+\begin{scope}
+\draw[fill=white] (368.500000, 45.000000) +(-45.000000:37.476659pt and 9.192388pt) -- +(45.000000:37.476659pt and 9.192388pt) -- +(135.000000:37.476659pt and 9.192388pt) -- +(225.000000:37.476659pt and 9.192388pt) -- cycle;
+\clip (368.500000, 45.000000) +(-45.000000:37.476659pt and 9.192388pt) -- +(45.000000:37.476659pt and 9.192388pt) -- +(135.000000:37.476659pt and 9.192388pt) -- +(225.000000:37.476659pt and 9.192388pt) -- cycle;
+\draw (368.500000, 45.000000) node {{$R(n - 1)$}};
+\end{scope}
+\filldraw (368.500000, 0.000000) circle(1.500000pt);
+% Line 19: LABEL ...
+\draw[color=black] (414.500000, 60.000000) node [fill=white] {$\cdots$};
+\draw[color=black] (414.500000, 45.000000) node [fill=white] {$\cdots$};
+\draw[color=black] (414.500000, 15.000000) node [fill=white] {$\cdots$};
+\draw[color=black] (414.500000, 0.000000) node [fill=white] {$\cdots$};
+% Line 20: c G {$H$}
+\begin{scope}
+\draw[fill=white] (440.000000, 15.000000) +(-45.000000:8.485281pt and 8.485281pt) -- +(45.000000:8.485281pt and 8.485281pt) -- +(135.000000:8.485281pt and 8.485281pt) -- +(225.000000:8.485281pt and 8.485281pt) -- cycle;
+\clip (440.000000, 15.000000) +(-45.000000:8.485281pt and 8.485281pt) -- +(45.000000:8.485281pt and 8.485281pt) -- +(135.000000:8.485281pt and 8.485281pt) -- +(225.000000:8.485281pt and 8.485281pt) -- cycle;
+\draw (440.000000, 15.000000) node {{$H$}};
+\end{scope}
+% Line 21: c G {$R(2)$} length=32 height=13 d
+\draw (474.000000,15.000000) -- (474.000000,0.000000);
+\begin{scope}
+\draw[fill=white] (474.000000, 15.000000) +(-45.000000:22.627417pt and 9.192388pt) -- +(45.000000:22.627417pt and 9.192388pt) -- +(135.000000:22.627417pt and 9.192388pt) -- +(225.000000:22.627417pt and 9.192388pt) -- cycle;
+\clip (474.000000, 15.000000) +(-45.000000:22.627417pt and 9.192388pt) -- +(45.000000:22.627417pt and 9.192388pt) -- +(135.000000:22.627417pt and 9.192388pt) -- +(225.000000:22.627417pt and 9.192388pt) -- cycle;
+\draw (474.000000, 15.000000) node {{$R(2)$}};
+\end{scope}
+\filldraw (474.000000, 0.000000) circle(1.500000pt);
+% Line 22: d G {$H$}
+\begin{scope}
+\draw[fill=white] (508.000000, -0.000000) +(-45.000000:8.485281pt and 8.485281pt) -- +(45.000000:8.485281pt and 8.485281pt) -- +(135.000000:8.485281pt and 8.485281pt) -- +(225.000000:8.485281pt and 8.485281pt) -- cycle;
+\clip (508.000000, -0.000000) +(-45.000000:8.485281pt and 8.485281pt) -- +(45.000000:8.485281pt and 8.485281pt) -- +(135.000000:8.485281pt and 8.485281pt) -- +(225.000000:8.485281pt and 8.485281pt) -- cycle;
+\draw (508.000000, -0.000000) node {{$H$}};
+\end{scope}
+% Done with gates; drawing ending labels
+\draw[color=black] (520.000000,60.000000) node[right] {${\ket{0} + e^{2i\pi(0.x_{n-1}\dots x_0)}}$};
+\draw[color=black] (520.000000,45.000000) node[right] {${\ket{0} + e^{2i\pi(0.x_{n-2}\dots x_0)}}$};
+\draw[color=black] (520.000000,30.000000) node[anchor=mid west] {$\vdots$};
+\draw[color=black] (520.000000,15.000000) node[right] {${\ket{0} + e^{2i\pi(0.x_1x_0)}}$};
+\draw[color=black] (520.000000,0.000000) node[right] {${\ket{0} + e^{2i\pi(0.x_0)}}$};
+% Done with ending labels; drawing cut lines and comments
+% Done with comments
+\end{tikzpicture}

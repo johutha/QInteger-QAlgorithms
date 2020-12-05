@@ -1,0 +1,22 @@
+SCALE 0.65
+
+a W {x_{n - 1}} {\ket{0} + e^{2i\pi(0.x_{n-1}\dots x_0)}}
+b W {x_{n - 2}} {\ket{0} + e^{2i\pi(0.x_{n-2}\dots x_0)}}
+...e W
+c W {x_{1}} {\ket{0} + e^{2i\pi(0.x_1x_0)}}
+d W {x_0} {\ket{0} + e^{2i\pi(0.x_0)}}
+
+a G {$H$}
+a G {$R(2)$} length=32 height=13 b
+LABEL ...
+a G {$R(n - 1)$} length=53 height=13 c
+a G {$R(n)$} length=48 height=13 d
+TOUCH
+b G {$H$}
+LABEL ...
+b G {$R(n - 2)$} length=53 height=13 c
+b G {$R(n - 1)$} length=53 height=13 d
+LABEL ...
+c G {$H$}
+c G {$R(2)$} length=32 height=13 d
+d G {$H$}
