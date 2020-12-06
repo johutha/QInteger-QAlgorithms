@@ -27,7 +27,7 @@ $$j=2^{n-1}\cdot j_{n-1}+\ldots + 2^1\cdot j_1+2^0\cdot j_0 = \sum_{s = 0}^{n - 
 Dann können wir folgende Umformung durchführen:
 
 \begin{align*}
-&\bigotimes_{s = 0}^{n - 1}{\left( \ket{0} + e^{2i\pi\frac{x}{2^{(1 + s)}}}\ket{1} \right)} = \bigotimes_{s = 0}^{n - 1}{\left( e^{2i\pi\frac{0\cdot x}{2^{(1 + s)}}}\ket{0} + e^{2i\pi\frac{1 \cdot x}{2^{(1 + s)}}}\ket{1} \right)} \\ &= \sum_{(j_{n-1},\dots,j_0)\in \{0, 1\}^n}\bigotimes_{s = 0}^{n - 1}e^{2i\pi\frac{x\cdot j_{n - 1 - s}}{2^{(1 + s)}}} = \sum_{(j_{n-1},\dots,j_0)\in \{0, 1\}^n}\left( \prod_{s = 0}^{n - 1}e^{2i\pi\frac{x\cdot j_{n - 1 - s}}{2^{(1 + s)}}} \right)\ket{j_{n - 1}j_{n - 2}\dots j_0} \\ &= \sum_{j = 0}^{2^n - 1} \left( \prod_{s = 0}^{n - 1}e^{2i\pi\frac{x\cdot j_{n - 1 - s}}{2^{(1 + s)}}} \right) \ket{j} = \sum_{j = 0}^{2^n - 1}\left( e^{2i\pi\frac{x\sum_{s = 0}^{n - 2}{j_{n - 1 - s}\cdot 2^{n - 1 - s}}}{2^n}} \right)\ket{j} = \sum_{j = 0}^{2^n - 1}e^{2i\pi\frac{xj}{2^n}}\ket{j}
+&\bigotimes_{s = 0}^{n - 1}{\left( \ket{0} + e^{2i\pi\frac{x}{2^{(1 + s)}}}\ket{1} \right)} = \bigotimes_{s = 0}^{n - 1}{\left( e^{2i\pi\frac{0\cdot x}{2^{(1 + s)}}}\ket{0} + e^{2i\pi\frac{1 \cdot x}{2^{(1 + s)}}}\ket{1} \right)} \\[1cm] &= \sum_{(j_{n-1},\dots,j_0)\in \{0, 1\}^n}\bigotimes_{s = 0}^{n - 1}e^{2i\pi\frac{x\cdot j_{n - 1 - s}}{2^{(1 + s)}}} = \sum_{(j_{n-1},\dots,j_0)\in \{0, 1\}^n}\left( \prod_{s = 0}^{n - 1}e^{2i\pi\frac{x\cdot j_{n - 1 - s}}{2^{(1 + s)}}} \right)\ket{j_{n - 1}j_{n - 2}\dots j_0} \\[1cm] &= \sum_{j = 0}^{2^n - 1} \left( \prod_{s = 0}^{n - 1}e^{2i\pi\frac{x\cdot j_{n - 1 - s}}{2^{(1 + s)}}} \right) \ket{j} = \sum_{j = 0}^{2^n - 1}\left( e^{2i\pi\frac{x\sum_{s = 0}^{n - 2}{j_{n - 1 - s}\cdot 2^{n - 1 - s}}}{2^n}} \right)\ket{j} = \sum_{j = 0}^{2^n - 1}e^{2i\pi\frac{xj}{2^n}}\ket{j}
 \end{align*}
 \paragraph{}
 
@@ -70,7 +70,9 @@ Die im obigen Produkt vorkommenden Zustände nennen wir in diesem Zusammenhang d
 
 Dass wir die Darstellung einer Zahl in der Fourierbasis als Tensorprodukt der einzelnen Qubits schreiben können, bedeutet, dass diese Qubits unabhängig voneinander, also nicht verschränkt sind. Dies bedeutet für uns, dass wenn wir mit einer Zahl in der Fourierbasis rechnen wollen, so können wir die Qubits einzeln bearbeiten. Zudem sehen wir, wenn wir den Zustand eines einzelnen Qubits betrachten, $\frac{1}{\sqrt{2}}\left(\ket{0} + e^{2i\pi\frac{x}{2^{(1 + s)}}}\right)$ betrachten, dass dieser Zustand einem Zeiger in der Blochkugel entspricht, welcher in der $XY$-Ebene liegt und dort um $2\pi\frac{x}{2^{s + 1}}$ um den Mittelpunkt gedreht ist.
 
-\begin{minipage}{.33\textwidth}
+
+\pagebreak
+\begin{minipage}{.3\textwidth}
     \centering
     \begin{tikzpicture}
         \def\radius{2}
@@ -83,7 +85,7 @@ Dass wir die Darstellung einer Zahl in der Fourierbasis als Tensorprodukt der ei
         \pic [draw=black, angle radius=5*\radius , angle eccentricity=\radius/1.2, text=black,->,"{\tiny ${2\pi\frac{5}{2}}$}"] {angle = xaxis--center--pnt};
     \end{tikzpicture}
 \end{minipage}
-\begin{minipage}{.33\textwidth}
+\begin{minipage}{.3\textwidth}
     \centering\begin{tikzpicture}
         \def\radius{2}
         \draw[->] (0,0) node[circle,fill,inner sep=1] (center) {} -- ++(\radius,0) node[right] (yaxis) {$y$};
@@ -95,7 +97,7 @@ Dass wir die Darstellung einer Zahl in der Fourierbasis als Tensorprodukt der ei
         \pic [draw=black, angle radius=5*\radius , angle eccentricity=\radius/1.3, text=black,->,"{\tiny ${2\pi\frac{5}{4}}$}"] {angle = xaxis--center--pnt};
     \end{tikzpicture}
 \end{minipage}
-\begin{minipage}{.33\textwidth}
+\begin{minipage}{.3\textwidth}
     \centering
     \begin{tikzpicture}
         \def\radius{2}
@@ -108,8 +110,7 @@ Dass wir die Darstellung einer Zahl in der Fourierbasis als Tensorprodukt der ei
         \pic [draw=black, angle radius=5*\radius , angle eccentricity=\radius, text=black,->,"{\tiny ${2\pi\frac{5}{8}}$}"] {angle = xaxis--center--pnt};
     \end{tikzpicture}
 \end{minipage}
-
-% TODO Insert Picture of "Blochkugel"
+\captionof{figure}{Die Darstellung von 5 in der Fourierbasis}
 \paragraph{}
 Oben wurden mit Hilfe der Blochkugel die Zustände der Qubits der Zahl 5 in der Fourierbasis dargestellt.
 
@@ -132,6 +133,7 @@ Gehen wir zurück zur Produktdarstellung der Fouriertransformierten von $\ket{x}
 \scriptsize
 \input{assets/circuits/3.3.3.1.crct}
 }
+\captionof{figure}{Schaltkreis der $QFT$}
 \paragraph{}
 In dieser Grafik habe ich aus Platzgründen den Namen $R(k)$ für das $Rot(k)$-Gatter verwendet. Um die Funktionsweise dieses Schaltkreises zu sehen, bemerken wir, dass $H\ket{x_j} = \frac{1}{\sqrt{2}}\left(\ket{0} + e^{2i\pi(0.x_j)}\ket{1}\right)$ gilt, da $e^{2i\pi\cdot 0} = 1$ und $e^{2i\pi\cdot\frac{1}{2}} = -1$ gilt. Nun wenden wir $Rot(2)^{x_{j - 1}}$ an. Wir bekommen:
 $$\frac{1}{\sqrt{2}}\left(\ket{0} + e^{2i\pi(0.x_j)}\ket{1}\right) \xrightarrow{Rot(2)^{x_{j - 1}}} \frac{1}{\sqrt{2}}\left(\ket{0} + e^{2i\pi\frac{x_j}{2} + 2i\pi\frac{x_{j - 1}}{4}}\ket{1}\right) = \frac{1}{\sqrt{2}}\left(\ket{0} + e^{2i\pi(0.x_jx_{j - 1})}\ket{1}\right)$$

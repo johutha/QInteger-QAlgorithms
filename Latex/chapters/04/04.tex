@@ -35,7 +35,10 @@ Um die Phase abzuschätzen, müssen wir also den Operator $U$ mehrmals hinterein
     \item Wende die inverse Quantenfouriertransformation auf das Zählerregister an, um die Approximation in die binäre Basis umzurechnen.
     \item Miss das Zählerregister, um die Abschätzung abzulesen.
 \end{enumerate}
-\input{./assets/circuits/4.3.1.crct} \newline
+\paragraph{}
+\input{./assets/circuits/4.3.1.crct}
+\captionof{figure}{Schaltkreis der Phasenabschätzung}
+\paragraph{}
 
 \section{Period Finding}
 Gegeben sei eine Funktion $f : S \rightarrow S$ über eine endlichen Menge $S \subset \mathbb{Z}$, welche sich auf einem Quantencomputer implementieren lässt, und ein Wert $x \in S$. Wir versuchen nun, die kleinste Zahl $r \in \mathbb{N}$ zu berechnen, sodass $f^r(x) = x$ gilt.
@@ -48,6 +51,7 @@ Sei nun $x \in S_i$. Da $\sigma_i$ einen Zykel bildet, gilt $f^{|S_i|}(x) = x$. 
 \paragraph{}
 \begin{wrapfigure}{l}{0.5\textwidth}
 \input{./assets/graphs/4.4.1.grph}
+\caption{\small Der Funktionsgraph der Funktion $g(x) = -x^3 + 1 \pmod{11}$}
 \end{wrapfigure}
 
 Als Beispiel nehmen wir $g : S \rightarrow S$ mit $S = \mathbb{Z}/11\mathbb{Z}$, $g(x) = -x^3 + 1$. Betrachten wir uns die Funktionswerte von $g$ an, sehen wir, dass diese Funktion bijektiv ist. Wenn wir den Graphen anschauen, sehen wir die einzelnen Zykeln und deren dazugehörige Mengen $S_i$: $S_0 = \{0, 1\}$, $S_1 = \{2, 3, 4, 7, 10\}$, $S_2 = \{5, 6, 8\}$ und $S_3 = \{9\}$. Wir sehen nun, dass $g^1(9) = 9$, $g^3(8) = 8$, $g^5(2) = 2$ etc. 

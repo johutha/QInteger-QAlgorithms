@@ -175,7 +175,9 @@ Falls wir nur einzelne Qubits messen, kollabiert das System in die restlichen, n
 
 \subsection{Die Blochkugel}
 Die Blochkugel dient der graphischen Darstellung des Zustands eines einzelnen Qubits. Zu diesem Zweck betrachten wir noch einmal ein einzelnes Qubit $\alpha\ket{0} + \beta\ket{1}$ mit $\abs*{\alpha}^2 + \abs*{\beta}^2 = 1$. Diese Bedingung führt dazu, dass wir den Zustand als $e^{i\gamma}\left(\cos\frac{\theta}{2}\ket{0} + e^{i\varphi}\sin\frac{\theta}{2}\ket{1}\right)$ umschreiben können. Den Faktor $e^{i\gamma}$ können wir nicht beobachten, da er auf beide Koeffizienten wirkt\footnote{Dies nennt man eine globale Phase: Dieser Faktor hat Betrag 1 und verändert deshalb die Wahrscheinlichkeiten nicht. Da er sich zudem auf alle Zustände auswirkt, kann man ihn bei den Quantenoperatoren wegen der Linearität ausklammern. Somit bleibt er immer über alle Qubits bestehen.}. Deshalb ist der Zustand durch die beiden Winkel $\theta$ und $\varphi$ definiert. Diese beiden Winkel kann man graphisch als einen Punkt auf einer Einheitskugel darstellen. Diese Darstellung wird die Bloch-Kugel genannt.
-
+\paragraph{}
+{
+\centering
 \begin{tikzpicture}
     \def\radius{3}
     \draw (0,0) node[circle,fill,inner sep=1] (center) {} -- (\radius/3,\radius/2) node[circle,fill,inner sep=0.7,label=above:$\alpha\ket{0} + \beta\ket{1}$] (pnt) {};
@@ -188,6 +190,8 @@ Die Blochkugel dient der graphischen Darstellung des Zustands eines einzelnen Qu
     \pic [draw=black,text=black,->,"$\phi$"] {angle = xaxis--center--phi};
     \pic [draw=black,text=black,<-,"$\theta$"] {angle = pnt--center--zaxis};
 \end{tikzpicture}
+\captionof{figure}{Beispiel einer Blochkugel}
+}
 
 \subsection{Operationen auf Qubits}
 Operationen, die man auf Qubits implementiert, sind lineare Operationen und lassen sich somit als Matrizen darstellen. Man kann den Vektor, welcher den Zustand beschreibt, mit der Matrix des Operators multiplizieren, um den Zustand nach der Operation zu erhalten. Dazu müssen die Operatoren die Norm des Quantenzustands bewahren, da die Zustände immer normiert sein müssen, und somit unitär sein. Dies hat die direkte Konsequenz (für eine unitäre Matrix $U$ gilt $UU^{\dagger} = I$), dass ein inverser Operator existieren muss und deshalb alle Berechnungen reversibel sein müssen. Beispielsweise kann der Modulo Operator nicht auf Quantencomputern implementiert werden, da man aus dem Ergebnis $x \equiv 2 \pmod{3}$ die Eingabe $x \in \{2, 5, 8\cdots\}$ nicht eindeutig wiederherstellen kann. Dies hat grosse Konsequenzen für die Berechnungen auf Quantencomputern.
