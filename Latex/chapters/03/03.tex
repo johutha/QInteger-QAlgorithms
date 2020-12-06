@@ -68,21 +68,45 @@ Die im obigen Produkt vorkommenden Zustände nennen wir in diesem Zusammenhang d
 
 \paragraph{}
 
-Dass wir die Darstellung einer Zahl in der Fourierbasis als Tensorprodukt der einzelnen Qubits schreiben können, bedeutet, dass diese Qubits unabhängig voneinander, also nicht verschränkt sind. Dies bedeutet für uns, dass wenn wir mit einer Zahl in der Fourierbasis rechnen wollen, so können wir die Qubits einzeln bearbeiten. Zudem sehen wir, wenn wir den Zustand eines einzelnen Qubits betrachten, $\frac{1}{\sqrt{2}}\left(\ket{0} + e^{2i\pi\frac{x}{2^(1 + s)}}\right)$ betrachten, dass dieser Zustand einem Zeiger in der Blochkugel entspricht, welcher in der $XY$-Ebene liegt und dort um $2\pi\frac{x}{2^{s + 1}}$ um den Mittelpunkt gedreht ist.
+Dass wir die Darstellung einer Zahl in der Fourierbasis als Tensorprodukt der einzelnen Qubits schreiben können, bedeutet, dass diese Qubits unabhängig voneinander, also nicht verschränkt sind. Dies bedeutet für uns, dass wenn wir mit einer Zahl in der Fourierbasis rechnen wollen, so können wir die Qubits einzeln bearbeiten. Zudem sehen wir, wenn wir den Zustand eines einzelnen Qubits betrachten, $\frac{1}{\sqrt{2}}\left(\ket{0} + e^{2i\pi\frac{x}{2^{(1 + s)}}}\right)$ betrachten, dass dieser Zustand einem Zeiger in der Blochkugel entspricht, welcher in der $XY$-Ebene liegt und dort um $2\pi\frac{x}{2^{s + 1}}$ um den Mittelpunkt gedreht ist.
 
 \begin{minipage}{.33\textwidth}
     \centering
-    \begin{blochsphere}[radius=0.5\textwidth, ball=circle]
-        \drawBall
-    \end{blochsphere}
+    \begin{tikzpicture}
+        \def\radius{2}
+        \draw[->] (0,0) node[circle,fill,inner sep=1] (center) {} -- ++(\radius,0) node[right] (yaxis) {$y$};
+        \draw (center) circle (\radius);
+        \draw[dashed] (center) ellipse (\radius{} and \radius/3);
+        \draw[->] (center) -- ++(-\radius/5,-\radius/3) node[below] (xaxis) {$x$};
+        \draw[->] (center) -- ++(0,\radius) node[above] (zaxis) {$z$};
+        \draw[color=red] (center) -- (\radius/5.06,\radius/3.05) node[circle,fill,inner sep=0.7, color=red] (pnt) {};
+        \pic [draw=black, angle radius=5*\radius , angle eccentricity=\radius/1.2, text=black,->,"{\tiny ${2\pi\frac{5}{2}}$}"] {angle = xaxis--center--pnt};
+    \end{tikzpicture}
+\end{minipage}
+\begin{minipage}{.33\textwidth}
+    \centering\begin{tikzpicture}
+        \def\radius{2}
+        \draw[->] (0,0) node[circle,fill,inner sep=1] (center) {} -- ++(\radius,0) node[right] (yaxis) {$y$};
+        \draw (center) circle (\radius);
+        \draw[dashed] (center) ellipse (\radius{} and \radius/3);
+        \draw[->] (center) -- ++(-\radius/5,-\radius/3) node[below] (xaxis) {$x$};
+        \draw[->] (center) -- ++(0,\radius) node[above] (zaxis) {$z$};
+        \draw[color=red] (center) -- (\radius/1,0) node[circle,fill,inner sep=0.7, color=red] (pnt) {};
+        \pic [draw=black, angle radius=5*\radius , angle eccentricity=\radius/1.3, text=black,->,"{\tiny ${2\pi\frac{5}{4}}$}"] {angle = xaxis--center--pnt};
+    \end{tikzpicture}
 \end{minipage}
 \begin{minipage}{.33\textwidth}
     \centering
-
-\end{minipage}
-\begin{minipage}{.33\textwidth}
-    \centering
-
+    \begin{tikzpicture}
+        \def\radius{2}
+        \draw[->] (0,0) node[circle,fill,inner sep=1] (center) {} -- ++(-\radius/5,-\radius/3) node[below] (xaxis) {$x$};
+        \draw[->] (center) -- ++(\radius,0) node[right] (yaxis) {$y$};
+        \draw[->] (center) -- ++(0,\radius) node[above] (zaxis) {$z$};
+        \draw (center) circle (\radius);
+        \draw[dashed] (center) ellipse (\radius{} and \radius/3);
+        \draw[color=red] (center) -- (-\radius/1.9,\radius/3.55) node[circle,fill,inner sep=0.7, color=red] (pnt) {};
+        \pic [draw=black, angle radius=5*\radius , angle eccentricity=\radius, text=black,->,"{\tiny ${2\pi\frac{5}{8}}$}"] {angle = xaxis--center--pnt};
+    \end{tikzpicture}
 \end{minipage}
 
 % TODO Insert Picture of "Blochkugel"
