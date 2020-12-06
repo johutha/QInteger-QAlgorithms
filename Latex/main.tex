@@ -4,6 +4,8 @@
 \usepackage[german]{babel}
 \usepackage[style=ieee,sorting=nty]{biblatex}
 \usepackage{caption}
+\usepackage{changepage}
+\usepackage{fullwidth}
 \usepackage[a4paper]{geometry}
 \usepackage{graphicx}
 \usepackage{inputenc}
@@ -16,6 +18,8 @@
 
 \usetikzlibrary{angles,babel,quotes,decorations.pathreplacing,decorations.pathmorphing}
 \addbibresource{./bibliography.bib}
+
+\renewcommand\theequation{\arabic{equation}}
 
 \nocite{*}
 
