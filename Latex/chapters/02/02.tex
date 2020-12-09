@@ -6,7 +6,7 @@ Um mit Quantencomputern arbeiten zu können, braucht es Kenntnisse der linearen 
 Vor der Zusammenfassung möchte ich kurz die in der Quantenmechanik gebräuchliche Notation für lineare Algebra einführen. Diese nennt sich Dirac- oder Bra-Ket-Notation. 
 
 \subsection{Schreibweise}
-Einen Vektor schreibt man in der Quantenmechanik als $\ket{\varphi}$. Diese besondere Art von Klammern wird als \textit{ket} bezeichnet. Für einen Vektor $\ket{\varphi}$ wird der dazugehörige duale Vektor als $\bra{\phi}$ bezeichnet. Diese zweite Klammer nennt man \textit{bra}, sodass die beiden Klammern zusammen ein Bra-Ket bildet, was vom englischen Wort bracket herrührt. Somit lässt sich das Skalarprodukt von $\ket{\psi}$ und $\ket{\varphi}$ als $\bra{\psi}\ket{\varphi}$ darstellen.
+Einen Vektor schreibt man in der Quantenmechanik als $\ket{\varphi}$. Diese besondere Art von Klammern wird als \textit{ket} bezeichnet. Für einen Vektor $\ket{\varphi}$ wird der dazugehörige duale Vektor als $\bra{\varphi}$ bezeichnet. Diese zweite Klammer nennt man \textit{bra}, sodass die beiden Klammern zusammen ein Bra-Ket bildet, was vom englischen Wort bracket herrührt. Somit lässt sich das Skalarprodukt von $\ket{\psi}$ und $\ket{\varphi}$ als $\bra{\psi}\ket{\varphi}$ darstellen.
 
 \subsection{Vektorräume}
 Um Quantensysteme mathematisch beschreiben zu können, brauchen wir Vektorräume. Genauer benötigen wir endlichdimensionale Vektorräume über $\mathbb{C}$, zusammen mit einem Skalarprodukt. Diese Vektorräume werden auch unitäre Vektorräume\footnote{Im Allgemeinen braucht es sogenannte Hilberträume. Da man es im Zusammenhang mit Quantencomputern aber nur mit endlichdimensionalen Räumen zu tun hat, reichen unitäre Vektorräume} genannt. Sie sind isomorph zu $\mathbb{C}^n$.
@@ -22,15 +22,15 @@ Eine Menge von Vektoren $\ket{v_0}, \ket{v_1}, ... \ket{v_{k - 1}}$ ist \textit{
 Eine \textit{Basis} ist ein linear unabhängiges Erzeugendensystem.
 
 \subsection{Skalarprodukt}
-Die für die Beschreibung der Qubits benötigten unitären Vektorräumen sind mit einem Skalarprodukt ausgerüstet: Das heisst, es gibt eine Funktion $(\cdot, \cdot) : V \times V \rightarrow C$ mit folgenden Eigenschaften:
+Die für die Beschreibung der Qubits benötigten unitären Vektorräumen sind mit einem Skalarprodukt ausgerüstet: Das heisst, es gibt eine Funktion $(\cdot, \cdot) : V \times V \rightarrow \mathbb{C}$ mit folgenden Eigenschaften:
 \begin{enumerate}
     \item Linear im zweiten Argument: $$\sum_j\lambda_j\left(\ket{\psi}, \; \ket{\varphi_j}\right) = \left(\ket{\psi}, \; \sum_j\lambda_j\ket{\varphi_j}\right)$$
     \item Hermitesch: $$\left(\ket{\psi}, \; \ket{\varphi} \right) = \overline{\left(\ket{\varphi} , \; \ket{\psi}\right)}$$
     \item Positiv definit: $$\varphi \neq 0 \Rightarrow \left( \ket{\varphi}, \; \ket{\varphi} \right) > 0$$
 \end{enumerate}
-Wie bereits angetönt, schreibt man dieses Produkt in der quantenmechanischen Notation als $\bra{\psi}\ket{\varphi}$. Ich habe für diese drei Bedingungen jedoch die $(\cdot, \cdot)$-Schreibweise verwendet, da man damit die Bedingungen übersichtlicher darstellen kann.
+Wie bereits angetönt, schreibt man dieses Produkt in der quantenmechanischen Notation als $\bra{\psi}\ket{\varphi}$. Ich habe oben jedoch die $(\cdot, \cdot)$-Schreibweise verwendet, da man damit die drei Bedingungen übersichtlicher darstellen kann.
 \paragraph{}
-\noindent Wir benutzen hier das Standardskalarprodukt in $\mathbb{C}^n$ definiert als: $$\begin{pmatrix} c_1 \\ \vdots \\ c_n \end{pmatrix}\cdot\begin{pmatrix} w_1 \\ \vdots \\ w_n \end{pmatrix} := \sum_{i = 1}^{n}\overline{c_i}w_i$$
+\noindent Wir benutzen in dieser Arbeit das Standardskalarprodukt in $\mathbb{C}^n$ definiert durch: $$\begin{pmatrix} c_1 \\ \vdots \\ c_n \end{pmatrix}\cdot\begin{pmatrix} w_1 \\ \vdots \\ w_n \end{pmatrix} := \sum_{i = 1}^{n}\overline{c_i}w_i$$
 \noindent Es ist nicht schwierig zu sehen, dass das auf diese Weise definierte Skalarprodukt die oben genannten Bedingungen erfüllt.
 
 \paragraph{}
@@ -49,7 +49,13 @@ L:  &  V & \longrightarrow & V \\
 \end{array}$
 \vspace{0.2cm}
 
-welche die Bedingung der Linearität $L(\sum_i{\lambda_i\ket{v_i}}) = \sum_i{\lambda_iL(\ket{v_i})}$ erfüllt. Für eine Matrix
+welche die Bedingung der Linearität $L(\sum_i{\lambda_i\ket{v_i}}) = \sum_i{\lambda_iL(\ket{v_i})}$ erfüllt. 
+
+\paragraph{}
+Lineare Operatoren lassen sich durch Matrizen darstellen, wobei die Spalten der Matrix die Bilder der Basisvektoren sind.
+\paragraph{}
+
+Für eine Matrix
 
 \vspace{0.5cm}
 $A=\begin{pmatrix}
@@ -93,67 +99,171 @@ Zustände eines Quantensystems können als Vektoren eines unitären Vektorraumes
 Ein Eigenvektor $\ket{\varphi}$ zu einem linearen Operator $U$ ist ein Vektor, sodass $U\ket{\varphi} = \lambda\ket{\varphi}$ gilt, wobei $\lambda$ als der dazugehörige Eigenwert bezeichnet wird und eine komplexe Zahl ist. Bei einem unitären Operator müssen alle Eigenwerte einen Betrag von 1 haben, sonst würde sich die Norm des Vektors verändern. Der grosse Vorteil von Eigenvektoren ist, dass sie sich bis auf einen skalaren Faktor nicht verändern, wenn der dazugehörige Operator auf sie angewendet wird.
 
 \subsection{Das Tensorprodukt}
-Das Tensorprodukt, geschrieben mit dem Zeichen $\otimes$, gibt uns die Möglichkeit, alle möglichen Kombinationen der Einträge ihrer Operanden zu generieren. Sei $A := (a_{ij})$ eine $n_a \times m_a$ Matrix und $B := (b_{ij})$ eine $n_b \times m_b$ Matrix. Die daraus resultierende Matrix $A \otimes B = C := (c_{ij})$ ist eine $n_an_b \times m_am_b$ Matrix, die wie folgt generiert wird:
+\subsubsection{Das Tensorprodukt von Vektorräumen}
+
+Das \textit{Tensorprodukt} von zwei Vektorräumen $U$ und $V$ ist ein Vektorraum $U\!\otimes\! V$, welcher durch die Produkte $u\otimes v$ mit $u\in U$ und $v\in V$ erzeugt wird, so dass 
+
+\vspace{-0.5cm}
+\[\begin{split} 
+(\lambda u)\otimes (\mu v) &=\lambda \mu (u\otimes v)\text{ , }  \\[0.2cm]
+(u_1+u_2)\otimes v &= u_1\otimes v + u_2\otimes v \\[0.2cm]
+\text{ und }  u\otimes (v_1+v_2)&=u\otimes v_1 + u\otimes v_2 \; .\\
+\end{split}\]
+
+\vspace{-0.2cm}
+\noindent (Für alle $u$, $u_1$, $u_2\in U$, $v$, $v_1$, $v_2\in V$ und $\lambda, \mu \in \mathbb{C}$)
+
+\vspace{0.2cm}
+\noindent Dass es ein solcher Vektorraum $U\otimes V$ wirklich existiert und wie man ihn definiert, kann man in [7] im Kapitel 6.3 nachlesen, ebenso wie die folgende Tatsache:
+
+\vspace{0.2cm}
+\noindent Sind die Vektoren $u_1$, $u_2$, $\ldots$, $u_n$ eine Basis von $U$ und die Vektoren $v_1$, $v_2$, $\ldots$, $v_m$ eine Basis von $V$, so bilden die Vektoren $u_i \otimes v_j$ eine Basis von $U\otimes V$. 
+\vspace{0.1cm}
+
+\noindent Dies zeigt, dass $U\otimes V$ ein $n\cdot m$-dimensionaler Vektorraum ist.
+
+\vspace{0.3cm}
+\noindent Für Tensorprodukte von mehreren Vektorräumen $V_1$, $V_2$, $\ldots$, $V_n$ verwenden wir die folgende Schreibweise:
+
+\vspace{-0.7cm}
+\[V_1\otimes V_2\otimes \ldots \otimes V_n=:\bigotimes_{k=1}^nV_k\]
+
+
+\noindent Und für das $n$-fache Tensorprodukt eines Vektorraumes $V$ mit sich selbst schreiben wir kurz 
+
+\vspace{-0.3cm}
+\[\bigotimes_{k=1}^nV=:V^{\otimes n}\]
+
+\vspace{0.3cm}
+\noindent In dieser Arbeit werden hauptsächlich $n$-fache Tensorprodukte des Vektorraumes $\mathbb{C}^2$ mit sich selbst benätigt. Wir betrachten deshalb diese Situation noch etwas genauer.
+
+\noindent Die Standardbasis des $\mathbb{C}^2$ wird in der Dirac-Schreibweise mit $\ket{0}:= \begin{pmatrix}1 \\ 0\end{pmatrix}$ und $\ket{1}:= \begin{pmatrix}0 \\ 1\end{pmatrix}$ bezeichnet.
+
+\paragraph{}
+
+\noindent Entsprechend bilden die folgenden Vektoren eine Basis  für das $n$-fache Tensorprodukt 
+
+\hspace{5.5cm}$\mathbb{C}^2\otimes \mathbb{C}^2\otimes\ldots \otimes \mathbb{C}^2$ :
+
+
+\vspace{0.2cm}
+\hspace{3.5cm}\begin{minipage}[t]{10cm}
+
+$\ket{0}\otimes\ket{0}\otimes\ldots\otimes\ket{0}\otimes\ket{0}=:\ket{00\ldots 00}=:\ket{0}$
+
+\vspace{0.2cm}
+$\ket{0}\otimes\ket{0}\otimes\ldots\otimes\ket{0}\otimes\ket{1}=:\ket{00\ldots 01}=:\ket{1}$
+
+\vspace{0.2cm}
+$\ket{0}\otimes\ket{0}\otimes\ldots\otimes\ket{1}\otimes\ket{0}=:\ket{00\ldots 10}=:\ket{2}$
+
+\vspace{0.2cm}
+$\ket{0}\otimes\ket{0}\otimes\ldots\otimes\ket{1}\otimes\ket{1}=:\ket{00\ldots 11}=:\ket{3}$
+
+\vspace{0.1cm}
+\hspace{4cm}$\vdots$
+
+\vspace{0.1cm}
+$\ket{1}\otimes\ket{1}\otimes\ldots\otimes\ket{1}\otimes\ket{1}=:\ket{11\ldots 11}=:\ket{2^n-1}$
+
+\end{minipage}
+
+\vspace{0.2cm}
+\noindent Bei der Abkürzung ganz rechts werden die Sequenzen von Nullen und Einsen als Zahlen im Binärsystem interpertiert.
+
+\noindent Aus der obigen Auflistung der Basisvektoren geht auch hervor, dass das $n$-fache Tensorprodukt $\mathbb{C}^2\otimes \mathbb{C}^2\otimes\ldots \otimes \mathbb{C}^2$ zum Vektorraum $\mathbb{C}^{2^n}$ isomorph ist. Je nachdem was gerade zweckdienlich ist, werden wir die eine oder die andere Darstellung wählen.
+
+
+\vspace{0.3cm}
+\subsubsection{Das Tensorprodukt von linearen Operatoren}
+
+Seien $U$, $U'$, $V$ und $V'$ endlichdimensionale Vektorräume und $A\!: U \rightarrow U'$, $B\!:V\rightarrow V'$ lineare Operatoren, so wird durch 
+
+\vspace{0.1cm}
+\hspace{4cm}$\begin{array}{ l c c c}
+
+A\otimes B:  &  U\otimes V & \longrightarrow & U'\otimes V' \\
+& u\otimes v & \mapsto & A(u)\otimes B(v) \\
+
+\end{array}$
+
+\vspace{0.2cm}
+\noindent ein linearer Operator von $U\otimes V$ nach $U'\otimes V'$ definiert.
+
+\vspace{0.3cm}
+Sei $u_1, u_2, \ldots , u_m$ eine Basis von $U$, $u'_1, u'_2, \ldots , u'_n$ eine Basis von $U'$ sowie $v_1, \ldots, v_s$ und $v'_1, \ldots v'_r$ Basen von $V$ bzw. von $V'$.
+
+Wenn wir $A$ bezüglich dieser Basen durch eine $n\times m$-Matrix $(a_{ij})$ darstellen und $B$ durch eine $r\times s$-Matrix $(b_{ij})$, so kann  man die Matrix des Operators $A\otimes B$ bezüglich der Basen 
+
+\vspace{0.2cm}
+\hspace{1cm}$u_1\otimes v_1$, $u_1\otimes v_2$, $\ldots$, $u_1\otimes v_s$, $u_2\otimes v_1$, $u_2\otimes v_2$, $\ldots$, $u_m\otimes v_s$ \quad von\quad $U\otimes V$
+
+\vspace{0.2cm}
+\hspace{5cm}und 
+
+\vspace{0.2cm}
+\hspace{1cm}$u'_1\otimes v'_1$, $u'_1\otimes v'_2$, $\ldots$, $u'_1\otimes v'_r$, $u'_2\otimes v'_1$, $u'_2\otimes v'_2$, $\ldots$, $u'_n\otimes v'_r$ \quad von\quad $U'\otimes V'$
+
+\vspace{0.2cm}
+auf die folgende Weise bestimmen:
 
 \begin{align*}
     C = A \otimes B =
     &\begin{bmatrix}
-        a_{11} & \cdots & a_{1m_a} \\
+        a_{11} & \cdots & a_{1m} \\
         \vdots & \ddots  & \vdots \\
-        a_{n_a1} & \cdots  & a_{n_am_a} \\
+        a_{n1} & \cdots  & a_{nm} \\
     \end{bmatrix}
     \otimes
     \begin{bmatrix}
-        b_{11} & \cdots & b_{1m_b} \\
+        b_{11} & \cdots & b_{1s} \\
         \vdots & \ddots  & \vdots \\
-        b_{n_b1} & \cdots  & b_{n_bm_b} \\
+        b_{r1} & \cdots  & b_{rs} \\
     \end{bmatrix} \\[0.5cm]
     =
     &\begin{bmatrix}
         a_{11}\begin{bmatrix}
-            b_{11} & \cdots & b_{1m_b} \\
+            b_{11} & \cdots & b_{1s} \\
             \vdots & \ddots  & \vdots \\
-            b_{n_b1} & \cdots  & b_{n_bm_b} \\
+            b_{r1} & \cdots  & b_{rs} \\
         \end{bmatrix} 
-        & \cdots & a_{1m_a}\begin{bmatrix}
-            b_{11} & \cdots & b_{1m_b} \\
+        & \cdots & a_{1m}\begin{bmatrix}
+            b_{11} & \cdots & b_{1s} \\
             \vdots & \ddots  & \vdots \\
-            b_{n_b1} & \cdots  & b_{n_bm_b} \\
+            b_{r1} & \cdots  & b_{rs} \\
         \end{bmatrix}
          \\
         \vdots & \ddots  & \vdots \\
-        a_{n_a1}\begin{bmatrix}
-            b_{11} & \cdots & b_{1m_b} \\
+        a_{n1}\begin{bmatrix}
+            b_{11} & \cdots & b_{1s} \\
             \vdots & \ddots  & \vdots \\
-            b_{n_b1} & \cdots  & b_{n_bm_b} \\
+            b_{r1} & \cdots  & b_{rs} \\
         \end{bmatrix} 
-        & \cdots  & a_{n_am_a}\begin{bmatrix}
-            b_{11} & \cdots & b_{1m_b} \\
+        & \cdots  & a_{nm}\begin{bmatrix}
+            b_{11} & \cdots & b_{1s} \\
             \vdots & \ddots  & \vdots \\
-            b_{n_b1} & \cdots  & b_{n_bm_b} \\
+            b_{r1} & \cdots  & b_{rs} \\
         \end{bmatrix} \\
     \end{bmatrix} \\[0.5cm]
     =
     &\begin{bmatrix}
-        a_{11}b_{11} & a_{11}b_{12} & \cdots & a_{11}b_{1m_b} & a_{12}b_{11} & \cdots & a_{1m_a}b_{1m_b} \\
-        a_{11}b_{21} & a_{11}b_{22} & \cdots & a_{11}b_{2m_b} & a_{12}b_{21} & \cdots & a_{1m_a}b_{2m_b} \\
+        a_{11}b_{11} & a_{11}b_{12} & \cdots & a_{11}b_{1s} & a_{12}b_{11} & \cdots & a_{1m}b_{1s} \\
+        a_{11}b_{21} & a_{11}b_{22} & \cdots & a_{11}b_{2s} & a_{12}b_{21} & \cdots & a_{1m}b_{2s} \\
         \vdots & \vdots & \ddots & \vdots & \vdots & \ddots & \vdots \\
-        a_{11}b_{n_b1} & a_{11}b_{n_b2} & \cdots & a_{11}b_{n_bm_b} & a_{12}b_{n_b1} & \cdots & a_{1m_a}b_{n_bm_b} \\ 
-        a_{21}b_{11} & a_{21}b_{12} & \cdots & a_{21}b_{1m_b} & a_{22}b_{11} & \cdots & a_{2m_a}b_{1m_b} \\
+        a_{11}b_{r1} & a_{11}b_{r2} & \cdots & a_{11}b_{rs} & a_{12}b_{r1} & \cdots & a_{1m}b_{rs} \\ 
+        a_{21}b_{11} & a_{21}b_{12} & \cdots & a_{21}b_{1s} & a_{22}b_{11} & \cdots & a_{2m}b_{1s} \\
         \vdots & \vdots & \ddots & \vdots & \vdots & \ddots & \vdots \\
-        a_{n_a1}b_{n_b1} & a_{n_a1}b_{n_b2} & \cdots & a_{n_a1}b_{n_bm_b} & a_{n_a2}b_{n_b1} & \cdots & a_{n_am_a}b_{n_bm_b}
+        a_{n1}b_{r1} & a_{n1}b_{r2} & \cdots & a_{n1}b_{rs} & a_{n2}b_{r1} & \cdots & a_{nm}b_{rs}
     \end{bmatrix}
 \end{align*}
 
-\paragraph{}
-Zusätzlich ist die Schreibweise $X^{\otimes n}$ eine verkürzte Schreibweise für die $n$-malige Anwendung des Tensorprodukts auf sich selbst. In anderen Worten, $X^{\otimes n} = \bigotimes_{k = 0}^{n - 1}X$.
 \section{Quantensysteme}
 Die Quantensysteme, die wir im Rahmen dieser Arbeit betrachten, sind rein mathematische Systeme, die nicht an eine fixe physikalische Realisierung gebunden sind. In der Tat gibt es verschiedene Möglichkeiten, solche Systeme physikalisch umzusetzen, wobei jede Variante eigene Vor- und Nachteile hat.
 
 \subsection{Qubits}
-Ein klassisches Bit hat genau zwei Zustände - 0 und 1 - und befindet sich immer in genau einem dieser beiden Zustände. Kann man zwei solche Zustände in einem quantenmechanischen System gezielt herbeizuführen, treten auch die Gesetze der Quantenphysik in Kraft. Ein Beispiel einer physikalischen Realisierung, das bei der Vorstellung helfen kann, wäre ein Atom in einem Grundzustand und einem angeregten Zustand, wobei der Grundzustand einer klassischen 0 und der angeregte Zustand einer klassischen 1 entsprechen könnte. Gemäss den Gesetzen der Quantenphysik kann sich das Atom aber auch in einer Überlagerung der beiden Zustände befinden. Dies nennt man eine Superposition. Ausgehend von diesem Beispiel können wir uns nun die genaue Definition eines Qubits betrachten:
+Ein klassisches Bit hat genau zwei Zustände - 0 und 1 - und befindet sich immer in genau einem dieser beiden Zustände. Kann man zwei solche Zustände in einem quantenmechanischen System gezielt herbeiführen, treten auch die Gesetze der Quantenphysik in Kraft. Ein Beispiel einer physikalischen Realisierung, das bei der Vorstellung helfen kann, wäre ein Atom im Grundzustand und einem angeregten Zustand, wobei der Grundzustand einer klassischen 0 und der angeregte Zustand einer klassischen 1 entsprechen könnte. Gemäss den Gesetzen der Quantenphysik kann sich das Atom aber auch in einer Überlagerung der beiden Zustände befinden. Dies nennt man eine Superposition. Ausgehend von diesem Beispiel können wir uns nun die genaue Definition eines Qubits betrachten:
 \paragraph{}
-\textbf{Definition:} Ein \textit{Qubit} ist ein Quantensystem mit den beiden Basiszuständen $\ket{0}$ und $\ket{1}$. Es kann alle Zustände $\alpha\ket{0} + \beta\ket{1}$ annehmen, sodass $\abs{\alpha}^2 + \abs{\beta}^2 = 1$ gilt.
+\textbf{Definition:} Ein \textit{Qubit} ist ein Quantensystem mit den beiden Basiszuständen $\ket{0}$ und $\ket{1}$. Es kann alle Zustände $\alpha\ket{0} + \beta\ket{1}$ annehmen, sodass $\abs{\alpha}^2 + \abs{\beta}^2 = 1$ gilt. Die komplexen Zahlen $\alpha$ und $\beta$ nennt man Amplituden.
 
 Ein Zustand des Qubits, welcher durch die Parameter $\alpha$ und $\beta$ definiert ist, entspricht einem normierten Vektor im Vektorraum $\mathbb{C}^2$.\footnote{Dass sich der Zustand eines quantenmechanischen Systems als Vektor beschreiben lässt, garantiert uns das erste Postulat der Quantenmechanik. Da diese Postulate den Rahmen dieser Arbeit übersteigen, verweise ich für eine genauere Betrachtung dieser Postulate auf \cite{QC}, Kapitel 2.2}
 
@@ -161,22 +271,24 @@ Ein Zustand des Qubits, welcher durch die Parameter $\alpha$ und $\beta$ definie
 Wenn wir zu unserem Beispiel von vorhin zurückkehren, würde der Zustand $\ket{0}$ dem Grundzustand und der Zustand $\ket{1}$ dem angeregten Zustand entsprechen.
 \paragraph{}
 
-Qubits können wir messen\footnote{Auch die Messungen basieren auf einem Postulat der Quantenmechanik, nämlich auf dem dritten Postulat.}. Betrachten wir ein Qubit im Zustand $\alpha\ket{0} + \beta\ket{1}$, so beträgt die Wahrscheinlichkeit, dass wir $\ket{0}$ messen, $\abs{\alpha}^2$ und die Wahrscheinlichkeit, $\ket{1}$ zu messen $\abs{\beta}^2$. Die Bedingung, dass $\abs{a}^2 + \abs{b}^2 = 1$ gelten muss (dass der Vektor normiert sein muss), führt dazu, dass sich die Wahrscheinlichkeiten auf $1$ summieren. Nach der Messung kollabiert das Quantensystem in den gemessenen Zustand. Messen wir also $\ket{1}$, befindet sich das Qubit nachher immer im Zustand $\ket{1}$, unabhängig davon, was $\alpha$ und $\beta$ vorher waren.
+Qubits können wir messen\footnote{Auch die Regeln für die Messungen basieren auf einem Postulat der Quantenmechanik, nämlich auf dem dritten Postulat.}. Betrachten wir ein Qubit im Zustand $\alpha\ket{0} + \beta\ket{1}$, so beträgt die Wahrscheinlichkeit, dass wir $\ket{0}$ messen, $\abs{\alpha}^2$ und die Wahrscheinlichkeit, $\ket{1}$ zu messen $\abs{\beta}^2$. Die Bedingung, dass $\abs{\alpha}^2 + \abs{\beta}^2 = 1$ gelten muss (dass der Vektor normiert sein muss), führt dazu, dass sich die Wahrscheinlichkeiten auf $1$ summieren. Nach der Messung kollabiert das Quantensystem in den gemessenen Zustand. Messen wir also $\ket{1}$, befindet sich das Qubit nachher immer im Zustand $\ket{1}$, unabhängig davon, was $\alpha$ und $\beta$ vorher waren.
 
 \paragraph{}
 
-Ähnlich entspricht der Zustand eines Multiqubitsystems mit $n$ Qubits einem normierten Vektor im Vektorraum $\mathbb{C}^{2^n}$. Die Basiszustände des Vektorraums entsprechen dabei den einzelnen Kombinationen der $\ket{0}$s und $\ket{1}$s der einzelnen Qubits. Zum Beispiel hat der Vektorraum zu einem Quantensystem mit 2 Qubits die vier Basiszustände $\ket{00}, \ket{01}, \ket{10}$ und $\ket{11}$. Der Bitstring von Länge $n$ innerhalb des Kets entspricht dabei der Konfiguration der Qubits. Der Zustand $\ket{101}$ in einem System mit 3 Qubits entspricht dem Zustand, in welchem das erste Qubit im Zustand $\ket{1}$, das zweite im Zustand $\ket{0}$ und das dritte im Zustand $\ket{1}$ ist. Anstelle des Bitstrings wird innerhalb des Kets auch oft eine Zahl verwendet, welche in der Binärdarstellung diesen Bitstring ergibt. Zum Beispiel entspricht $\ket{5}$ dem Zustand $\ket{101}$.
+Der Zustand eines Multiqubitsystems mit $n$ Qubits wird durch einen normierten Vektor im Raum $\otimes_{k = 1}^{n} \mathbb{C}$ beschrieben\footnote{Auch das folgt aus einem Postulat der Quantenmechanik. Für genauere Ausführungen sei auf \cite{QC}, Kapitel 2.2.8 verwiesen}. Wie in 2.1.6 erklärt wurde, hat dieser Raum die Basisvektoren $\ket{0\dots 00}, \ket{0\dots 01}, \dots, \ket{1\dots 11}$. Diese entsprechen dabei den einzelnen Kombinationen der $\ket{0}$s und $\ket{1}$s der einzelnen Qubits. Zum Beispiel hat der Vektorraum zu einem Quantensystem mit 2 Qubits die vier Basiszustände $\ket{00}, \ket{01}, \ket{10}$ und $\ket{11}$ und der Zustand $\ket{101}$ in einem System mit 3 Qubits entspricht dem Zustand, in welchem das erste Qubit im Zustand $\ket{1}$, das zweite im Zustand $\ket{0}$ und das dritte im Zustand $\ket{1}$ ist. 
 
-Ein Zustand ist nun ein normierter Vektor im Vektorraum $\mathbb{C}^{2^n}$. Der Koeffizient des Basiszustands $\ket{j}$ eines Vektors in diesem Vektorraum entspricht dabei der Wahrscheinlichkeit, den Zustand $j$ zu messen. Auch summmieren sich die Wahrscheinlichkeiten wieder auf 1, da der Vektor normiert ist. Man schreibt die Zustände oft als eine Linearkombiantion der Basiszustände: $\alpha_{00}\ket{00} + \alpha_{01}\ket{01} + \alpha_{10}\ket{10} + \alpha_{11}\ket{11} = \alpha_{0}\ket{0} + \alpha_{1}\ket{1} + \alpha_{2}\ket{2} + \alpha_{3}\ket{3}$.
+Ausserdem können wir den Vektorraum $\otimes_{k = 1}^{n} \mathbb{C}$ auch mit dem Raum $\mathbb{C}^{2^n}$ und die Basisvektoren in der Form $\ket{0}, \ket{1}, \dots, \ket{2^n - 1}$ notieren.
+
+Auch summmieren sich die Wahrscheinlichkeiten wieder auf 1, da der Vektor normiert ist. Man schreibt die Zustände oft als eine Linearkombiantion der Basiszustände: $\alpha_{00}\ket{00} + \alpha_{01}\ket{01} + \alpha_{10}\ket{10} + \alpha_{11}\ket{11} = \alpha_{0}\ket{0} + \alpha_{1}\ket{1} + \alpha_{2}\ket{2} + \alpha_{3}\ket{3}$.
 
 \paragraph{}
 Um den Zustand des Multiqubitsystems beschreiben zu können, wenn wir im Besitz der Zustände der einzelnen Qubits sind, können wir die Vektoren der Zustände der einzelnen Qubits mit Hilfe des Tensorprodukts zusammenmultiplizieren. Zudem kann man mit dem Tensorprodukt auch Operationen zusammenmultiplizieren: Wenn wir $n$ Qubits haben und auf jedes Qubit eine Operation anwenden (dies kann auch die Identität sein, falls wir das Qubit unverändert lassen wollen) und dann die Matrizen dieser Operationen multiplizieren, bekommen wir die Matrix, welche der Operation entspricht, die alle unsere ausgewählten Operationen ausführt. Wichtig ist aber noch anzumerken, dass das Tensorprodukt nicht kommutativ ist und die Reihenfolge der Faktoren somit wichtig ist.
 \paragraph{}
 
-Falls wir nur einzelne Qubits messen, kollabiert das System in die restlichen noch möglichen Zustände. Nehmen wir als Beispiel ein 2-Qubit-System im Zustand $\frac{1}{\sqrt{6}}\ket{00} + \frac{1}{\sqrt{2}}\ket{01} + \frac{1}{\sqrt{3}}\ket{11}$ und messen das erste Qubit. Die Wahrscheinlichkeit, dass wir dieses Qubit im Zustand $\ket{1}$ messen, liegt bei $\abs*{\alpha_{10}}^2 + \abs*{\alpha_{11}}^2 = \frac{1}{3}$. Falls wir diesen Zustand messen, kollabiert unser Quantensystem direkt in den Zustand $\frac{\alpha_{10}\ket{10} + \alpha_{11}\ket{11}}{\sqrt{\abs*{\alpha_{10}}^2 + \abs*{\alpha_{11}}^2}} = \ket{11}$, wobei der Nenner dafür sorgt, dass der neue Quantenzustand wieder normiert ist. Die Wahrscheinlichkeit eines $\ket{0}$ in der Messung des ersten Qubit hingegen liegt bei $\abs*{\alpha_{00}}^2 + \abs*{\alpha_{01}}^2 = \frac{2}{3}$. Der Zustand des Systems nach der Messung ist dann $\frac{\alpha_{00}\ket{00} + \alpha_{01}\ket{01}}{\sqrt{\abs*{\alpha_{00}}^2 + \abs*{\alpha_{01}}^2}} = \sqrt{\frac{1}{4}}\ket{00} + \sqrt{\frac{3}{4}}\ket{01}$.
+Falls wir nur einzelne Qubits messen, kollabiert das System in die restlichen noch möglichen Zustände. Nehmen wir als Beispiel ein 2-Qubit-System im Zustand $\frac{1}{\sqrt{6}}\ket{00} + \frac{1}{\sqrt{2}}\ket{01} + \frac{1}{\sqrt{3}}\ket{11}$ und messen das erste Qubit. Die Wahrscheinlichkeit, dass wir dieses Qubit im Zustand $\ket{1}$ messen, liegt bei $\abs*{\alpha_{10}}^2 + \abs*{\alpha_{11}}^2 = \frac{1}{3}$. Falls wir diesen Zustand messen, kollabiert unser Quantensystem direkt in den Zustand $\frac{\alpha_{10}\ket{10} + \alpha_{11}\ket{11}}{\sqrt{\abs*{\alpha_{10}}^2 + \abs*{\alpha_{11}}^2}} = \ket{11}$, wobei der Nenner dafür sorgt, dass der neue Quantenzustand wieder normiert ist. Die Wahrscheinlichkeit, bei der Messung des ersten Qubits $\ket{0}$ zu erhalten, liegt bei $\abs*{\alpha_{00}}^2 + \abs*{\alpha_{01}}^2 = \frac{2}{3}$. Der Zustand des Systems nach der Messung ist dann $\frac{\alpha_{00}\ket{00} + \alpha_{01}\ket{01}}{\sqrt{\abs*{\alpha_{00}}^2 + \abs*{\alpha_{01}}^2}} = \sqrt{\frac{1}{4}}\ket{00} + \sqrt{\frac{3}{4}}\ket{01}$.
 
 \subsection{Die Blochkugel}
-Die Blochkugel dient der graphischen Darstellung des Zustands eines einzelnen Qubits. Zu diesem Zweck betrachten wir noch einmal ein einzelnes Qubit $\alpha\ket{0} + \beta\ket{1}$ mit $\abs*{\alpha}^2 + \abs*{\beta}^2 = 1$. Diese Bedingung führt dazu, dass wir den Zustand als $e^{i\gamma}\left(\cos\frac{\theta}{2}\ket{0} + e^{i\varphi}\sin\frac{\theta}{2}\ket{1}\right)$ umschreiben können. Den Faktor $e^{i\gamma}$ können wir nicht beobachten, da er auf beide Koeffizienten wirkt\footnote{Man nennt dies eine globale Phase: Dieser Faktor hat Betrag 1 und verändert deshalb die Wahrscheinlichkeiten nicht. Da er sich zudem auf alle Zustände auswirkt, kann man ihn bei den Quantenoperatoren aufgrund der Linearität ausklammern. Somit bleibt er immer über alle Qubits bestehen und ist nicht beobachtbar.}. Deshalb ist der Zustand durch die beiden Winkel $\theta$ und $\varphi$ definiert. Diese beiden Winkel kann man graphisch als einen Punkt auf einer Einheitskugel darstellen. Diese Darstellung wird die Bloch-Kugel genannt.
+Die Blochkugel dient der graphischen Darstellung des Zustands eines einzelnen Qubits. Zu diesem Zweck betrachten wir noch einmal ein einzelnes Qubit $\alpha\ket{0} + \beta\ket{1}$ mit $\abs*{\alpha}^2 + \abs*{\beta}^2 = 1$. Diese Bedingung führt dazu, dass wir den Zustand als $e^{i\gamma}\left(\cos\frac{\psi}{2}\ket{0} + e^{i\varphi}\sin\frac{\psi}{2}\ket{1}\right)$ umschreiben können. Den Faktor $e^{i\gamma}$ können wir nicht beobachten, da er auf beide Koeffizienten wirkt\footnote{Man nennt dies eine globale Phase: Dieser Faktor hat Betrag 1 und verändert deshalb die Wahrscheinlichkeiten nicht. Da er sich zudem auf alle Zustände auswirkt, kann man ihn bei den Quantenoperatoren aufgrund der Linearität ausklammern. Somit bleibt er immer über alle Qubits bestehen und ist nicht beobachtbar.}. Deshalb ist der Zustand durch die beiden Winkel $\psi$ und $\varphi$ definiert. Diese beiden Winkel kann man graphisch als einen Punkt auf einer Einheitskugel darstellen. Diese Darstellung wird die Bloch-Kugel genannt.
 \paragraph{}
 {
 \centering
@@ -189,40 +301,56 @@ Die Blochkugel dient der graphischen Darstellung des Zustands eines einzelnen Qu
     \draw[->] (center) -- ++(-\radius/5,-\radius/3) node[below] (xaxis) {$x$};
     \draw[->] (center) -- ++(\radius,0) node[right] (yaxis) {$y$};
     \draw[->] (center) -- ++(0,\radius) node[above] (zaxis) {$z$};
-    \pic [draw=black,text=black,->,"$\phi$"] {angle = xaxis--center--phi};
-    \pic [draw=black,text=black,<-,"$\theta$"] {angle = pnt--center--zaxis};
+    \pic [draw=black,text=black,->,"$\varphi$"] {angle = xaxis--center--phi};
+    \pic [draw=black,text=black,<-, angle eccentricity = 0.7, angle radius = 20,"$\psi$"] {angle = pnt--center--zaxis};
 \end{tikzpicture}
 \captionof{figure}{Beispiel einer Blochkugel}
 }
 
 \subsection{Operationen auf Qubits}
-Operationen, die man auf Qubits implementiert, sind lineare Operationen und lassen sich somit als Matrizen darstellen. Man kann den Vektor, welcher den Zustand beschreibt, mit der Matrix des Operators multiplizieren, um den Zustand nach der Operation zu erhalten. Dazu müssen die Operatoren die Norm des Quantenzustands bewahren, da die Zustände immer normiert sein müssen, und somit unitär sein. Dies hat zur Folge (für eine unitäre Matrix $U$ gilt $UU^{\dagger} = I$), dass ein inverser Operator existieren muss und deshalb alle Berechnungen reversibel sein müssen. Beispielsweise kann der Modulo Operator nicht auf Quantencomputern implementiert werden, da man aus dem Ergebnis $x \equiv 2 \pmod{3}$ die Eingabe $x \in \{2, 5, 8\cdots\}$ nicht eindeutig wiederherstellen kann. Dies hat grosse Konsequenzen für die Berechnungen auf Quantencomputern.
+Operationen, die man auf Qubits implementiert, sind lineare Operationen und lassen sich somit als Matrizen darstellen. Man kann den Vektor, welcher den Zustand beschreibt, mit der Matrix des Operators multiplizieren, um den Zustand nach der Operation zu erhalten. Dazu müssen die Operatoren die Norm des Quantenzustands bewahren, da die Zustände immer normiert sein müssen, und somit unitär sein. Dies hat zur Folge (für eine unitäre Matrix $U$ gilt $UU^{\dagger} = I$), dass ein inverser Operator existieren muss und deshalb alle Berechnungen reversibel sein müssen. Beispielsweise kann der Modulo-Operator nicht auf Quantencomputern implementiert werden, da man aus dem Ergebnis $x \equiv 2 \pmod{3}$ die Eingabe $x \in \{2, 5, 8\cdots\}$ nicht eindeutig wiederherstellen kann. Dies hat grosse Konsequenzen für die Berechnungen auf Quantencomputern.
 \paragraph{}
 Gleichzeitig stellt sich heraus, dass es verschiedene universelle Kombinationen von Operationen gibt, wobei universell in diesem Zusammenhang bedeutet, dass man jeden unitären Operator nur mit den ausgewählten Operatoren beliebig annähern kann. Die Konstruktion dazu kann man in \cite{QC}, Seiten 188ff. nachlesen.
 
 \subsection{Wichtige Quantengatter}
-An dieser Stelle werden die wichtigsten Quantengatter eingeführt, die wir im Verlauf dieser benötigen werden. Zuerst betrachten wir fünf grundlegende Gatter auf Qubits: die drei Pauli-Matrizen $X, Y$ und $Z$, das $H$-Gatter und das $CNOT$-Gatter.
+An dieser Stelle werden die wichtigsten Quantengatter eingeführt, die wir im Verlauf dieser Arbeit benötigen werden. Zuerst betrachten wir fünf grundlegende Gatter auf Qubits: Die drei Pauli-Matrizen $X, Y$ und $Z$, das $H$-Gatter und das $CNOT$-Gatter.
 \begin{itemize}
     \item Das $X$-Gatter ist das Qubit-Equivalent zum $NOT$-Gatter eines elektronischen Schaltkreises. In Matrixform sieht der Operator so aus: $ X = \begin{bmatrix}0 & 1 \\ 1 & 0\end{bmatrix}$. Dieses Gatter dreht den Zustand des Qubits um $\pi$ um die $x$-Achse in der Blochkugel.
     \item Das $Y$-Gatter wird durch die Matrix $Y = \begin{bmatrix}0 & -i \\ i & 0\end{bmatrix}$ dargestellt. Dieses Gatter entspricht einer Rotation von $\pi$ um die $y$-Achse in der Blochkugel.
     \item Das $Z$-Gatter, als Matrix $Z = \begin{bmatrix}1 & 0 \\ 0 & -1\end{bmatrix}$, dreht den Zustand um $\pi$ um die $z$-Achse.
-    \item Das Hadamard-Gatter, meist durch den Buchstaben $H$ abgekürzt, ist der einfachste Weg, eine Superposition zu erzeugen. Mit der Matrix $H = \frac{1}{\sqrt{2}}\begin{bmatrix}1 & 1 \\ 1 & -1\end{bmatrix}$ kann man die beiden Zustände $H\ket{0} = \frac{1}{\sqrt{2}}(\ket{0} + \ket{1})$ und $H\ket{1} = \frac{1}{\sqrt{2}}(\ket{0} - \ket{1})$ erzeugen. Diese beiden Zustände kommen so häufig vor, dass man ihnen die Namen $\ket{+} = \frac{1}{\sqrt{2}}(\ket{0} + \ket{1})$ und $\ket{-} = \frac{1}{\sqrt{2}}(\ket{0} - \ket{1})$ gegeben hat.
-    \item $CNOT$ steht als Abkürzung für \grqq Controlled NOT\grqq. Dieses Gatter wirkt auf zwei Qubits und wendet ein $NOT$ auf das zweite Qubit an, wenn das erste Qubit auf $1$ ist. Als Matrix sieht die Operation so aus: $$CNOT = \begin{bmatrix}1 & 0 & 0 & 0 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 0 & 1 \\ 0 & 0 & 1 & 0\end{bmatrix}$$.
+    \item Das Hadamard-Gatter, meist durch den Buchstaben $H$ abgekürzt, ist der einfachste Weg, eine Superposition zu erzeugen. Mit der Matrix $H = \frac{1}{\sqrt{2}}\begin{bmatrix}1 & 1 \\ 1 & -1\end{bmatrix}$ kann man die beiden Zustände $H\ket{0} = \frac{1}{\sqrt{2}}(\ket{0} + \ket{1})$ und $H\ket{1} = \frac{1}{\sqrt{2}}(\ket{0} - \ket{1})$ erzeugen. Diese beiden Zustände kommen so häufig vor, dass man ihnen die Namen \vspace{0.2cm}
+    
+    \centerline{\quad $\ket{+} = \frac{1}{\sqrt{2}}(\ket{0} + \ket{1})$ \quad und \quad $\ket{-} = \frac{1}{\sqrt{2}}(\ket{0} - \ket{1})$ \quad}
+    
+    gegeben hat.
+    \item $CNOT$ steht als Abkürzung für \grqq Controlled NOT\grqq. Dieses Gatter wirkt auf zwei Qubits und wendet ein $NOT$ auf das zweite Qubit an, wenn das erste Qubit im Zustand $\ket{1}$ ist. Als Matrix sieht die Operation so aus: $$CNOT = \begin{bmatrix}1 & 0 & 0 & 0 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 0 & 1 \\ 0 & 0 & 1 & 0\end{bmatrix}$$.
 \end{itemize}
 Diese Gatter gehören zu den wichtigsten Gattern im Bereich der Quantencomputer. Wir werden auf unserem Weg jedoch noch weitere Gatter antreffen. Eines davon möchte ich hier kurz definieren. Ich nenne es $\text{Rot}(k)$, und in Matrix-Form sieht es so aus: $\text{Rot}(k) = \begin{bmatrix}1 & 0 \\ 0 & e^{\frac{2i\pi}{2^k}}\end{bmatrix}$. Dieses Gatter multipliziert den Koeffiztienten von $\ket{1}$ mit $e^{\frac{2i\pi}{2^k}}$ und wir werden es bei der Quanten-Fouriertransformation\footnote{Siehe Kapitel 3} und dessen Anwendungen antreffen.
 
-Abschliessend möchte ich noch ein Gatter auf zwei Qubits erwähnen, bekannt als das SWAP-Gatter. Dieses Gatter vertauscht die Zustände der beiden Qubits, indem es die Amplituden derjenigen Zustände vertauscht, in welchen die beiden Qubits nicht gleich sind. Es wird durch die folgende Matrix beschrieben: $$ SWAP = \begin{bmatrix} 1 & 0 & 0 & 0 \\ 0 & 0 & 1 & 0 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 0 & 1 \end{bmatrix} = \begin{bmatrix}1 & 0 & 0 & 0 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 0 & 1 \\ 0 & 0 & 1 & 0\end{bmatrix} \begin{bmatrix}1 & 0 & 0 & 0 \\ 0 & 0 & 0 & 1 \\ 0 & 0 & 1 & 0 \\ 0 & 1 & 0 & 0 \end{bmatrix} \begin{bmatrix}1 & 0 & 0 & 0 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 0 & 1 \\ 0 & 0 & 1 & 0\end{bmatrix}$$
-Wenn wir das erste Qubit als $a$ und das zweite als $b$ bezeichnen, sehen wir auf der rechten Seite, dass wir das $SWAP(a, b)$ als Abfolge dreier $CNOT$-Gates ($CNOT(a, b)$, dann $CNOT(b, a)$ und dann $CNOT(a, b)$) programmieren können.
+\paragraph{}
+
+Abschliessend möchte ich noch das SWAP-Gatter erwähnen, welches auf zwei Qubits wirkt. Dieses Gatter vertauscht die Zustände der beiden Qubits, indem es die Amplituden der Zustände $\ket{01}$ und $\ket{10}$ vertauscht. Es wird durch die folgende Matrix beschrieben: $$ SWAP = \begin{bmatrix} 1 & 0 & 0 & 0 \\ 0 & 0 & 1 & 0 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 0 & 1 \end{bmatrix} = \begin{bmatrix}1 & 0 & 0 & 0 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 0 & 1 \\ 0 & 0 & 1 & 0\end{bmatrix} \begin{bmatrix}1 & 0 & 0 & 0 \\ 0 & 0 & 0 & 1 \\ 0 & 0 & 1 & 0 \\ 0 & 1 & 0 & 0 \end{bmatrix} \begin{bmatrix}1 & 0 & 0 & 0 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 0 & 1 \\ 0 & 0 & 1 & 0\end{bmatrix}$$
+Wenn wir das erste Qubit als $a$ und das zweite als $b$ bezeichnen, sehen wir auf der rechten Seite, dass wir das $SWAP(a, b)$ als Abfolge dreier $CNOT$-Gatter ($CNOT(a, b)$, dann $CNOT(b, a)$ und dann $CNOT(a, b)$) programmieren können.
+\paragraph{}
+\noindent Man kann die Wirkung des SWAP-Gatters auch folgendermassen erkennen:
+
+\vspace{-0.3cm}
+\[\begin{split}
+&(\alpha \ket{0}+\beta\ket{1})\otimes(\gamma\ket{0}+\delta\ket{1}) \\
+= &\;\alpha\gamma\ket{00} +\alpha\delta\ket{01}+\beta\gamma\ket{10}+\beta\delta\ket{11} = \begin{pmatrix} \alpha\gamma \\ \alpha\delta \\ \beta\gamma \\ \beta\delta \end{pmatrix} \overset{SWAP}{\longrightarrow }  \begin{pmatrix} \alpha\gamma \\ \beta\gamma  \\ \alpha\delta \\ \beta\delta \end{pmatrix}  \\
+= &\;\alpha\gamma\ket{00} +\beta\gamma\ket{01}+\alpha\delta\ket{10}+\beta\delta\ket{11}   \\[0.7cm]
+= & \; (\gamma\ket{0}+\delta\ket{1})\otimes(\alpha \ket{0}+\beta\ket{1}) \\
+\end{split}\]
 
 \subsection{Kontrollierte und adjungierte Operatoren}
-Wie wir bereits erfahren haben, müssen Operatoren, welche man auf Quantencomputern umsetzen kann, unitär und somit reversibel sein. Dies setzt direkt die Existenz eines adjungierten Operators (auch inverser Operator genannt) zu einem Operator $U$ voraus, welcher aus einem Zustand $\ket{\varphi}$ den Zustand $\ket{\psi}$ mit $U\ket{\psi} = \ket{\varphi}$ macht. Ein Schaltkreis zu diesem adjungierten Operator lässt sich generieren, indem man die Gatter des Schaltkreises für $U$ rückwärts durchgeht, und dabei immer den adjungierten Operator des jeweiligen Gatters nimmt. Viele Quantenprogrammiersprachen können so auch die die adjungierte Version eines Quantenoperators aus dem Programmcode des ursprünglichen Operators generieren.
+Wie wir bereits erfahren haben, müssen Operatoren, welche man auf Quantencomputern umsetzen kann, unitär und somit invertierbar sein. Dies setzt direkt die Existenz eines adjungierten Operators\footnote{Der inverse Operator eines unitären Operators $U$ ist der adjungierte Operator, da $U^\dagger U = I$.} zu einem Operator $U$ voraus, welcher aus einem Zustand $\ket{\varphi}$ den Zustand $\ket{\psi}$ mit $U\ket{\psi} = \ket{\varphi}$ macht. Ein Schaltkreis zu diesem adjungierten Operator lässt sich generieren, indem man die Gatter des Schaltkreises für $U$ rückwärts durchgeht, und dabei immer den adjungierten Operator des jeweiligen Gatters nimmt. Viele Quantenprogrammiersprachen können so auch die die adjungierte Version eines Quantenoperators aus dem Programmcode des ursprünglichen Operators generieren.
 
 \paragraph{}
-Auch lassen sich kontrollierte Versionen eines Operators bilden. Die kontrollierte Version eines Operators nimmt zusätzlich zu den Qubits, auf welche die Operation ausgeführt werden soll, eine Menge an sogenannten Kontrollqubits. Diese Version der Operation wird nur in denjenigen Zuständen ausgeführt, in welchen alle Kontrollqubits im Zustand $\ket{1}$ sind. Als Beispiel nehmen wir eine Operation, welche die Bitrepräsentation zyklisch um ein Bit nach rechts verschiebt (also aus dem Zustand $\ket{01101}$ den Zustand $\ket{10110}$ macht). Betrachten wir nun den Zustand $\ket{0}\ket{11101} + \ket{1}\ket{10110} + \ket{0}\ket{01000}$ (das erste Qubit habe ich hier getrennt dargestellt, da ich es für diese Operation als Kontrollqubit verwenden möchte). Wenn wir nun die Operation mit dem ersten Qubit als Kontrollqubit anwenden, erhalten wir den Zustand $\ket{0}\ket{11101} + \ket{1}\ket{01011} + \ket{0}\ket{01000}$. Sei $U$ ein Operator, welcher auf Quantencomputern programmierbar ist. Dann schreiben wir die durch das Qubit $c$ kontrollierte Version von $U$ als $U^c$. In den Fällen, in denen wir mit $U^k$ die $k$ mal wiederholte Anwendung des Operators $U$ meinen, werde ich darauf hinweisen.
+Auch lassen sich \textit{kontrollierte} Versionen eines Operators bilden. Die kontrollierte Version eines Operators hat zusätzlich zu den Qubits, auf welchen die Operation ausgeführt werden soll, eine Menge an sogenannten Kontrollqubits als Argumente. Diese Version der Operation wird nur in denjenigen Zuständen ausgeführt, in welchen alle Kontrollqubits im Zustand $\ket{1}$ sind. Als Beispiel nehmen wir eine Operation, welche die Bitrepräsentation zyklisch um ein Bit nach rechts verschiebt (also aus dem Zustand $\ket{01101}$ den Zustand $\ket{10110}$ macht). Betrachten wir nun den Zustand $\ket{0}\ket{11101} + \ket{1}\ket{10110} + \ket{0}\ket{01000}$. Das erste Qubit habe ich hier getrennt dargestellt, da ich es für diese Operation als Kontrollqubit verwenden möchte. Wenn wir nun die Operation mit dem ersten Qubit als Kontrollqubit anwenden, erhalten wir den Zustand $\ket{0}\ket{11101} + \ket{1}\ket{01011} + \ket{0}\ket{01000}$. Sei $U$ ein Operator, welcher auf Quantencomputern programmierbar ist. Dann schreiben wir die durch das Qubit $c$ kontrollierte Version von $U$ als $U^c$. In den Fällen, in denen wir mit $U^k$ die $k$ mal wiederholte Anwendung des Operators $U$ meinen, werde ich darauf hinweisen.
 
 \paragraph{}
 
-Ein Qubit darf aber nie gleichzeitig ein Kontrollqubit und eines jener Qubits sein, auf die der Operator angewendet wird. Um dies zu sehen, betrachten wir das $CNOT$, welches die kontrollierte Variante des $X$-Operators ist. Wenn wir den Operator auf ein Qubit mit demselben Qubit als Kontrollqubit anwenden, wird dieses Qubit nach der Anwendung immer im Zustand $\ket{0}$ sein. Somit ist dieser Operator nicht mehr reversibel. Wenn die oben genannte Bedingung aber eingehalten wird, sind kontrollierte Operatoren reversibel, da man aus den Kontrollqubits, welche während der Operation nicht verändert werden, ablesen kann, ob die Operation durchgeführt wurde.
+Ein Qubit darf aber nie gleichzeitig ein Kontrollqubit und eines jener Qubits sein, auf die der Operator angewendet wird. Um dies zu sehen, betrachten wir das $CNOT$, welches die kontrollierte Variante des $X$-Operators ist. Wenn wir den Operator auf ein Qubit anwenden, welches gleichzeitig das Kontrollqubit ist, wird dieses Qubit nach der Anwendung immer im Zustand $\ket{0}$ sein. Somit ist dieser Operator nicht mehr invertierbar. Wenn die oben genannte Bedingung aber eingehalten wird, sind kontrollierte Operatoren invertierbar, da man aus den Kontrollqubits, welche während der Operation nicht verändert werden, ablesen kann, ob die Operation durchgeführt wurde.
 
 Auch diese Version wird von den meisten Quantenprogrammiersprachen automatisch generiert, da man den Schaltkreis der kontrollierten Version einfach herstellen kann, indem man vom Schaltkreis des ursprünglichen Operators bei jedem Gatter die kontrollierte Version nimmt.
 
