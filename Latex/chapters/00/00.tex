@@ -1,5 +1,24 @@
-\shipout\null
-\shipout\null
+\pagenumbering{gobble}
+\null\newpage
+
+\thispagestyle{empty}
+\null\vfill
+
+\newlength\longest
+\settowidth\longest{\Large\itshape This is only a foretaste of what is to come,}
+\centering
+\parbox{\longest}{%
+  \raggedright{\Large\itshape%
+  This is only a foretaste of what is to come, \\
+  and only the shadow of what is going to be.\par\bigskip
+  }   
+  \raggedleft\large\MakeUppercase{Alan Turing}\par%
+}
+
+\vfill\vfill
+
+\newpage
+\setcounter{page}{0}
 \pagenumbering{roman}
 \tableofcontents
 \newpage
