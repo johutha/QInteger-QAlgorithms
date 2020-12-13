@@ -47,7 +47,7 @@
 		{
 			for (i in 0..n-1)
 			{
-				for (j in 0..i)
+				for (j in 0..n-i-1)
 				{
 					(Controlled RotQ)([Summand::Number[i]], (n - i - j, Target::Number[j]));
 				}
