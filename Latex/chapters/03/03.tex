@@ -1,6 +1,8 @@
 \chapter{Arithmetische Operationen auf Qubits ausführen: Die QInteger Library}
+Dieses Kapitel basiert vor allem auf \cite{AROP} und \cite{QC}. Zusätzlich basiert das Kapitel über die Addition hauptsächlich auf \cite{ADFT}.
+
 \section{Zahlen in Qubits speichern - Der QInt-Typ}
-Da ich davon ausgehe, dass in absehbarer Zeit die Anzahl Qubits zwar wachsen, aber nicht so schnell ansteigen wird, dass man schon bald mehrere grössere Qubit-Einheiten speichern kann, habe ich mich entschieden, in meiner Implementierung auf eine einheitliche Grösse zu verzichten und für den Moment eine variable Anzahl von Qubits zur Speicherung einer Zahl zu benutzen. Aus diesem Grund besteht der QInt-Typ aus einer klassischen Zahl, der Anzahl Qubits, und einem Array von Qubits, welcher die in den Qubits zu speichernde Zahl speichert.
+Da ich davon ausgehe, dass in absehbarer Zeit die Anzahl Qubits zwar wachsen, aber nicht so schnell ansteigen wird, dass man schon bald mehrere grössere Qubit-Einheiten speichern kann, habe ich mich entschieden, in meiner Implementierung auf eine einheitliche Grösse zu verzichten und für den Moment eine variable Anzahl von Qubits zur Speicherung einer Zahl zu benutzen. Aus diesem Grund besteht der QInt-Typ aus einer klassischen Zahl, der Anzahl Qubits, und einem Array von Qubits (oder Quantenregister\footnote{In dieser Arbeit wird der Begriff \textit{Quantenregister} als eine Gruppe geordneter, zusammengehöriger Qubits verwendet.}), welcher die in den Qubits zu speichernde Zahl speichert.
 
 \lstinputlisting[language=C++]{assets/code/3/3.2.1}
 
@@ -116,7 +118,7 @@ Dass wir die Darstellung einer Zahl in der Fourierbasis als Tensorprodukt der ei
 \noindent Wir können nun feststellen, dass wenn wir die Zahl in der Fourierbasis verändern wollen, wir nur die Qubits um den richtigen Winkel $\theta$ drehen müssen, was der Multiplikation des Koeffizienten von $\ket{1}$ mit $e^{i\pi\theta}$ entspricht. Zudem können wir feststellen, dass wenn wir den Koeffizienten von $\ket{1}$ eines Qubits der Fourierbasis mit $e^{2i\pi\theta}$ multiplizieren, wir den Winkel $\theta$ mit Hilfe der inversen $QFT$ bestimmen können. Diese Erkenntnis werden wir in Kapitel 4.3 benötigen.
 
 \subsection{Unitarität}
-Wir haben noch nicht gezeigt, dass die oben beschriebene Operation unitär ist. Zu diesem Zweck schauen wir uns die Matrix mit Einträgen an, die die Operation der $QFT$ darstellt. Dafür sei $\omega_N^{s} = e^{2i\pi\frac{s}{N}}$. Dann können wir die $QFT$ wie folgt darstellen: $[QFT] := (\omega_{2^n}^{jk})$ (wobei hier $j$ die Reihe und $k$ die Spalte ist, da $i$ schon eine andere Bedeutung hat). Nun können wir die Bedingung $[QFT]^{\dagger}\, [QFT] = I$ überprüfen. Dazu berechnen wir den Eintrag $jk$ von $[QFT]^{\dagger}\, [QFT]$:
+Wir haben noch nicht gezeigt, dass die oben beschriebene Operation unitär ist. Zu diesem Zweck schauen wir uns die Matrix mit Einträgen an, die die Operation der $QFT$ darstellt. Dafür sei $\omega_N^{s} = e^{2i\pi\frac{s}{N}}$. Dann können wir die $QFT$ wie folgt darstellen: $[QFT] := (\frac{\omega_{2^n}^{jk}}{\sqrt{2^n}})$ (wobei hier $j$ die Reihe und $k$ die Spalte ist, da $i$ schon eine andere Bedeutung hat). Nun können wir die Bedingung $[QFT]^{\dagger}\, [QFT] = I$ überprüfen. Dazu berechnen wir den Eintrag $jk$ von $[QFT]^{\dagger}\, [QFT]$:
 $$\sum_{s = 0}^{2^n - 1}\frac{\overline{\omega_{2^n}^{js}}}{\sqrt{2^n}} \cdot \frac{\omega_{2^n}^{sk}}{\sqrt{2^n}} = \frac{1}{2^n}\sum_{s = 0}^{2^n - 1}\omega_{2^n}^{-js} \cdot \omega_{2^n}^{sk} = \frac{1}{2^n}\sum_{s = 0}^{2^n - 1}\omega_{2^n}^{s(k - j)}$$
 Wir stellen nun fest: Falls $j = k$ gilt, dann ist $\omega_{2^n}^{s\cdot 0} = 1$ und somit 
 $$\frac{1}{2^n}\sum_{s = 0}^{2^n - 1}\omega_{2^n}^{s\cdot 0} = 1$$
