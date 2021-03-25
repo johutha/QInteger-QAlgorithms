@@ -1,16 +1,16 @@
 \chapter{Arithmetische Operationen auf Qubits ausführen: Die QInteger Library}
 Dieses Kapitel basiert vor allem auf \cite{AROP} und \cite{QC}. Zusätzlich basiert das Kapitel über die Addition hauptsächlich auf \cite{ADFT}.
 
-\section{Zahlen in Qubits speichern - Der QInt-Typ}
+\section{Zahlen in Qubits speichern - der QInt-Typ}
 Da ich davon ausgehe, dass in absehbarer Zeit die Anzahl Qubits zwar wachsen, aber nicht so schnell ansteigen wird, dass man schon bald mehrere grössere Qubit-Einheiten speichern kann, habe ich mich entschieden, in meiner Implementierung auf eine einheitliche Grösse zu verzichten und für den Moment eine variable Anzahl von Qubits zur Speicherung einer Zahl zu benutzen. Aus diesem Grund besteht der QInt-Typ aus einer klassischen Zahl, der Anzahl Qubits, und einem Array von Qubits (oder Quantenregister\footnote{In dieser Arbeit wird der Begriff \textit{Quantenregister} als eine Gruppe geordneter, zusammengehöriger Qubits verwendet.}), welcher die in den Qubits zu speichernde Zahl speichert.
 
 \lstinputlisting[language=C++]{assets/code/3/3.2.1}
 
-Dies ist die Definition des Typs QInt in meinem Code: Wir definieren den neuen Typ \grqq QInt\grqq{} als eine Kombination einer Zahl, genannt \textit{Size}, und einem Array von Qubits, genannt \textit{Number}.
+Dies ist die Definition des Typs QInt in meinem Code: Wir definieren den neuen Typ "`QInt"' als eine Kombination einer Zahl, genannt \textit{Size}, und einem Array von Qubits, genannt \textit{Number}.
 
 \paragraph{}
 
-Im weiteren Verlauf dieser Arbeit werde ich Zahlen, die auf klassische Weise gespeichert sind und somit keine Superpositionen erlauben, als \grqq klassische Zahlen\grqq{} bezeichnen und Zahlen, welche in Quantenregistern gespeichert werden, als \grqq Quantenzahlen\grqq{} oder \grqq QInts\grqq{}.
+Im weiteren Verlauf dieser Arbeit werde ich Zahlen, die auf klassische Weise gespeichert sind und somit keine Superpositionen erlauben, als "`klassische Zahlen"' bezeichnen und Zahlen, welche in Quantenregistern gespeichert werden, als "`Quantenzahlen"' oder "`QInts"'.
 
 \section{Die Quanten-Fouriertransformation und die Fourier-Basis}
 \subsection{Die Quantenfouriertransformation}
@@ -22,7 +22,7 @@ Diesen Zustand kann man folgendermassen faktorisieren, was ich nachher beweisen 
     \left(\ket{0} + e^{2i\pi\frac{x}{2^{1}}}\ket{1}\right)\otimes\left(\ket{0} + e^{2i\pi\frac{x}{2^{2}}}\ket{1}\right)\otimes\cdots\otimes\left(\ket{0} + e^{2i\pi\frac{x}{2^{n}}}\ket{1}\right) = \bigotimes_{j = 0}^{n - 1}\left(\ket{0} + e^{2i\pi\frac{x}{2^{1 + j}}}\ket{1}\right)
 \end{align*}
 
-\noindent Diese Faktorisierung werde ich nun beweisen. Sei die Darstellung von $j \in \{0, 1, \dots, 2^n - 1\}$ im Binärsystem:
+\noindent Diese Faktorisierung werde ich nun beweisen. Den Faktor $\frac{1}{\sqrt{2}}$ lasse ich der Übersichtlichkeit halber weg. Sei die Darstellung von $j \in \{0, 1, \dots, 2^n - 1\}$ im Binärsystem:
 
 $$j=2^{n-1}\cdot j_{n-1}+\ldots + 2^1\cdot j_1+2^0\cdot j_0 = \sum_{s = 0}^{n - 1}2^sj_s$$
 
@@ -115,14 +115,14 @@ Dass wir die Darstellung einer Zahl in der Fourierbasis als Tensorprodukt der ei
 \captionof{figure}{Die Darstellung der Zahl 5 in der Fourierbasis}
 \paragraph{}
 
-\noindent Wir können nun feststellen, dass wenn wir die Zahl in der Fourierbasis verändern wollen, wir nur die Qubits um den richtigen Winkel $\theta$ drehen müssen, was der Multiplikation des Koeffizienten von $\ket{1}$ mit $e^{i\pi\theta}$ entspricht. Zudem können wir feststellen, dass wenn wir den Koeffizienten von $\ket{1}$ eines Qubits der Fourierbasis mit $e^{2i\pi\theta}$ multiplizieren, wir den Winkel $\theta$ mit Hilfe der inversen $QFT$ bestimmen können. Diese Erkenntnis werden wir in Kapitel 4.3 benötigen.
+\noindent Wir können nun feststellen, dass wenn wir die Zahl in der Fourierbasis verändern wollen, wir nur die Qubits um den richtigen Winkel $\theta$ drehen müssen, was der Multiplikation des Koeffizienten von $\ket{1}$ mit $e^{i\pi\theta}$ entspricht. Zudem werden wir feststellen, dass wenn wir den Koeffizienten von $\ket{1}$ eines Qubits der Fourierbasis mit $e^{2i\pi\theta}$ multiplizieren, wir den Winkel $\theta$ mit Hilfe der inversen $QFT$ bestimmen können. Diese Erkenntnis werden wir in Kapitel 4.3 benötigen.
 
 \subsection{Unitarität}
-Wir haben noch nicht gezeigt, dass die oben beschriebene Operation unitär ist. Zu diesem Zweck schauen wir uns die Matrix mit Einträgen an, die die Operation der $QFT$ darstellt. Dafür sei $\omega_N^{s} = e^{2i\pi\frac{s}{N}}$. Dann können wir die $QFT$ wie folgt darstellen: $[QFT] := (\frac{\omega_{2^n}^{jk}}{\sqrt{2^n}})$ (wobei hier $j$ die Reihe und $k$ die Spalte ist, da $i$ schon eine andere Bedeutung hat). Nun können wir die Bedingung $[QFT]^{\dagger}\, [QFT] = I$ überprüfen. Dazu berechnen wir den Eintrag $jk$ von $[QFT]^{\dagger}\, [QFT]$:
+Wir haben noch nicht gezeigt, dass die oben beschriebene Operation unitär ist. Zu diesem Zweck schauen wir uns die Matrix mit Einträgen an, die die Operation der $QFT$ darstellt. Dafür sei $\omega_N^{s} := e^{2i\pi\frac{s}{N}}$. Dann können wir die $QFT$ wie folgt darstellen: $[QFT] := (\frac{\omega_{2^n}^{jk}}{\sqrt{2^n}})$ (wobei hier $j$ die Zeile und $k$ die Spalte ist, da $i$ schon eine andere Bedeutung hat). Nun können wir die Bedingung $[QFT]^{\dagger}\, [QFT] = I$ überprüfen. Dazu berechnen wir den Eintrag $jk$ von $[QFT]^{\dagger}\, [QFT]$:
 $$\sum_{s = 0}^{2^n - 1}\frac{\overline{\omega_{2^n}^{js}}}{\sqrt{2^n}} \cdot \frac{\omega_{2^n}^{sk}}{\sqrt{2^n}} = \frac{1}{2^n}\sum_{s = 0}^{2^n - 1}\omega_{2^n}^{-js} \cdot \omega_{2^n}^{sk} = \frac{1}{2^n}\sum_{s = 0}^{2^n - 1}\omega_{2^n}^{s(k - j)}$$
 Wir stellen nun fest: Falls $j = k$ gilt, dann ist $\omega_{2^n}^{s\cdot 0} = 1$ und somit 
 $$\frac{1}{2^n}\sum_{s = 0}^{2^n - 1}\omega_{2^n}^{s\cdot 0} = 1$$
-Falls $j \neq k$, lässt die sich Summe wie folgt umformen, da $\omega_{2^n}^{0(k - j)}$, $\omega_{2^n}^{1(k - j)}$, ..., $\omega_{2^n}^{(2^n - 1)(k - j)}$ eine geometrische Reihe ist:
+Falls $j \neq k$, lässt sich die Summe wie folgt umformen, da $\omega_{2^n}^{0(k - j)}$, $\omega_{2^n}^{1(k - j)}$, ..., $\omega_{2^n}^{(2^n - 1)(k - j)}$ eine geometrische Reihe ist:
 $$\frac{1}{2^n}\sum_{s = 0}^{2^n - 1}\omega_{2^n}^{s(k - j)} = \frac{1}{2^n} \cdot \frac{\omega_{2^n}^{(k - j)2^n} - 1}{\omega_{2^n}^{(k - j)} - 1}$$
 Gleichzeitig gilt $\omega_{2^n}^{(k - j)2^n} = 1$ und somit 
 $$\frac{1}{2^n} \cdot \frac{\omega_{2^n}^{(k - j)2^n} - 1}{\omega_{2^n}^{(k - j)} - 1} = 0$$
@@ -140,7 +140,7 @@ Gehen wir zurück zur Produktdarstellung der Fouriertransformierten von $\ket{x}
 \scriptsize
 \input{assets/circuits/3.3.3.1.crct}
 }
-\captionof{figure}{Schaltkreis der $QFT$. Die Rot-Gatter werden alle kontrolliert angewendet und die vertikalen Verbindungen zeigen, welches die Kontrollqubtis sind. Die Normalisierungsfaktoren von $\frac{1}{\sqrt{2}}$ wurden auf der rechten Seite weggelassen.}
+\captionof{figure}{Schaltkreis der $QFT$. Die Rot-Gatter werden alle kontrolliert angewendet und die vertikalen Verbindungen zeigen, welches die Kontrollqubits sind. Die Normalisierungsfaktoren von $\frac{1}{\sqrt{2}}$ wurden auf der rechten Seite weggelassen.}
 \paragraph{}
 In der obigen Grafik habe ich aus Platzgründen den Namen $R(k)$ für das $\text{Rot}(k)$-Gatter verwendet. Um die Funktionsweise dieses Schaltkreises zu sehen, bemerken wir, dass ${H\ket{x_j} = \frac{1}{\sqrt{2}}\left(\ket{0} + e^{2i\pi(0.x_j)}\ket{1}\right)}$ gilt, da $e^{2i\pi\cdot 0} = 1$ und $e^{2i\pi\cdot\frac{1}{2}} = -1$ gilt. Wenden wir nun $\text{Rot}(2)^{x_{j - 1}}$ an, bekommen wir:
 $$\frac{1}{\sqrt{2}}\left(\ket{0} + e^{2i\pi(0.x_j)}\ket{1}\right) \xrightarrow{\text{Rot}(2)^{x_{j - 1}}} \frac{1}{\sqrt{2}}\left(\ket{0} + e^{2i\pi\frac{x_j}{2} + 2i\pi\frac{x_{j - 1}}{4}}\ket{1}\right) = \frac{1}{\sqrt{2}}\left(\ket{0} + e^{2i\pi(0.x_jx_{j - 1})}\ket{1}\right)$$
@@ -155,7 +155,7 @@ Dies können wir wie folgt fortsetzen:
 Auf diese Weise können wir mit Hilfe der $\text{Rot}(k)$-Gatter die Nachkommastellen der Binärzahl eine Stelle nach der anderen aufbauen. Zum Schluss müssen wir noch die Reihenfolge der Qubits umkehren, was mit $SWAP$-Gattern erreicht werden kann.
 
 \paragraph{}
-Wenn wir uns den Schaltkreis anschauen, stellen wir fest, dass wir $\mathcal O(n^2)$ Gatter benötigen, um diese Operation zu implementieren, wobei $n$ die Anzahl Qubits des Registers ist. Dabei werden auch keine zusätzlichen temporäre Qubits benötigt. 
+Wenn wir uns den Schaltkreis anschauen, stellen wir fest, dass wir $\mathcal O(n^2)$ Gatter benötigen, um diese Operation zu implementieren, wobei $n$ die Anzahl Qubits des Registers ist. Dabei werden auch keine zusätzlichen temporären Qubits benötigt. 
 
 \section{Addition}
 Die wohl grundlegendste arithmetische Operation ist die Addition. Die Subtraktion kann als Addition ausgedrückt werden und auch die Multiplikation (und somit die Division) sind abhängig von der Addition. Aus diesem Grund ist die Addition die erste arithmetische Operation, die wir betrachten. 
@@ -180,24 +180,49 @@ Schauen wir uns nun den in der QInteger-Library verwendeten Additionsalgorithmus
         = \frac{1}{\sqrt{2}}(\ket{0} + e^{2i\pi\frac{y + \sum_{s = 0}^{j}{x_{j - s}\cdot2^{j - s}}}{2^{1 + j}}}\ket{1}) \\ = &\frac{1}{\sqrt{2}}(\ket{0} + e^{2i\pi\frac{y + x}{2^{1 + j}}}\ket{1})
     \end{align*}
     Wobei uns alle Bits mit Indizes grösser als $j$ nicht interessieren, wie man analog zu den Überlegungen aus Abschnitt 3.2.1 feststellen kann.
-    \item Die Qubits im zweiten Register befinden sich nun in folgendem Zustand: $\frac{1}{\sqrt{2^n}}\bigotimes_{j = 0}^{n - 1}\left(\ket{0} + e^{2i\pi\frac{x + y}{2^{1 + j}}}\right)$. Mit der inversen $QFT$ kann man aus diesem Zustand den Zustand $\ket{x + y}$ wiederherstellen.
+    \item Die Qubits im zweiten Register befinden sich nun in folgendem Zustand: $\frac{1}{\sqrt{2^n}}\bigotimes_{j = 0}^{n - 1}\left(\ket{0} + e^{2i\pi\frac{x + y}{2^{1 + j}}}\ket{1}\right)$. Mit der inversen $QFT$ kann man aus diesem Zustand den Zustand $\ket{x + y}$ wiederherstellen.
 \end{enumerate}
+
+\section{Vergleichsoperatoren}
+Um mit verschiedenen Modoli arbeiten zu können, müssen wir zuerst QInts miteinander und mit klassischen Zahlen vergleichen können. Dazu betrachten wir, wie wir den Vergleichsoperator $<$ implementieren können, der vergleicht, ob ein QInt kleiner als eine klassische Zahl ist. Die Implementierungen für die Operation, in welcher wir zwei Quantenzahlen miteinander vergleichen, und die verschiedenen Varianten dieses Operators ($\leq$, $>$, etc.) unterscheiden sich nur durch Details, die zugrundeliegende Idee ist aber überall die Gleiche.
+\paragraph{}
+
+Zuerst möchte ich nun das Konzept des Integer Overflows einführen. Wenn wir auf einem klassischen Computer eine Variable $a$ einer Zahl haben (der Einfachheit halber nehme ich hier einen Datentyp ohne Vorzeichen, d. h. eine nicht-negative Variable), und dazu eine andere Zahl $b$ addieren, mit $a + b \geq 2^n$, wobei $n$ die Anzahl Bits dieses Datentyps ist, dann passiert ein sogenannter Integer Overflow: Die resultierende Zahl ist zu gross, als dass sie in diesem Datentyp gespeichert werden kann. Die Addition verläuft aber trotzdem noch gleich, aussert dass das grösste Bit des Resultats nicht gesetzt werden kann. Dies führt dazu, dass das Resultat dann zu $a + b - 2^n$ statt zu $a + b$ wird. 
+Dies nennt man einen Overflow. Das selbe Verhalten kann man auch bei einer Subtraktion beobachten: Nehmen wir wieder zwei Zahlen $a$ und $b$, so dass $a - b < 0$ gilt, und subtrahieren $b$ von $a$, haben wir am Schluss der Subtraktion immer noch ein gesetztes Carry-Bit, welches wir vom nächstgrösseren, aber inexistenten Bit abziehen wollen. Da wir von diesem Bit aber nicht subtrahieren können, wird das Resultat dann zu $2^n + (a - b)$ statt zu $a - b$.
+
+\paragraph{}
+Das gleiche Phänomen können wir auch bei der von uns implementierten Addition und Subtraktion beobachten: Betrachten wir, was passiert, wenn wir $a$ und $b$ auf Qubits addieren, mit $0 \leq a, b \leq 2^n - 1$ und $a + b \geq 2^n$. Der Zustand in der Addition vor der inversen $QFT$ ist: $$\bigotimes_{s = 0}^{n - 1}{\left( \ket{0} + e^{2i\pi\frac{a + b}{2^{(1 + s)}}}\ket{1} \right)} = \bigotimes_{s = 0}^{n - 1}{\left(\ket{0} + e^{2i\pi\left(\frac{a + b}{2^{(1 + s)}} - 2^{n - 1 - s}\right)}\ket{1} \right)} = \bigotimes_{s = 0}^{n - 1}{\left( \ket{0} + e^{2i\pi\frac{a + b - 2^n}{2^{(1 + s)}}}\ket{1} \right)}$$
+
+Die Resultate $a + b$ und $a + b - 2^n$ sind somit nicht unterscheidbar. Da aber nach der inversen $QFT$ kein Bit vorhanden ist, um das Bit mit dem Wert $2^n$ zu speichern, wird das Resultat dieser Addition zu $a + b - 2^n$. Gleichzeitig ist die Subtraktion dazu die inverse Operation. Wenn wir also $b$ von $a + b - 2^n$ subtrahieren, erhält man $a - 2^n \leq 2^n - 1 - 2^n < 0$, das Resultat wird aber zu $a$. Dies bedeutet, dass wenn das Resultat einer Subtraktion $a - b$ kleiner als $0$ ist, es zu $2^n + (a - b)$ wird.
+
+\paragraph{}
+Während dieses Phänomen für viele Bugs auf klassischen Computern verantwortlich ist, ist es aber hier für uns sehr nützlich. Wollen wir überprüfen, ob $x < y$ gilt, ist dies das gleiche, wie zu überprüfen, ob $x - y < 0$ gilt. Betrachten wir nun ein QInt $x$ mit $n$ Qubits und eine Zahl $y$ mit $n$ Bits. Zuerst vergössern wir die beiden Register von $x$ und $y$ um je ein Bit. Subtrahieren wir nun $y$ von $x$, bekommen wir zwei Fälle:
+\begin{enumerate}
+    \item Falls $x < y$ gilt, gibt es einen Overflow, und das Resultat wird zu $2^{n + 1} + (x - y)$, da wir die beiden Register um ein Bit vergössert haben. Da $0 \leq x, y < 2^n$ gilt, gilt auch $\abs*{x - y} < 2^n$ und somit $2^{n + 1} + (x - y) > 2^{n + 1} - 2^n = 2^n$.
+    \item Sonst wird das Resultat zu $x - y$. Da $0 \leq x, y < 2^n$ gilt, gilt auch $x - y < 2^n$.
+\end{enumerate}
+Wir können nun sehen, dass das Resultat dieser Subtraktion genau dann grösser als $2^n$ ist, wenn $x < y$ gilt. Da $2^n$ als Resultat aber nicht vorkommen kann (die beiden Fälle geben Lösungen die entweder strikt grösser oder strikt kleiner als $2^n$ sind), reicht es, zu überprüfen, ob das Resultat dieser Subtraktion grösser oder gleich $2^n$ ist. Ob dies gilt oder nicht, ist äquivalent dazu, ob das höchste Bit im Resultat gesetzt ist, oder nicht. Dies führt zum folgenden Algorithmus:
+Gegeben ein QInt $\ket{x}$, eine klassische Zahl $y$ und ein Qubit $\ket{r}$, in welchem das Resultat gespeichert werden soll (bzw. welches den Zustand geändert haben soll, wenn die Zahl in $\ket{x}$ kleiner als $y$ ist), können wir folgendes tun:
+
+\begin{enumerate}
+    \item Verlängere das Register von $\ket{x}$ um ein (temporäres) Qubit im Zustand $\ket{0}$.
+    \item Subtrahiere $y$ von $x$. Wir kriegen den Zustand $\ket{x - y + [x < y]2^n}$, wobei $[P] = 1$ ist, falls die Bedingung $P$ wahr ist, und $0$, wenn sie falsch ist.
+    \item Wende ein $CNOT$ mit dem ersten Qubit des Registers, welches $\ket{x}$ speichert, als Kontrollqubit auf das Qubit $\ket{r}$ an.
+    \item Addiere $y$ zu $\ket{x - y + [x < y]2^n}$. Da die Addition die inverse Operation zur Subtraktion ist, wird der Ursprungszustand $\ket{x}$ wieder hergestellt. Das temporäre Qubit wird dadurch wieder auf $\ket{0}$ gesetzt, so dass wir es wieder  freigeben können.
+\end{enumerate}
+
+Da wir auch hier keine Messungen oder sondergleichen machen, funktioniert dieser Operator auch auf Superpositionen und verschränkt dabei $\ket{r}$ mit $\ket{x}$. Würden wir darauf das $\ket{r}$ messen, dann würde auch $\ket{x}$ kollabieren.
+
 \section{Modulare Addition}
 Den uns bekannten Modulo-Operator kann man auf Qubits nicht implementieren, da er nicht invertierbar ist ($a$ und $a + m$ haben dasselbe Resultat modulo $m$). Die modulare Addition ist jedoch invertierbar, wenn beide Summanden kleiner als $m$ sind. Wir haben wieder zwei QInts in den Zuständen $\ket{x}$ und $\ket{y}$ und eine klassische Zahl $m$ und möchten den Zustand des zweiten QInts auf $\ket{x + y \pmod{m}}$ setzen\footnote{Hier lässt sich $m$ durch einen QInt ersetzen (oder der erste Summand durch eine klassische Zahl). Für den Shor-Algorithmus benötigen wir die Operation nur mit einem klassischen $m$, die Implementierungen für $m$ als QInt folgen analog und sind auch in der QInt-Library enthalten.}.
 
 \paragraph{}
 
-Zuerst addieren wir $\ket{x}$ zum Register $\ket{y}$, um das Register in den Zustand $\ket{x + y}$ zu versetzen. Nun überprüfen wir, ob diese Summe grösser oder gleich $m$ ist. 
+Zuerst addieren wir $\ket{x}$ zum Register $\ket{y}$, um das Register in den Zustand $\ket{x + y}$ zu versetzen. Mit Hilfe des im vorangehenden Kapitels erklärten Operators können wir nun herausfinden, ob Summe grösser oder gleich $m$ ist, und diese Information in einem zusätzlichen Qubit speichern.
 
 \paragraph{}
 
-Wie überprüfen wir, ob ein QInt $x$ grösser oder gleich einer anderen Zahl $y$ ist? In der QInteger-Bibliothek ist die Funktion $GreaterOrEqual$ als $\neg LessThan$ implementiert\footnote{Hier unterscheiden sich die Implementierungen für den Fall, dass die andere Zahl auch ein QInt oder eine klassische Zahl ist. Die zugrundeliegende Idee ist jedoch bei beiden Implementierungen die gleiche.}. Das heisst, wir versuchen herausezufinden, ob $x < y$ gilt, und negieren dann das Resultat. Wir können dies wie folgt umformen: $x < y \Leftrightarrow x - y < 0$. Subtrahieren wir also $y$ von $x$, müssen wir herausfinden, ob das Resultat negativ ist. Ist $x - y$ nun tatsächlich negativ, passiert ein sogenannter \textit{Underflow}. Dies bedeutet, dass $x - y$ zu $2^n + (x - y)$ wird, weil das nächstgrössere Bit fehlt. Um zu erkennen, dass dieses von klassischen Bits bekannte Phänomen auch bei Qubits auftritt, beobachten wir, was passiert, wenn wir $a$ und $b$ auf Qubits addieren, mit $0 \leq a, b \leq 2^n - 1$ und $a + b \geq 2^n$. Der Zustand in der Addition vor der inversen $QFT$ ist: $$\bigotimes_{s = 0}^{n - 1}{\left( \ket{0} + e^{2i\pi\frac{a + b}{2^{(1 + s)}}}\ket{1} \right)} = \bigotimes_{s = 0}^{n - 1}{\left(\ket{0} + e^{2i\pi\left(\frac{a + b}{2^{(1 + s)}} - 2^{n - 1 - s}\right)}\ket{1} \right)} = \bigotimes_{s = 0}^{n - 1}{\left( \ket{0} + e^{2i\pi\frac{a + b - 2^n}{2^{(1 + s)}}}\ket{1} \right)}$$
-
-Die Resultate $a + b$ und $a + b - 2^n$ sind somit nicht unterscheidbar. Da aber nach der inversen $QFT$ kein Bit vorhanden ist, um das Bit mit dem Wert $2^n$ zu speichern, wird das Resultat dieser Addition zu $a + b - 2^n$. Gleichzeitig ist die Subtraktion dazu die inverse Operation. Wenn wir also $b$ von $a + b - 2^n$ subtrahieren, erhält man $a - 2^n \leq 2^n - 1 - 2^n < 0$, das Resultat wird aber zu $a$. Dies bedeutet, dass wenn das Resultat einer Subtraktion $x - y$ kleiner als $0$ ist, es zu $2^n + (x - y)$ wird. Somit können wir messen, ob $x - y < 0$ gilt, indem wir uns einfach das vorderste Qubit anschauen, welches dem Wert $2^{n - 1}$ entspricht. Ist dieses $1$, gab es möglicherweise einen Underflow. Um sicherzugehen, dass das vorderste Bit nur dann $1$ ist, und nicht wenn $x - y \geq 2^{n - 1}$ gilt, verlängere ich in meiner Implementierung vor der Subtraktion noch die Länge der beiden Register um $1$, so dass $0 \leq a, b \leq 2^{n - 1} - 1$ gilt, wobei $n$ die neue grösse des Registers ist. Dann muss auch $a - b \leq 2^{n - 1} - 1 - 0 < 2^{n - 1}$ gelten, und so kann das erste Bit nur dann $1$ sein, wenn ein Underflow auftritt.
-
-\paragraph{}
-
-Wir können nun herausfinden, ob $x + y \geq m$ gilt, und diese Information in einem zusätzlichen Qubit speichern. Falls dies zutrifft, subtrahieren wir $m$ von der Zahl und erhalten somit die Zahl $x + y - m$ im zweiten QInt. Die Information, ob $x + y \geq m$ gilt, ist aber noch in einem Qubit gespeichert, welches wir zurücksetzen müssen, da wir Qubits nur im Zustand $\ket{0}$ freigeben können\footnote{Wäre dieses temporäre Qubit immer noch verschränkt mit den restlichen Qubits, könnte dies deren Zustand beeinflussen oder sogar zerstören.}. Wir werden nun beweisen, dass $x + y \geq m$ genau dann gilt, wenn das Endresultat ${x + y \pmod{m}}$ kleiner als der Summand $x$ ist. 
+Falls dies zutrifft, subtrahieren wir $m$ von der Zahl und erhalten somit die Zahl $x + y - m$ im zweiten QInt. Die Information, ob $x + y \geq m$ gilt, ist aber noch in einem Qubit gespeichert, welches wir zurücksetzen müssen, da wir Qubits nur im Zustand $\ket{0}$ freigeben können\footnote{Wäre dieses temporäre Qubit immer noch verschränkt mit den restlichen Qubits, könnte dies deren Zustand beeinflussen oder sogar zerstören.}. Wir werden nun beweisen, dass $x + y \geq m$ genau dann gilt, wenn das Endresultat ${x + y \pmod{m}}$ kleiner als der Summand $x$ ist. 
 
 \paragraph{}
 
@@ -210,7 +235,7 @@ Die andere Richtung, $(x + y \pmod{m}) \geq x \Rightarrow x + y < m$, zeigen wir
 \noindent So können wir mit diesem Vergleich die Information in unserem Aushilfsqubit wieder löschen.
 
 \section{Modulare Multiplikation}
-Mit Hilfe der modularen Addition können wir nun die modulare Multiplikation implementieren. Zuerst stellen wir fest, dass wir die modulare Multiplikation $\ket{x} \rightarrow \ket{(ax) \pmod{m}}$ nur dann implementieren können, wenn $\text{ggT}(a, m) = 1$ gilt, ansonsten wäre sie nicht invertierbar (zum Beispiel ist $2\cdot 3 \equiv 2 \equiv 2\cdot 1 \pmod{4}$). Gilt hingegen $\text{ggt}(a, m) = 1$, so lässt sich ein Inverses $a^{-1}$ zu $a$ modulo $m$ finden, sodass $a\cdot a^{-1} \equiv 1 \pmod{m}$ gilt. Somit lässt sich die Operation durch die Multiplikation mit $a^{-1}$ invertieren.
+Mit Hilfe der modularen Addition können wir nun die modulare Multiplikation implementieren. Zuerst stellen wir fest, dass wir die modulare Multiplikation $\ket{x} \rightarrow \ket{(ax) \pmod{m}}$ nur dann implementieren können, wenn $\text{ggT}(a, m) = 1$ gilt, ansonsten wäre sie nicht invertierbar (zum Beispiel ist $2\cdot 3 \equiv 2 \equiv 2\cdot 1 \pmod{4}$). Gilt hingegen $\text{ggT}(a, m) = 1$, so lässt sich ein Inverses $a^{-1}$ zu $a$ modulo $m$ finden, sodass $a\cdot a^{-1} \equiv 1 \pmod{m}$ gilt. Somit lässt sich die Operation durch die Multiplikation mit $a^{-1}$ invertieren.
 
 \paragraph{}
 
@@ -218,10 +243,12 @@ Wir schauen uns die modulare Multiplikation auf QInts in zwei Schritten an.
 
 \noindent Zuerst implementieren wir die Quantenoperation auf zwei Registern, welche für gegebenes $a$ und $m$ folgende Operation bewirkt: $$U'_{a, m}\ket{x}\ket{y} = \ket{x}\ket{(y + ax) \pmod{m}}$$
 Wir sehen, dass wenn wir $x = 2^0 x_0 + 2^1 x_1 ...$ in seine Zweierpotenzen aufteilen, wir $ax \pmod{m} = x_0(2^0 a \pmod{m}) + x_1(2^1 a \pmod{m}) + ...$ schreiben können. Dieses $+ \;x_0(...)$ ist nichts anderes als eine Addition, kontrolliert durch das Qubit $x_0$. Das bedeuet, wir können diese Operation relativ einfach durchführen: \newline
-Führe für jedes $j$ eine modulare Addition durch, kontrolliert durch das Qubit $x_j$, auf das Ausgaberegister mit dem Summanden $2^ja \pmod{m}$, den wir klassisch berechnen können. \newline
+Führe für jedes $j$ eine modulare Addition mit dem Summanden $2^{j}a \pmod{m}$ durch, kontrolliert durch das Qubit $x_j$. Der Summand $2^j{a}$ wird dabei klassisch berechnet.\newline
 Diese Unteroperation ruft den modularen Addierer $\mathcal O(n)$ mal auf und jede dieser Additionen braucht $\mathcal O(n^2)$ Gatteroperationen. Damit kommen wir auf $\mathcal O(n^3)$ Gatteroperationen.
 
-Mit Hilfe dieser Unteroperation können wir nun die Operation, welche $$U_{a, m}\ket{x} = \ket{(ax) \pmod{m}}$$ bewirkt, implementieren:
+\paragraph{}
+
+\noindent Mit Hilfe dieser Unteroperation können wir nun die Operation, welche $$U_{a, m}\ket{x} = \ket{(ax) \pmod{m}}$$ bewirkt, implementieren:
 \begin{enumerate}
     \item Führe ein temporäres Register im Zustand $\ket{0}$ ein und bringe es mit Hilfe der obigen Unteroperation in den Zustand $\ket{ax \pmod{m}}$.
     \item Berechne klassisch das Inverse von $a$ modulo $m$. Dieses lässt sich effizient mit Hilfe des erweiterten euklidischen Algorithmus\footnote{Siehe auch \cite{clrs}, Kapitel 31} berechnen. Das Inverse existiert, da $a$ und $m$ teilerfremd sind.
@@ -231,6 +258,6 @@ Mit Hilfe dieser Unteroperation können wir nun die Operation, welche $$U_{a, m}
     \begin{align*}
         &[U'_{a^{-1}, m}]^{-1}\ket{ax \pmod{m}}\ket{x} \\[0.2cm] = &\ket{ax \pmod{m}}\ket{x - a^{-1}(ax) \pmod{m}} \\[0.2cm] = &\ket{ax \pmod{m}}\ket{0}
     \end{align*}
-    \item Wechsle den Zustand der beiden Register mit Hilfe der Swap-Operation, sodass $\ket{ax \pmod{m}}$ im ersten Register und das temporäre Register wieder im Zustand $\ket{0}$ ist. Das temporäre Register kann wieder wieder freigeben werden und das erste Register befindet sich nun im Zustand $\ket{ax \pmod{m}}$.
+    \item Wechsle den Zustand der beiden Register mit Hilfe der Swap-Operation, sodass $\ket{ax \pmod{m}}$ im ersten Register und das temporäre Register wieder im Zustand $\ket{0}$ ist. Das temporäre Register kann wieder freigegeben werden und das erste Register befindet sich nun im Zustand $\ket{ax \pmod{m}}$.
 \end{enumerate}
-Diese Multiplikation benötigt $n$ extra Qubits für das temporäre Register. Sie ruft die Unteroperation $2 \in \mathcal O(1)$ mal auf und benötigt somit $\mathcal O(n^3)$ Gatteroperationen. Wir erinnern uns, dass man die Addition mit $\mathcal O(n)$ Gatteroperationen und dafür $n$ zusätzlichen Qubits implementieren könnte, was dazu führt, dass wir nur noch $\mathcal O(n^2)$ Gatteroperationen, dafür aber $\mathcal O(n)$ zusätzliche Qubits benötigen würden.
+Diese Multiplikation benötigt $n$ zusätzliche Qubits für das temporäre Register. Sie ruft die Unteroperation $2 \in \mathcal O(1)$ mal auf und benötigt somit $\mathcal O(n^3)$ Gatteroperationen. Wir erinnern uns, dass man die Addition mit $\mathcal O(n)$ Gatteroperationen und dafür $n$ zusätzlichen Qubits implementieren könnte, was dazu führen würde, dass wir nur noch $\mathcal O(n^2)$ Gatteroperationen, dafür aber $\mathcal O(n)$ zusätzliche Qubits benötigen würden.

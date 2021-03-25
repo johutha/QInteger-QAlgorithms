@@ -41,6 +41,7 @@ namespace Factorize.Classical.Calculator
 
 		long FindRoot(long n)
         {
+			return -1;
 			long lg2 = (long)Math.Ceiling(Math.Log2(n));
 			for (int i = 2; i < lg2; i++)
             {

@@ -1,0 +1,16 @@
+operation GreaterThanCQ(A : Int, B : QInt, res : Qubit) : Unit is Adj+Ctl
+{
+	using (an = Qubit())
+	{
+		let b1 = QInt(B::Size + 1, B::Number + [an]);
+
+		within
+		{
+			(Adjoint AddCQ)(A, b1);
+		}
+		apply
+		{
+			CNOT(b1::Number[b1::Size - 1], res);
+		}
+	}
+}

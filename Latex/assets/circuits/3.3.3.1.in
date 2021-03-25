@@ -1,10 +1,10 @@
 SCALE 0.65
 
-a W {x_{n - 1}} {\ket{0} + e^{2i\pi(0.x_{n-1}\dots x_0)}}
-b W {x_{n - 2}} {\ket{0} + e^{2i\pi(0.x_{n-2}\dots x_0)}}
+a W {\ket{x_{n - 1}}} {\ket{0} + e^{2i\pi(0.x_{n-1}\dots x_0)}\ket{1}}
+b W {\ket{x_{n - 2}}} {\ket{0} + e^{2i\pi(0.x_{n-2}\dots x_0)}\ket{1}}
 ...e W
-c W {x_{1}} {\ket{0} + e^{2i\pi(0.x_1x_0)}}
-d W {x_0} {\ket{0} + e^{2i\pi(0.x_0)}}
+c W {\ket{x_{1}}} {\ket{0} + e^{2i\pi(0.x_1x_0)}\ket{1}}
+d W {\ket{x_0}} {\ket{0} + e^{2i\pi(0.x_0)}\ket{1}}
 
 a G {$H$}
 a G {$R(2)$} length=32 height=13 b

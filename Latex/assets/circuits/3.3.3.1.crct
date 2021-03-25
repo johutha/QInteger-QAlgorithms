@@ -1,20 +1,20 @@
-\begin{tikzpicture}[scale=0.650000,x=1pt,y=1pt]
+\begin{tikzpicture}[scale=0.600000,x=1pt,y=1pt]
 \filldraw[color=white] (0.000000, -7.500000) rectangle (520.000000, 67.500000);
 % Drawing wires
-% Line 3: a W {x_{n - 1}} {\ket{0} + e^{2i\pi(0.x_{n-1}\dots x_0)}}
+% Line 3: a W {\ket{x_{n - 1}}} {\ket{0} + e^{2i\pi(0.x_{n-1}\dots x_0)}\ket{1}}
 \draw[color=black] (0.000000,60.000000) -- (520.000000,60.000000);
-\draw[color=black] (0.000000,60.000000) node[left] {${x_{n - 1}}$};
-% Line 4: b W {x_{n - 2}} {\ket{0} + e^{2i\pi(0.x_{n-2}\dots x_0)}}
+\draw[color=black] (0.000000,60.000000) node[left] {${\ket{x_{n - 1}}}$};
+% Line 4: b W {\ket{x_{n - 2}}} {\ket{0} + e^{2i\pi(0.x_{n-2}\dots x_0)}\ket{1}}
 \draw[color=black] (0.000000,45.000000) -- (520.000000,45.000000);
-\draw[color=black] (0.000000,45.000000) node[left] {${x_{n - 2}}$};
+\draw[color=black] (0.000000,45.000000) node[left] {${\ket{x_{n - 2}}}$};
 % Line 5: ...e W
 \draw[color=black] (0.000000,30.000000) node[anchor=mid east] {$\vdots$};
-% Line 6: c W {x_{1}} {\ket{0} + e^{2i\pi(0.x_1x_0)}}
+% Line 6: c W {\ket{x_{1}}} {\ket{0} + e^{2i\pi(0.x_1x_0)}\ket{1}}
 \draw[color=black] (0.000000,15.000000) -- (520.000000,15.000000);
-\draw[color=black] (0.000000,15.000000) node[left] {${x_{1}}$};
-% Line 7: d W {x_0} {\ket{0} + e^{2i\pi(0.x_0)}}
+\draw[color=black] (0.000000,15.000000) node[left] {${\ket{x_{1}}}$};
+% Line 7: d W {\ket{x_0}} {\ket{0} + e^{2i\pi(0.x_0)}\ket{1}}
 \draw[color=black] (0.000000,0.000000) -- (520.000000,0.000000);
-\draw[color=black] (0.000000,0.000000) node[left] {${x_0}$};
+\draw[color=black] (0.000000,0.000000) node[left] {${\ket{x_0}}$};
 % Done with wires; drawing gates
 % Line 9: a G {$H$}
 \begin{scope}
@@ -105,11 +105,11 @@
 \draw (508.000000, -0.000000) node {{$H$}};
 \end{scope}
 % Done with gates; drawing ending labels
-\draw[color=black] (520.000000,60.000000) node[right] {${\ket{0} + e^{2i\pi(0.x_{n-1}\dots x_0)}}$};
-\draw[color=black] (520.000000,45.000000) node[right] {${\ket{0} + e^{2i\pi(0.x_{n-2}\dots x_0)}}$};
+\draw[color=black] (520.000000,60.000000) node[right] {${\ket{0} + e^{2i\pi(0.x_{n-1}\dots x_0)}\ket{1}}$};
+\draw[color=black] (520.000000,45.000000) node[right] {${\ket{0} + e^{2i\pi(0.x_{n-2}\dots x_0)}\ket{1}}$};
 \draw[color=black] (520.000000,30.000000) node[anchor=mid west] {$\vdots$};
-\draw[color=black] (520.000000,15.000000) node[right] {${\ket{0} + e^{2i\pi(0.x_1x_0)}}$};
-\draw[color=black] (520.000000,0.000000) node[right] {${\ket{0} + e^{2i\pi(0.x_0)}}$};
+\draw[color=black] (520.000000,15.000000) node[right] {${\ket{0} + e^{2i\pi(0.x_1x_0)}\ket{1}}$};
+\draw[color=black] (520.000000,0.000000) node[right] {${\ket{0} + e^{2i\pi(0.x_0)}\ket{1}}$};
 % Done with ending labels; drawing cut lines and comments
 % Done with comments
 \end{tikzpicture}

@@ -6,9 +6,9 @@ a b c W >{2^n\theta} width=100
 d W \ket{\psi} \ket{\psi} style=very_thick breadth=40
 
 a b c G {$H^{\otimes n}$} length=30
-d G {$U_{2^0}$} a length=20 height=20 
-d G {$U_{2^1}$} b length=20 height=20 
+d G {$U^{2^0}$} a length=20 height=20 
+d G {$U^{2^1}$} b length=20 height=20 
 = {...}
-d G {$U_{2^{(n - 1)}}$} c length=35 height=20
+d G {$U^{2^{(n - 1)}}$} c length=35 height=20
 a b c G {$QFT^{-1}_{n}$} length=40
 a b c M
