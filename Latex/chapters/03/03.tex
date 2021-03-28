@@ -22,7 +22,7 @@ Diesen Zustand kann man folgendermassen faktorisieren, was ich nachher beweisen 
     \left(\ket{0} + e^{2i\pi\frac{x}{2^{1}}}\ket{1}\right)\otimes\left(\ket{0} + e^{2i\pi\frac{x}{2^{2}}}\ket{1}\right)\otimes\cdots\otimes\left(\ket{0} + e^{2i\pi\frac{x}{2^{n}}}\ket{1}\right) = \bigotimes_{j = 0}^{n - 1}\left(\ket{0} + e^{2i\pi\frac{x}{2^{1 + j}}}\ket{1}\right)
 \end{align*}
 
-\noindent Diese Faktorisierung werde ich nun beweisen. Den Faktor $\frac{1}{\sqrt{2}}$ lasse ich der Übersichtlichkeit halber weg. Sei die Darstellung von $j \in \{0, 1, \dots, 2^n - 1\}$ im Binärsystem:
+\noindent Diese Faktorisierung werde ich nun beweisen. Den Faktor $\frac{1}{\sqrt{2^n}}$ lasse ich der Übersichtlichkeit halber weg. Sei die Darstellung von $j \in \{0, 1, \dots, 2^n - 1\}$ im Binärsystem:
 
 $$j=2^{n-1}\cdot j_{n-1}+\ldots + 2^1\cdot j_1+2^0\cdot j_0 = \sum_{s = 0}^{n - 1}2^sj_s$$
 
@@ -184,11 +184,11 @@ Schauen wir uns nun den in der QInteger-Library verwendeten Additionsalgorithmus
 \end{enumerate}
 
 \section{Vergleichsoperatoren}
-Um mit verschiedenen Modoli arbeiten zu können, müssen wir zuerst QInts miteinander und mit klassischen Zahlen vergleichen können. Dazu betrachten wir, wie wir den Vergleichsoperator $<$ implementieren können, der vergleicht, ob ein QInt kleiner als eine klassische Zahl ist. Die Implementierungen für die Operation, in welcher wir zwei Quantenzahlen miteinander vergleichen, und die verschiedenen Varianten dieses Operators ($\leq$, $>$, etc.) unterscheiden sich nur durch Details, die zugrundeliegende Idee ist aber überall die Gleiche.
+Um verschiedene modulare Operationen implementieren zu können, müssen wir zuerst QInts miteinander und mit klassischen Zahlen vergleichen können. Dazu betrachten wir, wie wir den Vergleichsoperator $<$ implementieren können, der feststellt, ob ein QInt kleiner als eine klassische Zahl ist. Die Implementierungen für die Operation, in welcher wir zwei Quantenzahlen miteinander vergleichen, und die verschiedenen Varianten dieses Operators ($\leq$, $>$, etc.) unterscheiden sich nur durch Details, die zugrundeliegende Idee ist aber überall die Gleiche.
 \paragraph{}
 
-Zuerst möchte ich nun das Konzept des Integer Overflows einführen. Wenn wir auf einem klassischen Computer eine Variable $a$ einer Zahl haben (der Einfachheit halber nehme ich hier einen Datentyp ohne Vorzeichen, d. h. eine nicht-negative Variable), und dazu eine andere Zahl $b$ addieren, mit $a + b \geq 2^n$, wobei $n$ die Anzahl Bits dieses Datentyps ist, dann passiert ein sogenannter Integer Overflow: Die resultierende Zahl ist zu gross, als dass sie in diesem Datentyp gespeichert werden kann. Die Addition verläuft aber trotzdem noch gleich, aussert dass das grösste Bit des Resultats nicht gesetzt werden kann. Dies führt dazu, dass das Resultat dann zu $a + b - 2^n$ statt zu $a + b$ wird. 
-Dies nennt man einen Overflow. Das selbe Verhalten kann man auch bei einer Subtraktion beobachten: Nehmen wir wieder zwei Zahlen $a$ und $b$, so dass $a - b < 0$ gilt, und subtrahieren $b$ von $a$, haben wir am Schluss der Subtraktion immer noch ein gesetztes Carry-Bit, welches wir vom nächstgrösseren, aber inexistenten Bit abziehen wollen. Da wir von diesem Bit aber nicht subtrahieren können, wird das Resultat dann zu $2^n + (a - b)$ statt zu $a - b$.
+Zuerst möchte ich nun das Konzept des \textit{Integer Overflows} einführen. Wenn wir auf einem klassischen Computer eine Variable $a$ einer Zahl haben (der Einfachheit halber nehme ich hier einen Datentyp ohne Vorzeichen, d. h. eine nicht-negative Variable) und dazu eine andere Zahl $b$ addieren, mit $a + b \geq 2^n$, wobei $n$ die Anzahl Bits dieses Datentyps ist, dann passiert ein sogenannter Integer Overflow: Die resultierende Zahl ist zu gross, als dass sie in diesem Datentyp gespeichert werden kann. Die Addition verläuft aber trotzdem noch gleich, ausser dass das grösste Bit des Resultats nicht gesetzt werden kann. Dies führt dazu, dass das Resultat dann zu $a + b - 2^n$ statt zu $a + b$ wird. 
+Dies nennt man einen Overflow. Das selbe Verhalten kann man auch bei einer Subtraktion beobachten: Nehmen wir wieder zwei Zahlen $a$ und $b$, so dass $a - b < 0$ gilt und subtrahieren $b$ von $a$, haben wir am Schluss der Subtraktion immer noch ein gesetztes Carry-Bit, welches wir vom nächstgrösseren, aber inexistenten Bit abziehen wollen. Da wir von diesem Bit aber nicht subtrahieren können, wird das Resultat dann zu $2^n + (a - b)$ statt zu $a - b$.
 
 \paragraph{}
 Das gleiche Phänomen können wir auch bei der von uns implementierten Addition und Subtraktion beobachten: Betrachten wir, was passiert, wenn wir $a$ und $b$ auf Qubits addieren, mit $0 \leq a, b \leq 2^n - 1$ und $a + b \geq 2^n$. Der Zustand in der Addition vor der inversen $QFT$ ist: $$\bigotimes_{s = 0}^{n - 1}{\left( \ket{0} + e^{2i\pi\frac{a + b}{2^{(1 + s)}}}\ket{1} \right)} = \bigotimes_{s = 0}^{n - 1}{\left(\ket{0} + e^{2i\pi\left(\frac{a + b}{2^{(1 + s)}} - 2^{n - 1 - s}\right)}\ket{1} \right)} = \bigotimes_{s = 0}^{n - 1}{\left( \ket{0} + e^{2i\pi\frac{a + b - 2^n}{2^{(1 + s)}}}\ket{1} \right)}$$
@@ -196,13 +196,13 @@ Das gleiche Phänomen können wir auch bei der von uns implementierten Addition 
 Die Resultate $a + b$ und $a + b - 2^n$ sind somit nicht unterscheidbar. Da aber nach der inversen $QFT$ kein Bit vorhanden ist, um das Bit mit dem Wert $2^n$ zu speichern, wird das Resultat dieser Addition zu $a + b - 2^n$. Gleichzeitig ist die Subtraktion dazu die inverse Operation. Wenn wir also $b$ von $a + b - 2^n$ subtrahieren, erhält man $a - 2^n \leq 2^n - 1 - 2^n < 0$, das Resultat wird aber zu $a$. Dies bedeutet, dass wenn das Resultat einer Subtraktion $a - b$ kleiner als $0$ ist, es zu $2^n + (a - b)$ wird.
 
 \paragraph{}
-Während dieses Phänomen für viele Bugs auf klassischen Computern verantwortlich ist, ist es aber hier für uns sehr nützlich. Wollen wir überprüfen, ob $x < y$ gilt, ist dies das gleiche, wie zu überprüfen, ob $x - y < 0$ gilt. Betrachten wir nun ein QInt $x$ mit $n$ Qubits und eine Zahl $y$ mit $n$ Bits. Zuerst vergössern wir die beiden Register von $x$ und $y$ um je ein Bit. Subtrahieren wir nun $y$ von $x$, bekommen wir zwei Fälle:
+Während dieses Phänomen für viele Bugs auf klassischen Computern verantwortlich ist, ist es aber hier für uns sehr nützlich. Wollen wir überprüfen, ob $x < y$ gilt, ist dies das gleiche, wie zu überprüfen, ob $x - y < 0$ gilt. Betrachten wir nun einen QInt $x$ mit $n$ Qubits und eine Zahl $y$ mit $n$ Bits. Zuerst vergössern wir die beiden Register von $x$ und $y$ um je ein Bit. Subtrahieren wir nun $y$ von $x$, bekommen wir zwei Fälle:
 \begin{enumerate}
     \item Falls $x < y$ gilt, gibt es einen Overflow, und das Resultat wird zu $2^{n + 1} + (x - y)$, da wir die beiden Register um ein Bit vergössert haben. Da $0 \leq x, y < 2^n$ gilt, gilt auch $\abs*{x - y} < 2^n$ und somit $2^{n + 1} + (x - y) > 2^{n + 1} - 2^n = 2^n$.
     \item Sonst wird das Resultat zu $x - y$. Da $0 \leq x, y < 2^n$ gilt, gilt auch $x - y < 2^n$.
 \end{enumerate}
-Wir können nun sehen, dass das Resultat dieser Subtraktion genau dann grösser als $2^n$ ist, wenn $x < y$ gilt. Da $2^n$ als Resultat aber nicht vorkommen kann (die beiden Fälle geben Lösungen die entweder strikt grösser oder strikt kleiner als $2^n$ sind), reicht es, zu überprüfen, ob das Resultat dieser Subtraktion grösser oder gleich $2^n$ ist. Ob dies gilt oder nicht, ist äquivalent dazu, ob das höchste Bit im Resultat gesetzt ist, oder nicht. Dies führt zum folgenden Algorithmus:
-Gegeben ein QInt $\ket{x}$, eine klassische Zahl $y$ und ein Qubit $\ket{r}$, in welchem das Resultat gespeichert werden soll (bzw. welches den Zustand geändert haben soll, wenn die Zahl in $\ket{x}$ kleiner als $y$ ist), können wir folgendes tun:
+Wir können nun sehen, dass das Resultat dieser Subtraktion genau dann grösser als $2^n$ ist, wenn $x < y$ gilt. Da $2^n$ als Resultat aber nicht vorkommen kann (die beiden Fälle geben Lösungen die entweder strikt grösser oder strikt kleiner als $2^n$ sind), reicht es, zu überprüfen, ob das Resultat dieser Subtraktion grösser oder gleich $2^n$ ist. Ob dies gilt oder nicht, ist äquivalent dazu, ob das höchste Bit im Resultat 1 ist, oder nicht. Dies führt zum folgenden Algorithmus:
+Gegeben einen QInt $\ket{x}$, eine klassische Zahl $y$ und ein Qubit $\ket{r}$, in welchem das Resultat gespeichert werden soll (bzw. dessen den Zustand geändert werden soll, wenn die Zahl in $\ket{x}$ kleiner als $y$ ist), können wir folgendes tun:
 
 \begin{enumerate}
     \item Verlängere das Register von $\ket{x}$ um ein (temporäres) Qubit im Zustand $\ket{0}$.
@@ -218,7 +218,7 @@ Den uns bekannten Modulo-Operator kann man auf Qubits nicht implementieren, da e
 
 \paragraph{}
 
-Zuerst addieren wir $\ket{x}$ zum Register $\ket{y}$, um das Register in den Zustand $\ket{x + y}$ zu versetzen. Mit Hilfe des im vorangehenden Kapitels erklärten Operators können wir nun herausfinden, ob Summe grösser oder gleich $m$ ist, und diese Information in einem zusätzlichen Qubit speichern.
+Zuerst addieren wir $\ket{x}$ zum Register $\ket{y}$, um das Register in den Zustand $\ket{x + y}$ zu versetzen. Mit Hilfe des im vorangehenden Kapitel erklärten Operators können wir nun herausfinden, ob die Summe grösser oder gleich $m$ ist, und diese Information in einem zusätzlichen Qubit speichern.
 
 \paragraph{}
 
