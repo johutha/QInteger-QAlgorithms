@@ -1,0 +1,33 @@
+internal operation _MulModAdd(a : Int, b : QInt,
+						Target : QInt, Mod : Int) : Unit is Adj+Ctl
+{
+	for (i in 0..Target::Size - 1)
+	{
+		let md = ((a % Mod)*(PowI(2, i) % Mod)) % Mod;
+		(Controlled AddModCQC)([b::Number[i]], ((md, Target, Mod)));
+	}
+}
+
+internal operation _MulMod(a : Int, Target : QInt,
+                                    Mod : Int) : Unit is Adj+Ctl
+{
+	if (GCD(a, Mod) == 1)
+	{
+		let inv = Inverse(a, Mod);
+		let n = Target::Size;
+		using (qr = Qubit[n])
+		{
+			let tmp = QInt(n, qr);
+			MulModAdd(a, Target, tmp, Mod);
+			(Adjoint MulModAdd)(inv, tmp, Target, Mod);
+			for (i in 0..n - 1)
+			{
+				SWAP(tmp::Number[i], Target::Number[i]);
+			}
+		}
+	}
+	else
+	{
+		fail "GCD of a and Mod not equal to 1.";
+	}
+}

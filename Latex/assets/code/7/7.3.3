@@ -1,0 +1,19 @@
+operation AddMod(Summand : QInt, Target : QInt,
+                                Mod : QInt) : Unit is Adj+Ctl
+{
+	using (an = Qubit[4])
+	{
+		let c = an[3];
+		let _Summand = QInt(Summand::Size + 1,
+                            Summand::Number + [an[0]]);
+                            
+		let _Target = QInt(Target::Size + 1,
+                            Target::Number + [an[1]]);
+
+		let _Mod = QInt(Mod::Size + 1, Mod::Number + [an[2]]);
+		Add(_Summand, _Target);
+		GreaterOrEq(_Target, _Mod, c);
+		(Controlled (Adjoint Add))([c], (_Mod, _Target));
+		GreaterThan(_Summand, _Target, c);
+	}
+}

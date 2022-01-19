@@ -1,0 +1,30 @@
+operation FindPeriod(Start : Int,
+			kth_next : ((Qubit[], Int) => Unit is Ctl),
+			cls : ((Int, Int) -> Int), Size : Int,
+			MAXREP : Int) : Int
+{
+	mutable res = 0;
+	mutable rep = 0;
+	let n = SmallestPow2WithPowBiggerThan(Size);
+	let q = 2*n;
+	using (qs = Qubit[n])
+	{
+		repeat
+		{
+			set rep = rep + 1;
+			if (rep > MAXREP)
+			{
+				fail "Too many repetitions."
+			}
+
+			CopyToQInt(Start, QIntR(qs));
+			let tp = EstimatePhase(kth_next, qs, q);
+			mutable tr = 0;
+			set (tr, res) = ApproximateFraction(tp,
+											FastPow(2, q), Size);
+			ResetAll(qs);
+		}
+		until (cls(Start, res) == Start and res > 0);
+	}
+	return res;
+}
