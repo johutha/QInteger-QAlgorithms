@@ -6,7 +6,7 @@
     open Microsoft.Quantum.Intrinsic;
     open QTypes.QInteger;
 
-    internal function SmallestPow2WithPowBiggerThan(ip : Int): Int
+    internal function SmallestPow2BiggerThan(ip : Int): Int
     {
         mutable rs = 1;
         mutable e = 0;
@@ -22,7 +22,7 @@
     {
         mutable res = 0;
         mutable rep = 0;
-        let n = SmallestPow2WithPowBiggerThan(Size);
+        let n = SmallestPow2BiggerThan(Size);
         let q = 2*n;
         using (qs = Qubit[n])
         {
